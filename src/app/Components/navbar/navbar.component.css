@@ -1,0 +1,21 @@
+.navbar {
+    font-size: 20px;
+}
+
+img {
+    margin-top: -15px;
+}
+
+.navbar-nav > li {
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.navbar-nav > li a {
+    color: greenyellow;
+}
+
+.navbar-nav > li a:hover {
+    color: white;
+}
+
