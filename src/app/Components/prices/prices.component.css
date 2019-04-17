@@ -1,0 +1,28 @@
+.topmargin {
+    margin-top: 200px;
+    background-color: greenyellow;
+    color: black;
+}
+
+.blackbackground {
+    background-color: black;
+}
+
+.priceName {
+    font-size: 25px;
+    text-align: center;
+}
+
+.price {
+    text-align: center;
+    font-size: 45px;
+}
+
+.expire {
+    text-align: center;
+    font-size: 20px;
+}
+
+.rowHeight {
+    min-height: 600px;
+}

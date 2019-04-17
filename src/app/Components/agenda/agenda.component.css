@@ -1,0 +1,20 @@
+.my-container {
+    margin-top: 150px;
+    border: 1px solid green;
+    background-color: black;
+}
+
+.my-row {
+    margin-left: 30px;
+    margin-right: 30px;
+    border: 1px solid red;
+}
+
+.my-col {
+    border: 1px solid blue;
+    background-color: ghostwhite;
+}
+
+.weekLabel {
+    horiz-align: center;
+}

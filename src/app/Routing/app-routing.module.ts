@@ -6,6 +6,7 @@ import {PricesComponent} from '../Components/prices/prices.component';
 import {PersonalComponent} from '../Components/personal/personal.component';
 import {CircuitComponent} from '../Components/circuit/circuit.component';
 import {HomeComponent} from '../Components/home/home.component';
+import {CannotActivateGuard} from '../RouteGuards/cannot_activator.service';
 
 const routes: Routes = [
     {
@@ -19,11 +20,13 @@ const routes: Routes = [
     },
     {
         path: 'circuit',
-        component: CircuitComponent
+        component: CircuitComponent,
+        canActivate: [CannotActivateGuard]
     },
     {
         path: 'personal',
-        component: PersonalComponent
+        component: PersonalComponent,
+        canActivate: [CannotActivateGuard]
     },
     {
         path: 'prices',
@@ -35,13 +38,14 @@ const routes: Routes = [
     },
     {
         path: 'contact',
-        component: ContactComponent
+        component: ContactComponent,
+        canActivate: [CannotActivateGuard]
     }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-    /*providers: [CanActivateViaAuthGuard, CanDeactivateConfirmGuard]*/
+  exports: [RouterModule],
+  providers: [CannotActivateGuard]
 })
 export class AppRoutingModule { }

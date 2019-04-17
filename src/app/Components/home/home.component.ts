@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CompanyService} from '../../Services/company.service';
+import {Company} from '../../Domains/company.model';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+    company: Company;
 
-  constructor() { }
+  constructor(private service: CompanyService) {
+      this.service = service;
+  }
 
   ngOnInit() {
+      this.company = this.service.getCompany();
   }
 
 }
