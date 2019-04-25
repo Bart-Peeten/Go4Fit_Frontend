@@ -10,6 +10,7 @@ import { PersonalComponent } from './Components/personal/personal.component';
 import { PricesComponent } from './Components/prices/prices.component';
 import { ContactComponent } from './Components/contact/contact.component';
 import {AppRoutingModule} from './Routing/app-routing.module';
+import { ReservationComponent } from './Components/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {AppRoutingModule} from './Routing/app-routing.module';
     CircuitComponent,
     PersonalComponent,
     PricesComponent,
-    ContactComponent
+    ContactComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,

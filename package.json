@@ -21,6 +21,7 @@
     "@angular/router": "~7.2.12",
     "bootstrap": "^3.4.1",
     "core-js": "^2.5.4",
+    "current-week-number": "^1.0.7",
     "jquery": "^3.3.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",

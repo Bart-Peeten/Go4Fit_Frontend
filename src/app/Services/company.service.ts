@@ -12,7 +12,8 @@ export class CompanyService {
                                 'Heerbaan 20',
                                 'Bree/Opitter',
                                 '3960',
-                                '0498 46 97 92');
+                                '0498 46 97 92',
+                                'nickgoos@hotmail.com');
   }
 
   getCompany() {

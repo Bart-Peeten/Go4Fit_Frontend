@@ -1,19 +1,41 @@
 <div class="container-fluid blackbackground">
-    <div class="row rowHeight equal h-600 justify-content-around">
-        <div class="col-md-2 col-xs-4 topmargin">
-            <br><br><p class="priceName"> {{ prices[0].name}} </p><br><br><br>
-            <p class="price"> {{ prices[0].price}} </p><br><br><br>
-            <p class="expire"> {{ prices[0].expireDate}} </p><br><br><br>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="header">Circuit / Cross training</h1>
         </div>
-        <div class="col-md-2 col-xs-4 topmargin">
-            <br><br><p class="priceName"> {{ prices[1].name}} </p><br><br><br>
-            <p class="price"> {{ prices[1].price}} </p><br><br><br>
-            <p class="expire"> {{ prices[1].expireDate}} </p><br><br><br>
+    </div>
+    <div class="row rowHeight equal justify-content-around">
+        <div class="col-md-2 col-sm-4 topmargin roundborder">
+            <br><br><p class="priceName"> {{ prices[0].name}} </p><br>
+            <p class="price"> {{ prices[0].price}} </p>
+            <p class="expire"> {{ prices[0].expireDate}} </p>
+            <p class="expire"> {{ prices[0].explenation}} </p>
         </div>
-        <div class="col-md-2 col-xs-4 topmargin">
-            <br><br> <p class="priceName"> {{ prices[2].name}} </p><br><br><br>
-            <p class="price"> {{ prices[2].price}} </p><br><br><br>
-            <p class="expire"> {{ prices[2].expireDate}} </p><br><br><br>
+        <div class="col-md-2 col-sm-4 topmargin roundborder">
+            <br><br><p class="priceName"> {{ prices[1].name}} </p><br>
+            <p class="price"> {{ prices[1].price}} </p>
+            <p class="expire"> {{ prices[1].expireDate}} </p>
+            <p class="expire"> {{ prices[1].explenation}} </p>
+        </div>
+        <div class="col-md-2 col-sm-4 topmargin roundborder">
+            <br><br> <p class="priceName"> {{ prices[2].name}} </p><br>
+            <p class="price"> {{ prices[2].price}} </p>
+            <p class="expire"> {{ prices[2].expireDate}} </p>
+            <p class="expire"> {{ prices[2].explenation}} </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="header">Personal training</h1>
+        </div>
+    </div>
+    <div class="row rowHeight equal justify-content-around">
+        <div class="col-md-2 col-sm-4 topmargin roundborder">
+            <br><br><p class="priceName"> {{ prices[3].name}} </p><br>
+            <p class="price"> {{ prices[3].price}} </p>
+            <p class="expire"> {{ prices[3].expireDate}} </p>
+            <p class="expire"> {{ prices[3].explenation}} </p>
         </div>
     </div>
 </div>

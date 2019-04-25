@@ -1,11 +1,84 @@
+
 <div class="container-fluid my-container">
-    <div class="row my-row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 my-col">
-            <label class="">Datum van de week</label>
-        </div>
-        <div class="col-md-3">
-            <button>Test button</button>
+    <div class="row my-header-row">
+        <div class="col-md-12 text-center title">
+            <p>Agenda Go4Fit Bree</p>
         </div>
     </div>
+
+    <!-- TODO: The code below need to move to seperate component in a newer version.  -->
+
+    <div class="form-group row my-row ">
+        <div class="col-md-4">
+            <button class="thisWeekButton">Deze week</button>
+        </div>
+        <label class="col-md-4  weekLabel">{{ firstDayOfWeekString }} {{ dateOfWeek | date:'MMM' }} -
+                                            {{ lastdayOfWeekString }} {{ dateOfWeek | date:'MMM' }}
+                                            {{ dateOfWeek | date:'yyyy'}}</label>
+        <div class="col-md-2"></div>
+        <div class="col-md-1 ">
+            <label>Week: {{ weekNumber | date:'w' }}</label>
+        </div>
+        <div class="col-md-1">
+            <button class="nextWeekButton" (click)="getNextWeekNumber()"> > </button>
+        </div>
+    </div>
+    <!-- End of TODO code -->
+
+    <div class="row my-row-trainingsday">
+        <div class="col-md-1"></div>
+        <div class="col-md-2 colmargintop">
+            <div class="trianingdaytitle">
+                <span class="trianingday">Dinsdag</span><br>
+                <span class="spanmargin">datum</span>
+            </div>
+            <div>
+                <app-reservation></app-reservation>
+                <app-reservation></app-reservation>
+            </div>
+        </div>
+        <div class="col-md-2 colmargintop">
+            <div class="trianingdaytitle">
+                <span class="trianingday">Woensdag</span><br>
+                <span class="spanmargin">datum</span>
+            </div>
+            <div>
+                <app-reservation></app-reservation>
+                <app-reservation></app-reservation>
+                <app-reservation></app-reservation>
+                <app-reservation></app-reservation>
+            </div>
+        </div>
+        <div class="col-md-2 colmargintop">
+            <div class="trianingdaytitle">
+                <span class="trianingday">Donderdag</span><br>
+                <span class="spanmargin">datum</span>
+            </div>
+            <div>
+                <app-reservation></app-reservation>
+            </div>
+        </div>
+        <div class="col-md-2 colmargintop">
+            <div class="trianingdaytitle">
+                <span class="trianingday">Zaterdag</span><br>
+                <span class="spanmargin">datum</span>
+            </div>
+            <div>
+                <app-reservation></app-reservation>
+            </div>
+        </div>
+        <div class="col-md-2 colmargintop">
+            <div class="trianingdaytitle">
+                <span class="trianingday">Zondag</span><br>
+                <span class="spanmargin">datum</span>
+            </div>
+            <div>
+                <app-reservation></app-reservation>
+                <app-reservation></app-reservation>
+                <app-reservation></app-reservation>
+            </div>
+        </div>
+
+    </div>
+
 </div>

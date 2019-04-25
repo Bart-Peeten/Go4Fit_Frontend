@@ -1,5 +1,5 @@
 .topmargin {
-    margin-top: 200px;
+    margin-top: 40px;
     background-color: greenyellow;
     color: black;
 }
@@ -24,5 +24,15 @@
 }
 
 .rowHeight {
-    min-height: 600px;
+    min-height: 200px;
+}
+
+.roundborder {
+    border-radius: 10%;
+}
+
+.header {
+    color: greenyellow;
+    margin-top: 80px;
+    text-align: center;
 }
