@@ -7,6 +7,8 @@ import {PersonalComponent} from '../Components/personal/personal.component';
 import {CircuitComponent} from '../Components/circuit/circuit.component';
 import {HomeComponent} from '../Components/home/home.component';
 import {CannotActivateGuard} from '../RouteGuards/cannot_activator.service';
+import {LoginComponent} from '../Components/login/login.component';
+import {SigninComponent} from '../Components/signin/signin.component';
 
 const routes: Routes = [
     {
@@ -35,6 +37,14 @@ const routes: Routes = [
     {
         path: 'agenda',
         component: AgendaComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'signin',
+        component: SigninComponent
     },
     {
         path: 'contact',

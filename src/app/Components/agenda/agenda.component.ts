@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DatePipe, formatDate} from '@angular/common';
+import {AgendaService} from '../../Services/agenda.service';
 
 @Component({
   selector: 'app-agenda',
@@ -13,14 +14,17 @@ export class AgendaComponent implements OnInit {
     private dayInThisWeek: number;
     private lastdayOfWeekString: string;
     private firstDayOfWeek: number;
+    private trainingsDaysList: String[];
 
-  constructor() {
+  constructor(private agendaService: AgendaService) {  }
+
+  ngOnInit() {
       this.weekNumber = this.getWeekNumber();
       this.getFirstDayOfWeek();
       this.getLastDayOfWeek();
-  }
+      this.fetchTrainingsDays();
+      this.agendaService.getTrainingsMoments();
 
-  ngOnInit() {
   }
 
   getWeekNumber() {
@@ -50,4 +54,7 @@ export class AgendaComponent implements OnInit {
   }
 
 
+    private fetchTrainingsDays() {
+        /*this.trainingsDaysList = this.agendaService.getTrainingsdays();*/
+    }
 }

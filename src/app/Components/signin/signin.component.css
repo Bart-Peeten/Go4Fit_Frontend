@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    height: 100vh;
+}
+
+.text_color {
+    color: black;
+}
+
+#Signin .container #Signin-row #Signin-column #Signin-box {
+    margin-top: 100px;
+    max-width: 600px;
+    height: 500px;
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+}
+
+#Signin .container #Signin-row #Signin-column #Signin-box #Signin-form {
+    padding: 20px;
+}
+
+#Signin .container #Signin-row #Signin-column #Signin-box #Signin-form #register-link {
+    margin-top: -85px;
+}

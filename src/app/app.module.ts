@@ -11,6 +11,10 @@ import { PricesComponent } from './Components/prices/prices.component';
 import { ContactComponent } from './Components/contact/contact.component';
 import {AppRoutingModule} from './Routing/app-routing.module';
 import { ReservationComponent } from './Components/reservation/reservation.component';
+import { LoginComponent } from './Components/login/login.component';
+import {FormsModule} from '@angular/forms';
+import {AuthService} from './Services/auth.service';
+import { SigninComponent } from './Components/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,16 @@ import { ReservationComponent } from './Components/reservation/reservation.compo
     PersonalComponent,
     PricesComponent,
     ContactComponent,
-    ReservationComponent
+    ReservationComponent,
+    LoginComponent,
+    SigninComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
+    providers: [AuthService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

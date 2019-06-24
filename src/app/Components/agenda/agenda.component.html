@@ -27,9 +27,9 @@
 
     <div class="row my-row-trainingsday">
         <div class="col-md-1"></div>
-        <div class="col-md-2 colmargintop">
+        <div *ngFor="let day of trainingsDaysList" class="col-md-2 colmargintop">
             <div class="trianingdaytitle">
-                <span class="trianingday">Dinsdag</span><br>
+                <span class="trainingday">{{ day }}</span><br>
                 <span class="spanmargin">datum</span>
             </div>
             <div>
@@ -37,47 +37,7 @@
                 <app-reservation></app-reservation>
             </div>
         </div>
-        <div class="col-md-2 colmargintop">
-            <div class="trianingdaytitle">
-                <span class="trianingday">Woensdag</span><br>
-                <span class="spanmargin">datum</span>
-            </div>
-            <div>
-                <app-reservation></app-reservation>
-                <app-reservation></app-reservation>
-                <app-reservation></app-reservation>
-                <app-reservation></app-reservation>
-            </div>
-        </div>
-        <div class="col-md-2 colmargintop">
-            <div class="trianingdaytitle">
-                <span class="trianingday">Donderdag</span><br>
-                <span class="spanmargin">datum</span>
-            </div>
-            <div>
-                <app-reservation></app-reservation>
-            </div>
-        </div>
-        <div class="col-md-2 colmargintop">
-            <div class="trianingdaytitle">
-                <span class="trianingday">Zaterdag</span><br>
-                <span class="spanmargin">datum</span>
-            </div>
-            <div>
-                <app-reservation></app-reservation>
-            </div>
-        </div>
-        <div class="col-md-2 colmargintop">
-            <div class="trianingdaytitle">
-                <span class="trianingday">Zondag</span><br>
-                <span class="spanmargin">datum</span>
-            </div>
-            <div>
-                <app-reservation></app-reservation>
-                <app-reservation></app-reservation>
-                <app-reservation></app-reservation>
-            </div>
-        </div>
+
 
     </div>
 
