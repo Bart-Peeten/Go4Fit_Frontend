@@ -15,16 +15,20 @@ export class LoginComponent implements OnInit {
     constructor(private authService: AuthService, private router: Router) { }
 
     ngOnInit() {
+        this.authService.getIsLoggedIn().subscribe(value => this.setIsLoggedIn(value));
         console.log('Er wordt naar de login pagina genavigeerd');
     }
 
     login() {
-        this.authService.login();
-        this.isLoggedin = this.authService.isLoggedIn();
+        this.authService.login(this.username, this.password);
         console.log('logging in');
         console.log(this.username);
         console.log(this.password);
-        console.log(this.authService.isLoggedIn());
+        this.router.navigate(['/agenda'])
+    }
+
+    setIsLoggedIn(status: boolean) {
+        this.isLoggedin = status;
     }
 
 }

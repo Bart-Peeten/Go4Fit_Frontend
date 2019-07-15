@@ -19,3 +19,13 @@ img {
     color: white;
 }
 
+.dropdownItem {
+    background-color: black;
+    color: black;
+}
+
+.dropdownItem > a:hover {
+    background-color: black;
+    color: black;
+}
+

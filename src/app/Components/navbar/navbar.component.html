@@ -31,11 +31,18 @@
 
     <div class="collapse navbar-collapse" id="loginItem">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li *ngIf="!isLoggedin" class="nav-item">
                 <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
             </li>
+            <li *ngIf="isLoggedinAsAdmin" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                <div class="dropdown-menu dropdownItem" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" [routerLink]="['/admin_agenda']">Admin agenda</a>
+                </div>
+            </li>
             <li *ngIf="isLoggedin" class="nav-item">
-                <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+                <a class="nav-link" (click)="logOut()">Log uit</a>
             </li>
         </ul>
     </div>

@@ -15,6 +15,7 @@ import { LoginComponent } from './Components/login/login.component';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from './Services/auth.service';
 import { SigninComponent } from './Components/signin/signin.component';
+import { AdminAgendaComponent } from './Components/admin-agenda/admin-agenda.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SigninComponent } from './Components/signin/signin.component';
     ContactComponent,
     ReservationComponent,
     LoginComponent,
-    SigninComponent
+    SigninComponent,
+    AdminAgendaComponent
   ],
     imports: [
         BrowserModule,

@@ -9,6 +9,8 @@ import {HomeComponent} from '../Components/home/home.component';
 import {CannotActivateGuard} from '../RouteGuards/cannot_activator.service';
 import {LoginComponent} from '../Components/login/login.component';
 import {SigninComponent} from '../Components/signin/signin.component';
+import {AuthActivatorService} from '../RouteGuards/auth-activator.service';
+import {AdminAgendaComponent} from '../Components/admin-agenda/admin-agenda.component';
 
 const routes: Routes = [
     {
@@ -36,7 +38,8 @@ const routes: Routes = [
     },
     {
         path: 'agenda',
-        component: AgendaComponent
+        component: AgendaComponent,
+        canActivate: [AuthActivatorService]
     },
     {
         path: 'login',
@@ -45,6 +48,10 @@ const routes: Routes = [
     {
         path: 'signin',
         component: SigninComponent
+    },
+    {
+        path: 'admin_agenda',
+        component: AdminAgendaComponent
     },
     {
         path: 'contact',
