@@ -9,13 +9,16 @@ import { CircuitComponent } from './Components/circuit/circuit.component';
 import { PersonalComponent } from './Components/personal/personal.component';
 import { PricesComponent } from './Components/prices/prices.component';
 import { ContactComponent } from './Components/contact/contact.component';
-import {AppRoutingModule} from './Routing/app-routing.module';
+import { AppRoutingModule } from './Routing/app-routing.module';
 import { ReservationComponent } from './Components/reservation/reservation.component';
 import { LoginComponent } from './Components/login/login.component';
-import {FormsModule} from '@angular/forms';
-import {AuthService} from './Services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './Services/auth.service';
 import { SigninComponent } from './Components/signin/signin.component';
 import { AdminAgendaComponent } from './Components/admin-agenda/admin-agenda.component';
+import { HttpClientModule } from '@angular/common/http';
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryService} from './Services/in-memory.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { AdminAgendaComponent } from './Components/admin-agenda/admin-agenda.com
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule,
+        InMemoryWebApiModule.forRoot(InMemoryService)
     ],
     providers: [AuthService],
     bootstrap: [AppComponent]

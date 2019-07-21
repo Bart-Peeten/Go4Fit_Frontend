@@ -71,3 +71,19 @@
     border-bottom: 1px solid black;
 
 }
+
+.reservation {
+    padding: 20px;
+    background-color: darkgray;
+    margin-top: 5px;
+    border-left: 2px solid;
+}
+
+.reservationtitle {
+    font-weight: bold;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+}

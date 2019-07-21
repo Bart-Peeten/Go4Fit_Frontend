@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AgendaService} from '../../Services/agenda.service';
+import {Participant} from '../../Domains/participant.model';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-admin-agenda',
@@ -14,16 +16,22 @@ export class AdminAgendaComponent implements OnInit {
     private lastdayOfWeekString: string;
     private firstDayOfWeek: number;
     private trainingsDaysList: String[];
+    private trainingsMoments: any[][];
+    private trainingsTypes: any[][];
+    private participants: Participant[];
 
-    constructor(private agendaService: AgendaService) {  }
+    constructor(private agendaService: AgendaService) {
+    }
 
     ngOnInit() {
         this.weekNumber = this.getWeekNumber();
         this.getFirstDayOfWeek();
         this.getLastDayOfWeek();
         this.fetchTrainingsDays();
-        this.agendaService.getTrainingsMoments();
-
+        this.trainingsMoments = this.agendaService.getTrainingsMoments();
+        this.trainingsTypes = this.agendaService.getTrainingsType();
+        this.getParticipants();
+        console.log(this.trainingsTypes[0][0]);
     }
 
     getWeekNumber() {
@@ -52,9 +60,18 @@ export class AdminAgendaComponent implements OnInit {
         this.lastdayOfWeekString = 'Zo ' + lastDayOfWeek;
     }
 
-
     private fetchTrainingsDays() {
-        /*this.trainingsDaysList = this.agendaService.getTrainingsdays();*/
+        this.trainingsDaysList = this.agendaService.getTrainingsdays();
+    }
+    
+    private getParticipants() {
+        this.agendaService.getParticipants().subscribe(result => {
+            console.log(result);
+            this.participants = result;
+        });
     }
 
+    private setParticipants(participant: String) {
+
+    }
 }

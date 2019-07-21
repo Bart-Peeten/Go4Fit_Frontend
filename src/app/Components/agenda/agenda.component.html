@@ -27,18 +27,19 @@
 
     <div class="row my-row-trainingsday">
         <div class="col-md-1"></div>
-        <div *ngFor="let day of trainingsDaysList" class="col-md-2 colmargintop">
+        <div *ngFor="let day of trainingsDaysList; let i = index" class="col-md-2 colmargintop">
             <div class="trianingdaytitle">
                 <span class="trainingday">{{ day }}</span><br>
                 <span class="spanmargin">datum</span>
             </div>
-            <div>
-                <app-reservation></app-reservation>
-                <app-reservation></app-reservation>
+            <div *ngFor="let moment of trainingsMoments[i]; let x = index">
+                <div class="reservation"
+                [style.border-left]="trainingsTypes[i][x] == 'circuit training' ? '5px solid greenyellow' : '5px solid red '">
+                    <span class="reservationtitle"> {{ trainingsTypes[i][x] }} </span><br>
+                    <span>{{ moment }}</span><br>
+                </div>
             </div>
         </div>
-
-
     </div>
 
 </div>
