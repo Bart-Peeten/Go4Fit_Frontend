@@ -5,10 +5,19 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class AuthService {
     isLoggedIn: BehaviorSubject<boolean>;
     isLoggedInAsAdmin: BehaviorSubject<boolean>;
+    private _name: String;
 
     constructor() {
         this.isLoggedIn = new BehaviorSubject<boolean>(false);
         this.isLoggedInAsAdmin = new BehaviorSubject<boolean>(false);
+    }
+
+    set name(value: String) {
+        this._name = value;
+    }
+
+    get name(): String {
+        return this._name;
     }
 
     public getIsLoggedIn(): Observable<boolean> {
@@ -28,6 +37,7 @@ export class AuthService {
     }
 
     public login(username: string, password: string) {
+        this.name = username;
         if (username == 'test') {
             this.setIsLoggedIn(true);
         } else if (username == 'admin') {

@@ -10,17 +10,17 @@
 
     <div class="form-group row my-row ">
         <div class="col-md-4">
-            <button class="thisWeekButton">Deze week</button>
+            <button class="thisWeekButton" (click)="currentWeek()">Deze week</button>
         </div>
         <label class="col-md-4  weekLabel">{{ firstDayOfWeekString }} {{ dateOfWeek | date:'MMM' }} -
                                             {{ lastdayOfWeekString }} {{ dateOfWeek | date:'MMM' }}
                                             {{ dateOfWeek | date:'yyyy'}}</label>
         <div class="col-md-2"></div>
         <div class="col-md-1 ">
-            <label>Week: {{ weekNumber | date:'w' }}</label>
+            <label>Week: {{ weekNumber }}</label>
         </div>
         <div class="col-md-1">
-            <button class="nextWeekButton" (click)="getNextWeekNumber()"> > </button>
+            <button class="nextWeekButton" (click)="getNextWeekData()"> > </button>
         </div>
     </div>
     <!-- End of TODO code -->
@@ -30,14 +30,43 @@
         <div *ngFor="let day of trainingsDaysList; let i = index" class="col-md-2 colmargintop">
             <div class="trianingdaytitle">
                 <span class="trainingday">{{ day }}</span><br>
-                <span class="spanmargin">datum</span>
+                <span class="spanmargin">{{ trainingDaysDatesList[i] }}</span>
             </div>
             <div *ngFor="let moment of trainingsMoments[i]; let x = index">
-                <div class="reservation"
-                [style.border-left]="trainingsTypes[i][x] == 'circuit training' ? '5px solid greenyellow' : '5px solid red '">
+                <div class="reservation" disabled="isOccupied"
+                [style.border-left]="trainingsTypes[i][x] == 'circuit training' ? '5px solid greenyellow' : '5px solid red '"
+                     data-toggle="modal"
+                     data-target="#myModal">
                     <span class="reservationtitle"> {{ trainingsTypes[i][x] }} </span><br>
                     <span>{{ moment }}</span><br>
+                    <span style="float: right; margin-top: 20px;"> {{ getNumberOfReservations() }} </span>
+
                 </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title">Bevestig je reservatie.</h4>
+                            </div>
+                            <div class="modal-body">
+                                <label>Naam: {{ participantName }}</label>
+                                <label>dag: {{ reservationDay }}</label><br>
+                                <label>uur: {{ reservationDate }}</label>
+                            </div>
+                            <div class="modal-footer pull-left">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="confirmReservation(moment, trainingDaysDatesList[i])">Voeg toe</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

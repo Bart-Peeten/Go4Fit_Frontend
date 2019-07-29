@@ -1,6 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DatePipe, formatDate} from '@angular/common';
 import {AgendaService} from '../../Services/agenda.service';
+import {Observable} from 'rxjs';
+import {Participant} from '../../Domains/participant.model';
+import {DateService} from '../../Services/date.service';
+import {AuthService} from '../../Services/auth.service';
 
 @Component({
     selector: 'app-agenda',
@@ -11,53 +15,97 @@ export class AgendaComponent implements OnInit {
     private weekNumber: number;
     private firstDayOfWeekString: string;
     private dateOfWeek: Date;
-    private dayInThisWeek: number;
     private lastdayOfWeekString: string;
-    private firstDayOfWeek: number;
     private trainingsDaysList: String[];
     private trainingsMoments: any[][];
     private trainingsTypes: any[][];
+    private trainingDaysDatesList: any[];
+    private participants: Observable<Participant[]>;
+    private nextWeek: number = 1;
+    private nextWeekDays: number = 7;
+    private isOccupied: boolean;
+    private participantName: String;
+    private reservationDay: String;
+    private reservationDate: String;
 
-    constructor(private agendaService: AgendaService) {
+    @Input() participantName1: String;
+    @Input() reservationDay1: String;
+    @Input() reservationDate1: String;
+
+
+
+    constructor(private agendaService: AgendaService,
+                private dateService: DateService,
+                private authService: AuthService) {
     }
 
     ngOnInit() {
-        this.weekNumber = this.getWeekNumber();
-        this.getFirstDayOfWeek();
-        this.getLastDayOfWeek();
+        this.currentWeek();
         this.fetchTrainingsDays();
+        this.getParticipants();;
+        this.getNumberOfReservations()
         this.trainingsMoments = this.agendaService.getTrainingsMoments();
         this.trainingsTypes = this.agendaService.getTrainingsType();
-        console.log(this.trainingsTypes[0][0]);
     }
 
     getWeekNumber() {
-        return (Date.now());
+        return this.dateService.getWeekNumber();
     }
 
-    getNextWeekNumber() {
-        /* const t = new Date(formatDate(this.weekNumber, 'dd/MM/yyyy', 'en-UTC')); */
-        const t = new Date(this.weekNumber);
-        this.weekNumber = t.setDate(t.getDate() + 7);
-        console.log(this.weekNumber);
-        this.getFirstDayOfWeek();
-        this.getLastDayOfWeek();
+    getNextWeekData() {
+        this.weekNumber = this.dateService.getWeekNumberOfNextWeek(this.nextWeek);
+        this.trainingDaysDatesList = this.dateService.getDatesofDaysOfNextWeek(this.nextWeekDays)
+        this.getFirstDayOfNextWeekString();
+        this.getLastDayOfNextWeekString();
+        this.getNumberOfReservations();
+        this.nextWeek += 1;
+        this.nextWeekDays += 7;
     }
 
-    getFirstDayOfWeek() {
-        this.dayInThisWeek = new Date(this.weekNumber).getDay();
-        this.dateOfWeek = new Date(this.weekNumber);
-        this.firstDayOfWeek = this.dateOfWeek.setDate(this.dateOfWeek.getDate() - (this.dayInThisWeek - 1));
-        this.firstDayOfWeekString = 'Ma ' + new Date(this.firstDayOfWeek).getDate();
+    private getFirstDayOfWeekString() {
+        this.firstDayOfWeekString = 'Ma ' + this.dateService.getFirstDayOfWeek();
     }
 
-    getLastDayOfWeek() {
-        console.log(this.firstDayOfWeek);
-        const lastDayOfWeek = new Date(this.firstDayOfWeek).getDate() + 6;
-        this.lastdayOfWeekString = 'Zo ' + lastDayOfWeek;
+    private getLastDayOfWeekString() {
+        this.lastdayOfWeekString = 'Zo ' + this.dateService.getLastDayOfWeek();
+    }
+
+    private getFirstDayOfNextWeekString() {
+        this.firstDayOfWeekString = 'Ma ' + this.dateService.getFirstDayOfNextWeek(this.nextWeekDays);
+    }
+
+    private getLastDayOfNextWeekString() {
+        this.lastdayOfWeekString = 'Zo ' + this.dateService.getLastDayOfNextWeek(this.nextWeekDays);
     }
 
     private fetchTrainingsDays() {
         this.trainingsDaysList = this.agendaService.getTrainingsdays();
+    }
+
+    private getParticipants() {
+        this.participants = this.agendaService.getParticipants();
+    }
+
+    private currentWeek() {
+        this.trainingDaysDatesList = this.dateService.getTrainingsDays();
+        this.weekNumber = this.getWeekNumber();
+        this.getFirstDayOfWeekString();
+        this.getLastDayOfWeekString();
+    }
+
+    private getNumberOfReservations() {
+        let numberReserved = this.agendaService.getNumberOfReservations();
+        let free = 10 - numberReserved;
+        let freeString = "Nog " + free + " plaatsen vrij";
+        this.isOccupied = free == 0;
+
+        return free == 0 ? "VOLZET" : freeString;
+    }
+
+    confirmReservation(moment: any, date: any) {
+        this.reservationDay = moment;
+        this.reservationDate = date;
+        this.participantName = this.authService.name;
+        console.log(this.reservationDay + " : " + this.reservationDate + " : " + this.participantName)
     }
 }

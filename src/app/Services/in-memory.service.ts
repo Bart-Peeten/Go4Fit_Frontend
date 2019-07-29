@@ -14,7 +14,7 @@ export class InMemoryService implements InMemoryDbService {
       return { participant: participant };
   }
 
-  genId(participants: any[]) : number {
+  /* genId(participants: any[]) : number {
         return participants.length > 0 ? participants[participants.length - 1].id + 1 : 1;
-  }
+  } */
 }

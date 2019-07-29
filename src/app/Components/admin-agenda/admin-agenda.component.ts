@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AgendaService} from '../../Services/agenda.service';
 import {Participant} from '../../Domains/participant.model';
 import {Observable} from 'rxjs';
+import {DateService} from '../../Services/date.service';
 
 @Component({
   selector: 'app-admin-agenda',
@@ -12,52 +13,55 @@ export class AdminAgendaComponent implements OnInit {
     private weekNumber: number;
     private firstDayOfWeekString: string;
     private dateOfWeek: Date;
-    private dayInThisWeek: number;
     private lastdayOfWeekString: string;
-    private firstDayOfWeek: number;
     private trainingsDaysList: String[];
     private trainingsMoments: any[][];
     private trainingsTypes: any[][];
-    private participants: Participant[];
+    private trainingDaysDatesList: any[];
+    private participants: Observable<Participant[]>;
+    newParticipant: String;
+    private nextWeek: number = 1;
+    private nextWeekDays: number = 7;
 
-    constructor(private agendaService: AgendaService) {
+    constructor(private agendaService: AgendaService,
+                private dateService: DateService ) {
     }
 
     ngOnInit() {
-        this.weekNumber = this.getWeekNumber();
-        this.getFirstDayOfWeek();
-        this.getLastDayOfWeek();
+        this.currentWeek();
         this.fetchTrainingsDays();
+        this.getParticipants();
         this.trainingsMoments = this.agendaService.getTrainingsMoments();
         this.trainingsTypes = this.agendaService.getTrainingsType();
-        this.getParticipants();
-        console.log(this.trainingsTypes[0][0]);
     }
 
     getWeekNumber() {
-        return (Date.now());
+        return this.dateService.getWeekNumber();
     }
 
     getNextWeekNumber() {
-        /* const t = new Date(formatDate(this.weekNumber, 'dd/MM/yyyy', 'en-UTC')); */
-        const t = new Date(this.weekNumber);
-        this.weekNumber = t.setDate(t.getDate() + 7);
-        console.log(this.weekNumber);
-        this.getFirstDayOfWeek();
-        this.getLastDayOfWeek();
+        this.weekNumber = this.dateService.getWeekNumberOfNextWeek(this.nextWeek);
+        this.trainingDaysDatesList = this.dateService.getDatesofDaysOfNextWeek(this.nextWeekDays)
+        this.getFirstDayOfNextWeekString();
+        this.getLastDayOfNextWeekString();
+        this.nextWeek += 1;
+        this.nextWeekDays += 7;
     }
 
-    getFirstDayOfWeek() {
-        this.dayInThisWeek = new Date(this.weekNumber).getDay();
-        this.dateOfWeek = new Date(this.weekNumber);
-        this.firstDayOfWeek = this.dateOfWeek.setDate(this.dateOfWeek.getDate() - (this.dayInThisWeek - 1));
-        this.firstDayOfWeekString = 'Ma ' + new Date(this.firstDayOfWeek).getDate();
+    private getFirstDayOfWeekString() {
+        this.firstDayOfWeekString = 'Ma ' + this.dateService.getFirstDayOfWeek();
     }
 
-    getLastDayOfWeek() {
-        console.log(this.firstDayOfWeek);
-        const lastDayOfWeek = new Date(this.firstDayOfWeek).getDate() + 6;
-        this.lastdayOfWeekString = 'Zo ' + lastDayOfWeek;
+    private getLastDayOfWeekString() {
+        this.lastdayOfWeekString = 'Zo ' + this.dateService.getLastDayOfWeek();
+    }
+
+    private getFirstDayOfNextWeekString() {
+        this.firstDayOfWeekString = 'Ma ' + this.dateService.getFirstDayOfNextWeek(this.nextWeekDays);
+    }
+
+    private getLastDayOfNextWeekString() {
+        this.lastdayOfWeekString = 'Zo ' + this.dateService.getLastDayOfNextWeek(this.nextWeekDays);
     }
 
     private fetchTrainingsDays() {
@@ -65,13 +69,25 @@ export class AdminAgendaComponent implements OnInit {
     }
     
     private getParticipants() {
-        this.agendaService.getParticipants().subscribe(result => {
-            console.log(result);
-            this.participants = result;
-        });
+        this.participants = this.agendaService.getParticipants();
     }
 
-    private setParticipants(participant: String) {
+    removeParticipant() {
+        this.agendaService.removeParticipant(this.newParticipant);
+        this.getParticipants();
+    }
 
+    addNewParticipant() {
+        console.log(this.newParticipant);
+        this.agendaService.setParticipant(this.newParticipant)
+            .subscribe(_ => this.getParticipants());
+        this.newParticipant = '';
+    }
+
+    currentWeek() {
+        this.trainingDaysDatesList = this.dateService.getTrainingsDays();
+        this.weekNumber = this.getWeekNumber();
+        this.getFirstDayOfWeekString();
+        this.getLastDayOfWeekString();
     }
 }

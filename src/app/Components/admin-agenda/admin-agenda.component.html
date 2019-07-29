@@ -9,14 +9,14 @@
 
     <div class="form-group row my-row ">
         <div class="col-md-4">
-            <button class="thisWeekButton">Deze week</button>
+            <button class="thisWeekButton" (click)="currentWeek()">Deze week</button>
         </div>
         <label class="col-md-4  weekLabel">{{ firstDayOfWeekString }} {{ dateOfWeek | date:'MMM' }} -
             {{ lastdayOfWeekString }} {{ dateOfWeek | date:'MMM' }}
             {{ dateOfWeek | date:'yyyy'}}</label>
         <div class="col-md-2"></div>
         <div class="col-md-1 ">
-            <label>Week: {{ weekNumber | date:'w' }}</label>
+            <label>Week: {{ weekNumber }}</label>
         </div>
         <div class="col-md-1">
             <button class="nextWeekButton" (click)="getNextWeekNumber()"> > </button>
@@ -29,20 +29,47 @@
         <div *ngFor="let day of trainingsDaysList; let i = index" class="col-md-2 colmargintop">
             <div class="trianingdaytitle">
                 <span class="trainingday">{{ day }}</span><br>
-                <span class="spanmargin">datum</span>
+                <span class="spanmargin">{{ trainingDaysDatesList[i] }}</span>
             </div>
             <div *ngFor="let moment of trainingsMoments[i]; let x = index">
                 <div class="reservation"
-                     [style.border-left]="trainingsTypes[i][x] == 'circuit training' ? '4px solid greenyellow' : '4px solid red '">
+                     [style.border-left]="trainingsTypes[i][x] == 'circuit training' ? '4px solid greenyellow' : '4px solid red '"
+                     data-toggle="modal"
+                     data-target="#myModal">
                     <span class="reservationtitle"> {{ trainingsTypes[i][x] }} </span><br>
                     <span style="border-bottom: 2px solid black">{{ moment }}</span><br>
+
                     <div style="padding-top: 10px">
-                        <ul *ngFor="let participant of getParticipants()">
+                        <ul *ngFor="let participant of participants | async">
                             <li > {{ participant.name }} </li >
                         </ul>
                     </div>
                 </div>
             </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <h4 class="modal-title">Voeg / verwijder een klant</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label>Naam:&nbsp;&nbsp;</label>
+                            <input type="text" name="add_remove_field" [(ngModel)]="newParticipant">
+                        </div>
+                        <div class="modal-footer pull-left">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="removeParticipant()">Verwijder</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="addNewParticipant()">Voeg toe</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 

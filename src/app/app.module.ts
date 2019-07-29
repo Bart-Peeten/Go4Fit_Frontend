@@ -40,7 +40,7 @@ import {InMemoryService} from './Services/in-memory.service';
         AppRoutingModule,
         FormsModule,
         HttpClientModule,
-        InMemoryWebApiModule.forRoot(InMemoryService)
+        InMemoryWebApiModule.forRoot(InMemoryService, { delay: 1000 })
     ],
     providers: [AuthService],
     bootstrap: [AppComponent]
