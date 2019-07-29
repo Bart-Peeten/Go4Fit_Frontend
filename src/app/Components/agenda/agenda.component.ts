@@ -108,4 +108,12 @@ export class AgendaComponent implements OnInit {
         this.participantName = this.authService.name;
         console.log(this.reservationDay + " : " + this.reservationDate + " : " + this.participantName)
     }
+
+    onTrainingDayClick(trainingDay) {
+        console.log(trainingDay);
+    }
+
+    onTrainingMomentClick(trainingMoment) {
+        console.log(trainingMoment);
+    }
 }
