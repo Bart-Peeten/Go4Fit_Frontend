@@ -22,6 +22,9 @@ export class AdminAgendaComponent implements OnInit {
     newParticipant: String;
     private nextWeek: number = 1;
     private nextWeekDays: number = 7;
+    private reservationDay: String;
+    private reservationTime: String;
+    private reservationDate: String;
 
     constructor(private agendaService: AgendaService,
                 private dateService: DateService ) {
@@ -72,22 +75,32 @@ export class AdminAgendaComponent implements OnInit {
         this.participants = this.agendaService.getParticipants();
     }
 
-    removeParticipant() {
-        this.agendaService.removeParticipant(this.newParticipant);
-        this.getParticipants();
-    }
-
-    addNewParticipant() {
-        console.log(this.newParticipant);
-        this.agendaService.setParticipant(this.newParticipant)
-            .subscribe(_ => this.getParticipants());
-        this.newParticipant = '';
-    }
-
     currentWeek() {
         this.trainingDaysDatesList = this.dateService.getTrainingsDays();
         this.weekNumber = this.getWeekNumber();
         this.getFirstDayOfWeekString();
         this.getLastDayOfWeekString();
+    }
+
+    onTrainingDayClick(trainingDay: String, date: String) {
+        this.reservationDay = trainingDay;
+        this.reservationDate = date;
+        console.log("DE GESELECTEERDE DATUM: " + date);
+    }
+
+    onTrainingMomentClick(trainingMoment: String) {
+        this.reservationTime = trainingMoment;
+    }
+
+    addNewParticipant() {
+        console.log(this.newParticipant);
+        this.agendaService.addReservation(this.newParticipant, this.reservationDate, this.reservationTime)
+            .subscribe(_ => this.getParticipants());
+        this.newParticipant = '';
+    }
+
+    removeParticipant() {
+        this.agendaService.removeReservation(this.newParticipant, this.reservationDate, this.reservationTime)
+            .subscribe(_ => this.getParticipants());
     }
 }

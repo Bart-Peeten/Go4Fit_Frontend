@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../Domains/user.model';
 
 @Injectable()
 export class AuthService {
@@ -7,7 +9,7 @@ export class AuthService {
     isLoggedInAsAdmin: BehaviorSubject<boolean>;
     private _name: String;
 
-    constructor() {
+    constructor(private http: HttpClient) {
         this.isLoggedIn = new BehaviorSubject<boolean>(false);
         this.isLoggedInAsAdmin = new BehaviorSubject<boolean>(false);
     }
@@ -44,5 +46,12 @@ export class AuthService {
             this.setIsLoggedInAsAdmin(true);
             this.setIsLoggedIn(true);
         }
+    }
+
+    public signIn(lastName: String, firstName: String, email: String, phone: String, password: String) {
+        let newUser = new User(lastName, firstName, email, phone, password);
+        console.log(newUser);
+        this.setIsLoggedIn(true);
+        return this.http.post('', newUser);
     }
 }

@@ -80,6 +80,10 @@
     border-left: 2px solid;
 }
 
+.reservation:hover {
+    cursor: pointer;
+}
+
 .reservationtitle {
     font-weight: bold;
 }

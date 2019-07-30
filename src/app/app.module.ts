@@ -14,7 +14,7 @@ import { ReservationComponent } from './Components/reservation/reservation.compo
 import { LoginComponent } from './Components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './Services/auth.service';
-import { SigninComponent } from './Components/signin/signin.component';
+import { SignUpComponent } from './Components/signUp/sign-up.component';
 import { AdminAgendaComponent } from './Components/admin-agenda/admin-agenda.component';
 import { HttpClientModule } from '@angular/common/http';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
@@ -32,7 +32,7 @@ import {InMemoryService} from './Services/in-memory.service';
     ContactComponent,
     ReservationComponent,
     LoginComponent,
-    SigninComponent,
+    SignUpComponent,
     AdminAgendaComponent
   ],
     imports: [

@@ -26,13 +26,8 @@ export class AgendaComponent implements OnInit {
     private isOccupied: boolean;
     private participantName: String;
     private reservationDay: String;
+    private reservationTime: String;
     private reservationDate: String;
-
-    @Input() participantName1: String;
-    @Input() reservationDay1: String;
-    @Input() reservationDate1: String;
-
-
 
     constructor(private agendaService: AgendaService,
                 private dateService: DateService,
@@ -42,8 +37,8 @@ export class AgendaComponent implements OnInit {
     ngOnInit() {
         this.currentWeek();
         this.fetchTrainingsDays();
-        this.getParticipants();;
-        this.getNumberOfReservations()
+        this.getParticipants();
+        //this.getNumberOfReservations();
         this.trainingsMoments = this.agendaService.getTrainingsMoments();
         this.trainingsTypes = this.agendaService.getTrainingsType();
     }
@@ -54,10 +49,10 @@ export class AgendaComponent implements OnInit {
 
     getNextWeekData() {
         this.weekNumber = this.dateService.getWeekNumberOfNextWeek(this.nextWeek);
-        this.trainingDaysDatesList = this.dateService.getDatesofDaysOfNextWeek(this.nextWeekDays)
+        this.trainingDaysDatesList = this.dateService.getDatesofDaysOfNextWeek(this.nextWeekDays);
         this.getFirstDayOfNextWeekString();
         this.getLastDayOfNextWeekString();
-        this.getNumberOfReservations();
+        //this.getNumberOfReservations();
         this.nextWeek += 1;
         this.nextWeekDays += 7;
     }
@@ -93,27 +88,30 @@ export class AgendaComponent implements OnInit {
         this.getLastDayOfWeekString();
     }
 
-    private getNumberOfReservations() {
-        let numberReserved = this.agendaService.getNumberOfReservations();
+    private getNumberOfReservations(date: String) {
+        let numberReserved = this.agendaService.getNumberOfReservations(date);
         let free = 10 - numberReserved;
-        let freeString = "Nog " + free + " plaatsen vrij";
+        let freeString = 'Nog ' + free + ' plaatsen vrij';
         this.isOccupied = free == 0;
 
-        return free == 0 ? "VOLZET" : freeString;
+        return free == 0 ? 'VOLZET' : freeString;
     }
 
-    confirmReservation(moment: any, date: any) {
-        this.reservationDay = moment;
+    onTrainingDayClick(trainingDay: String, date: String) {
+        this.reservationDay = trainingDay;
         this.reservationDate = date;
-        this.participantName = this.authService.name;
-        console.log(this.reservationDay + " : " + this.reservationDate + " : " + this.participantName)
-    }
-
-    onTrainingDayClick(trainingDay) {
-        console.log(trainingDay);
     }
 
     onTrainingMomentClick(trainingMoment) {
-        console.log(trainingMoment);
+        this.reservationTime = trainingMoment;
+        this.participantName = this.authService.name;
+    }
+
+    confirmReservation() {
+        console.log(this.reservationDay + ' : ' + this.reservationTime + ' : ' + this.participantName);
+        this.agendaService.addReservation(this.participantName,
+            this.reservationDate,
+            this.reservationTime)
+            .subscribe(_ => this.getParticipants());
     }
 }
