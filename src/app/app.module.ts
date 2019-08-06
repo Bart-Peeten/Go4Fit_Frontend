@@ -12,7 +12,7 @@ import { ContactComponent } from './Components/contact/contact.component';
 import { AppRoutingModule } from './Routing/app-routing.module';
 import { ReservationComponent } from './Components/reservation/reservation.component';
 import { LoginComponent } from './Components/login/login.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from './Services/auth.service';
 import { SignUpComponent } from './Components/signUp/sign-up.component';
 import { AdminAgendaComponent } from './Components/admin-agenda/admin-agenda.component';
@@ -38,6 +38,7 @@ import {InMemoryService} from './Services/in-memory.service';
     imports: [
         BrowserModule,
         AppRoutingModule,
+        ReactiveFormsModule,
         FormsModule,
         HttpClientModule,
         InMemoryWebApiModule.forRoot(InMemoryService, { delay: 1000 })

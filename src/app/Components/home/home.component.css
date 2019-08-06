@@ -2,8 +2,9 @@ img {
     margin-top: 150px;
 }
 
-div {
+.main{
     background-color: black;
+    background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
 }
 
 .adress{

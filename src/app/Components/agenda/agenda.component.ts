@@ -88,8 +88,9 @@ export class AgendaComponent implements OnInit {
         this.getLastDayOfWeekString();
     }
 
-    private getNumberOfReservations(date: String) {
-        let numberReserved = this.agendaService.getNumberOfReservations(date);
+    private getNumberOfReservations(date: string, time: string) {
+        let numberReserved = null;
+        this.agendaService.getNumberOfReservations(date, time).subscribe(result => numberReserved = result);
         let free = 10 - numberReserved;
         let freeString = 'Nog ' + free + ' plaatsen vrij';
         this.isOccupied = free == 0;

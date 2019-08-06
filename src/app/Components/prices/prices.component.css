@@ -6,6 +6,7 @@
 
 .blackbackground {
     background-color: black;
+    background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
 }
 
 .priceName {

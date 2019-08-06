@@ -7,19 +7,24 @@ import {User} from '../Domains/user.model';
 export class AuthService {
     isLoggedIn: BehaviorSubject<boolean>;
     isLoggedInAsAdmin: BehaviorSubject<boolean>;
-    private _name: String;
+    private password: string;
+    private _name: string;
 
     constructor(private http: HttpClient) {
         this.isLoggedIn = new BehaviorSubject<boolean>(false);
         this.isLoggedInAsAdmin = new BehaviorSubject<boolean>(false);
     }
 
-    set name(value: String) {
+    set name(value: string) {
         this._name = value;
     }
 
-    get name(): String {
+    get name(): string {
         return this._name;
+    }
+
+    public getPassword(): string {
+        return this.password;
     }
 
     public getIsLoggedIn(): Observable<boolean> {
@@ -40,12 +45,15 @@ export class AuthService {
 
     public login(username: string, password: string) {
         this.name = username;
+        this.password = password;
         if (username == 'test') {
             this.setIsLoggedIn(true);
         } else if (username == 'admin') {
             this.setIsLoggedInAsAdmin(true);
             this.setIsLoggedIn(true);
         }
+
+        sessionStorage.setItem('username', username);
     }
 
     public signIn(lastName: String, firstName: String, email: String, phone: String, password: String) {

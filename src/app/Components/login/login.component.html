@@ -4,25 +4,28 @@
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div id="login-box" class="col-md-12">
-                    <form id="login-form" class="form" action="" method="post">
+                    <form #form="ngForm" id="login-form" class="form" action="" method="post">
 
                         <img id="profile-img" class="profile-img-card" src="assets/Go4Fit_logo.png"/>
 
                         <div class="form-group">
-                            <label for="username" class="text_color">E-mail:</label><br>
-                            <input type="text" name="username" id="username"
-                                   class="form-control" [(ngModel)]="username">
+                            <label for="email" class="text_color">E-mail:</label><br>
+                            <input type="email" name="email" id="email"
+                                   class="form-control"
+                                   placeholder="naam@domein.com" [(ngModel)]="username" minlength="3" required >
+                            <p *ngIf="form.controls.email?.errors?.required" class="error">email is een verplicht veld!</p>
                         </div>
                         <div class="form-group">
                             <label for="password" class="text_color">Paswoord:</label><br>
                             <input type="password" name="password" id="password"
-                                   class="form-control" [(ngModel)]="password">
+                                   class="form-control" minlength="2" placeholder="paswoord" [(ngModel)]="password">
+                            <p *ngIf="form.controls.password?.errors?.minlength" class="error">Het paswoord moet min 2 characters hebben.</p>
                         </div>
                         <div class="form-group">
                             <label for="remember-me" class="text_color"><span>Onthoud mij</span> <span><input
                                     id="remember-me" name="remember-me" type="checkbox"></span></label><br>
                             <input type="submit" name="submit" class="btn btn-info btn-md"
-                                   style="background-color: black" value="submit" (click)="login()">
+                                   style="background-color: black" value="submit"  (click)="login()">
                         </div>
                         <div id="register-link" class="text-right">
                             <a href="signUp" class="text_color">Registreer hier</a>

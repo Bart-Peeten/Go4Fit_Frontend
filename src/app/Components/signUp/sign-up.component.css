@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: black;
+    background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
     height: 100vh;
 }
 
@@ -12,7 +13,7 @@ body {
 #Signin .container #Signin-row #Signin-column #Signin-box {
     margin-top: 100px;
     max-width: 600px;
-    height: 500px;
+    height: 550px;
     border: 1px solid #9C9C9C;
     background-color: #EAEAEA;
 }

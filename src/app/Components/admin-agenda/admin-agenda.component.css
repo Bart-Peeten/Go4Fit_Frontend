@@ -1,6 +1,7 @@
 .my-container {
     margin-top: 70px;
     background-color: black;
+    background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
     position: relative;
 }
 
