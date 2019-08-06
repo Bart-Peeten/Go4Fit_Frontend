@@ -40,7 +40,7 @@ export class AgendaService {
     getParticipants() {
         const headers = new HttpHeaders({Authorization: 'Basic' +
                 btoa(this.authService.getPassword() + ':' + this.authService.name)});
-        return this.http.get<Participant[]>(this.url + '/reservation/names', {headers : headers});
+        return this.http.get<Participant[]>(this.url + 'reservation/names', {headers : headers});
     }
 
     addReservation(participantName: String, reservationDate: String, reservationTime: String) {
@@ -65,11 +65,11 @@ export class AgendaService {
         const headers = new HttpHeaders({Authorization: 'Basic' +
                 btoa(this.authService.getPassword() + ':' + this.authService.name)});
 
-        let params = new HttpParams().set('date', date)
+        let params = new HttpParams()
+            .set('date', date)
             .set('time', time);
 
         let result = this.http.get(this.url + 'numberofreservations', {headers : headers, params : params});
-        console.log('Het aantal bezoekers is: ' + result);
 
         return result;
     }

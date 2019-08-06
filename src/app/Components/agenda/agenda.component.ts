@@ -26,8 +26,9 @@ export class AgendaComponent implements OnInit {
     private isOccupied: boolean;
     private participantName: String;
     private reservationDay: String;
-    private reservationTime: String;
-    private reservationDate: String;
+    private reservationTime: string;
+    private reservationDate: string;
+    private bezettingsString: string;
 
     constructor(private agendaService: AgendaService,
                 private dateService: DateService,
@@ -38,7 +39,7 @@ export class AgendaComponent implements OnInit {
         this.currentWeek();
         this.fetchTrainingsDays();
         this.getParticipants();
-        //this.getNumberOfReservations();
+        this.getNumberOfReservations();
         this.trainingsMoments = this.agendaService.getTrainingsMoments();
         this.trainingsTypes = this.agendaService.getTrainingsType();
     }
@@ -88,17 +89,20 @@ export class AgendaComponent implements OnInit {
         this.getLastDayOfWeekString();
     }
 
-    private getNumberOfReservations(date: string, time: string) {
+    private getNumberOfReservations() {
         let numberReserved = null;
-        this.agendaService.getNumberOfReservations(date, time).subscribe(result => numberReserved = result);
+        this.agendaService.getNumberOfReservations(this.reservationDate,
+            this.reservationTime)
+            .subscribe(result => numberReserved = result);
         let free = 10 - numberReserved;
+        console.log('Het aantal bezoekers is: ' + numberReserved);
         let freeString = 'Nog ' + free + ' plaatsen vrij';
         this.isOccupied = free == 0;
 
-        return free == 0 ? 'VOLZET' : freeString;
+        this.bezettingsString =  free == 0 ? 'VOLZET' : freeString;
     }
 
-    onTrainingDayClick(trainingDay: String, date: String) {
+    onTrainingDayClick(trainingDay: String, date: string) {
         this.reservationDay = trainingDay;
         this.reservationDate = date;
     }
