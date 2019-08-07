@@ -87,6 +87,7 @@ export class AgendaComponent implements OnInit {
         this.weekNumber = this.getWeekNumber();
         this.getFirstDayOfWeekString();
         this.getLastDayOfWeekString();
+      this.nextWeek = 1;
     }
 
     private getNumberOfReservations() {

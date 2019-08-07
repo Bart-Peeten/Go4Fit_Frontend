@@ -80,6 +80,7 @@ export class AdminAgendaComponent implements OnInit {
     this.weekNumber = this.getWeekNumber();
     this.getFirstDayOfWeekString();
     this.getLastDayOfWeekString();
+    this.nextWeek = 1;
   }
 
   onTrainingDayClick(trainingDay: string, date: string) {
