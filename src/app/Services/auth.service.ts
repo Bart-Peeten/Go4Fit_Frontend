@@ -69,6 +69,9 @@ export class AuthService {
 
     console.log('De params zijn: ' + params);
 
+      this.setIsLoggedIn(true);
+      this.setIsLoggedInAsAdmin(true);
+
     return this.http.get<User>(this.url + 'users/login', {params: params}).pipe(
       map(result => {
         sessionStorage.setItem('username', username);

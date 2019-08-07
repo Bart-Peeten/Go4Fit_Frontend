@@ -54,6 +54,11 @@ export class AgendaComponent implements OnInit {
         this.getFirstDayOfNextWeekString();
         this.getLastDayOfNextWeekString();
         // this.getNumberOfReservations();
+        console.log('De datums van deze week: ');
+        console.log(this.trainingDaysDatesList);
+
+        // Here data for next weeks will be fetched.
+        this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList);
         this.nextWeek += 1;
         this.nextWeekDays += 7;
     }
@@ -79,7 +84,7 @@ export class AgendaComponent implements OnInit {
     }
 
     private getParticipants() {
-        this.participants = this.agendaService.getParticipants();
+        // this.participants = this.agendaService.getParticipants();
     }
 
     private currentWeek() {
@@ -89,6 +94,8 @@ export class AgendaComponent implements OnInit {
         this.weekNumber = this.getWeekNumber();
         this.getFirstDayOfWeekString();
         this.getLastDayOfWeekString();
+        // Here data for this week will be fetched.
+
       this.nextWeek = 1;
     }
 

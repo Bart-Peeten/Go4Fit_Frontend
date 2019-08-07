@@ -4,6 +4,7 @@ import {Participant} from '../Domains/participant.model';
 import {Reservation} from '../Domains/reservation.model';
 import {AuthService} from './auth.service';
 import {User} from '../Domains/user.model';
+import {DateService} from './date.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class AgendaService {
     ['8h - 9h', '9h - 10h', '10h - 11h']];
 
   constructor(private http: HttpClient,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private dateService: DateService) {
   }
 
   getTrainingsMoments() {
@@ -73,6 +75,16 @@ export class AgendaService {
     };
     return this.http.delete('/api/participant/', options);
   }
+
+    getDataForGivenWeek(trainingDaysDatesList: any[]) {
+        let formatDatesList: any[] = [];
+        for (let item of trainingDaysDatesList) {
+            let formatDate = this.dateService.formatDate(item);
+            formatDatesList.push(formatDate );
+        }
+
+        this.http.get(this.url + '', formatDatesList);
+    }
 
   getNumberOfReservations(date: string, time: string) {
     const headers = new HttpHeaders({
