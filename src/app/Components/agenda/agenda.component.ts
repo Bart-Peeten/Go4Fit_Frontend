@@ -84,6 +84,8 @@ export class AgendaComponent implements OnInit {
 
     private currentWeek() {
         this.trainingDaysDatesList = this.dateService.getTrainingsDays();
+        console.log('De datums van deze week: ');
+        console.log(this.trainingDaysDatesList);
         this.weekNumber = this.getWeekNumber();
         this.getFirstDayOfWeekString();
         this.getLastDayOfWeekString();
