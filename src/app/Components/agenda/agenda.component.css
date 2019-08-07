@@ -5,6 +5,15 @@
     position: relative;
 }
 
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+
 .my-row {
     margin-left: 30px;
     margin-right: 30px;

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../Domains/user.model';
+import {catchError, map} from 'rxjs/operators';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Injectable()
 export class AuthService {
@@ -9,6 +11,7 @@ export class AuthService {
     isLoggedInAsAdmin: BehaviorSubject<boolean>;
     private password: string;
     private _name: string;
+    private url = 'http://localhost:8080/api/';
 
     constructor(private http: HttpClient) {
         this.isLoggedIn = new BehaviorSubject<boolean>(false);
@@ -44,22 +47,43 @@ export class AuthService {
     }
 
     public login(username: string, password: string) {
-        this.name = username;
-        this.password = password;
-        if (username == 'test') {
-            this.setIsLoggedIn(true);
-        } else if (username == 'admin') {
-            this.setIsLoggedInAsAdmin(true);
-            this.setIsLoggedIn(true);
-        }
 
-        sessionStorage.setItem('username', username);
+      const params = new HttpParams()
+        .set('useremail', username)
+        .set('userPassword', password);
+
+      console.log('De params zijn: ' + params);
+
+       return this.http.get<User>(this.url + 'users/login', {params : params}).pipe(
+         map(result => {
+           sessionStorage.setItem('username', username);
+           this.setIsLoggedIn(true);
+           console.log('DE ROL IS: ' + result.role);
+           if (result.role === 'ROLE_ADMIN') {
+             this.setIsLoggedIn(true);
+             this.setIsLoggedInAsAdmin(true);
+           }
+           return result;
+         })
+       );
+    }
+
+    isUserLoggedIn() {
+      const user = sessionStorage.getItem('username');
+      return !(user === null);
+    }
+
+    logout() {
+      sessionStorage.removeItem('username');
+      this.setIsLoggedInAsAdmin(false);
+      this.setIsLoggedIn(false);
     }
 
     public signIn(lastName: String, firstName: String, email: String, phone: String, password: String) {
-        let newUser = new User(lastName, firstName, email, phone, password);
+        const newUser = new User(lastName, firstName, email, phone, password);
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         console.log(newUser);
         this.setIsLoggedIn(true);
-        return this.http.post('', newUser);
+        return this.http.post(this.url + 'users/registration', newUser, { headers : headers});
     }
 }

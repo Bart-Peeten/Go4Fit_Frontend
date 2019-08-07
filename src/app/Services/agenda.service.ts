@@ -8,7 +8,7 @@ import {AuthService} from './auth.service';
     providedIn: 'root'
 })
 export class AgendaService {
-    private url: String = 'http://localhost:8080/api/'
+  private url: String = 'http://localhost:8080/api/';
     private trainingDays: Array<String> = ['Dinsdag', 'Woensdag', 'Donderdag', 'Zaterdag', 'Zondag'];
     private trainingsType: any[][] = [['circuit training', 'circuit training'],
         ['circuit training', 'circuit training', 'circuit training', 'circuit training'],
@@ -44,14 +44,14 @@ export class AgendaService {
     }
 
     addReservation(participantName: String, reservationDate: String, reservationTime: String) {
-        let reservation = new Reservation(participantName, reservationDate, reservationTime);
+        const reservation = new Reservation(participantName, reservationDate, reservationTime);
         const headers = new HttpHeaders({Authorization: 'Basic' +
                 btoa(this.authService.getPassword() + ':' + this.authService.name)});
         return this.http.post('/api/participant', reservation, {headers : headers});
     }
 
     removeReservation(participant: String, reservationDate: String, reservationTime: String) {
-        let reservation = new Reservation(participant, reservationDate, reservationTime);
+        const reservation = new Reservation(participant, reservationDate, reservationTime);
         const options = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -65,11 +65,11 @@ export class AgendaService {
         const headers = new HttpHeaders({Authorization: 'Basic' +
                 btoa(this.authService.getPassword() + ':' + this.authService.name)});
 
-        let params = new HttpParams()
+        const params = new HttpParams()
             .set('date', date)
             .set('time', time);
 
-        let result = this.http.get(this.url + 'numberofreservations', {headers : headers, params : params});
+        const result = this.http.get(this.url + 'numberofreservations', {headers : headers, params : params});
 
         return result;
     }

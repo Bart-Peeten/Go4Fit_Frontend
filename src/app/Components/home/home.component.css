@@ -7,6 +7,15 @@ img {
     background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
 }
 
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+
 .adress{
     margin-top: 20px;
     font-size: 20px;

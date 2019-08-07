@@ -1,5 +1,5 @@
 
-<div class="container-fluid my-container">
+<div class="container-fluid my-container fullscreen">
     <div class="row my-header-row">
         <div class="col-md-12 text-center title">
             <p>Agenda Go4Fit Bree</p>
@@ -32,13 +32,13 @@
                 <span class="trainingday">{{ day }}</span><br>
                 <span class="spanmargin">{{ trainingDaysDatesList[i] }}</span>
             </div>
-            <div *ngFor="let moment of trainingsMoments[i]; let x = index" (click)="onTrainingMomentClick(moment)">
+            <div *ngFor="let time of trainingsTimes[i]; let x = index" (click)="onTrainingMomentClick(time)">
                 <div class="reservation" disabled="isOccupied"
                 [style.border-left]="trainingsTypes[i][x] == 'circuit training' ? '5px solid greenyellow' : '5px solid red '"
                      data-toggle="modal"
                      data-target="#myModal">
                     <span class="reservationtitle"> {{ trainingsTypes[i][x] }}</span><br>
-                    <span>{{ moment }}</span><br>
+                    <span>{{ time }}</span><br>
                     <span style="float: right; margin-top: 20px;"> {{ bezettingsString }} </span>
 
                 </div>

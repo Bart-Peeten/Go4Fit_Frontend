@@ -17,7 +17,7 @@ export class AgendaComponent implements OnInit {
     private dateOfWeek: Date;
     private lastdayOfWeekString: string;
     private trainingsDaysList: String[];
-    private trainingsMoments: any[][];
+    private trainingsTimes: any[][];
     private trainingsTypes: any[][];
     private trainingDaysDatesList: any[];
     private participants: Observable<Participant[]>;
@@ -40,7 +40,7 @@ export class AgendaComponent implements OnInit {
         this.fetchTrainingsDays();
         this.getParticipants();
         this.getNumberOfReservations();
-        this.trainingsMoments = this.agendaService.getTrainingsMoments();
+        this.trainingsTimes = this.agendaService.getTrainingsMoments();
         this.trainingsTypes = this.agendaService.getTrainingsType();
     }
 
