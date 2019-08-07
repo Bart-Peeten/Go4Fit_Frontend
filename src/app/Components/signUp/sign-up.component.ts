@@ -8,11 +8,11 @@ import {Router} from '@angular/router';
     styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-    lastName: String;
-    firstName: String;
-    email: String;
-    phone: String;
-    password: String;
+    lastName: string;
+    firstName: string;
+    email: string;
+    phone: string;
+    password: string;
 
     constructor(private authService: AuthService, private router: Router) {
     }
@@ -23,6 +23,6 @@ export class SignUpComponent implements OnInit {
     signIn() {
         this.authService.signIn(this.lastName, this.firstName, this.email, this.phone, this.password)
             .subscribe(_ => this.router.navigate(['/agenda']));
-        this.router.navigate(['/agenda']);
+        // this.router.navigate(['/agenda']);
     }
 }

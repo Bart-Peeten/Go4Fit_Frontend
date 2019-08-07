@@ -41,7 +41,7 @@ import {InMemoryService} from './Services/in-memory.service';
         ReactiveFormsModule,
         FormsModule,
         HttpClientModule,
-        InMemoryWebApiModule.forRoot(InMemoryService, { delay: 1000 })
+        // InMemoryWebApiModule.forRoot(InMemoryService, { delay: 1000 })
     ],
     providers: [AuthService],
     bootstrap: [AppComponent]

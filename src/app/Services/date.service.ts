@@ -62,4 +62,21 @@ export class DateService {
 
         return trainingsDays;
     }
+
+    formatDate(date: string) {
+      console.log('Date to format is: ' + date);
+      console.log('geformateerde date is: ' + date.substring(0, 2));
+      console.log('geformateerde date is: ' + date.substring(3, 5));
+      console.log('geformateerde date is: ' + date.substring(6, 10));
+      console.log(date.substring(6, 10) + '-' + date.substring(3, 5) + '-' + date.substring(0, 2));
+      return date.substring(6, 10) + '-' + date.substring(3, 5) + '-' + date.substring(0, 2);
+    }
+
+    getFullTime(time: string) {
+      if (time.charAt(1) === 'h') {
+        return '0' + time.charAt(0) + ':00';
+      } else {
+        return time + ':00';
+      }
+    }
 }
