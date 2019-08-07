@@ -32,13 +32,13 @@
                 <span class="trainingday">{{ day }}</span><br>
                 <span class="spanmargin">{{ trainingDaysDatesList[i] }}</span>
             </div>
-            <div *ngFor="let moment of trainingsMoments[i]; let x = index" (click)="onTrainingMomentClick(moment)">
+            <div *ngFor="let time of trainingsTimes[i]; let x = index" (click)="onTrainingMomentClick(time)">
                 <div class="reservation"
                      [style.border-left]="trainingsTypes[i][x] == 'circuit training' ? '4px solid greenyellow' : '4px solid red '"
                      data-toggle="modal"
                      data-target="#myModal">
                     <span class="reservationtitle"> {{ trainingsTypes[i][x] }} </span><br>
-                    <span style="border-bottom: 2px solid black">{{ moment }}</span><br>
+                    <span style="border-bottom: 2px solid black">{{ time }}</span><br>
 
                     <div style="padding-top: 10px">
                         <ul *ngFor="let participant of participants | async">
