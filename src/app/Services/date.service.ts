@@ -62,4 +62,16 @@ export class DateService {
 
         return trainingsDays;
     }
+
+    formatDate(date: string) {
+      return moment(date).format('YYYY-MM-DD');
+    }
+
+    getFullTime(time: string) {
+      if (time.charAt(1) === 'h') {
+        return '0' + time.charAt(0) + ':00';
+      } else {
+        return time + ':00';
+      }
+    }
 }

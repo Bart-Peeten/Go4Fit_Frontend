@@ -21,8 +21,8 @@ export class AgendaComponent implements OnInit {
     private trainingsTypes: any[][];
     private trainingDaysDatesList: any[];
     private participants: Observable<Participant[]>;
-    private nextWeek: number = 1;
-    private nextWeekDays: number = 7;
+    private nextWeek = 1;
+    private nextWeekDays = 7;
     private isOccupied: boolean;
     private participantName: String;
     private reservationDay: String;
@@ -53,7 +53,7 @@ export class AgendaComponent implements OnInit {
         this.trainingDaysDatesList = this.dateService.getDatesofDaysOfNextWeek(this.nextWeekDays);
         this.getFirstDayOfNextWeekString();
         this.getLastDayOfNextWeekString();
-        //this.getNumberOfReservations();
+        // this.getNumberOfReservations();
         this.nextWeek += 1;
         this.nextWeekDays += 7;
     }
@@ -94,12 +94,12 @@ export class AgendaComponent implements OnInit {
         this.agendaService.getNumberOfReservations(this.reservationDate,
             this.reservationTime)
             .subscribe(result => numberReserved = result);
-        let free = 10 - numberReserved;
+        const free = 10 - numberReserved;
         console.log('Het aantal bezoekers is: ' + numberReserved);
-        let freeString = 'Nog ' + free + ' plaatsen vrij';
-        this.isOccupied = free == 0;
+        const freeString = 'Nog ' + free + ' plaatsen vrij';
+        this.isOccupied = free === 0;
 
-        this.bezettingsString =  free == 0 ? 'VOLZET' : freeString;
+        this.bezettingsString =  free === 0 ? 'VOLZET' : freeString;
     }
 
     onTrainingDayClick(trainingDay: String, date: string) {
@@ -113,10 +113,13 @@ export class AgendaComponent implements OnInit {
     }
 
     confirmReservation() {
-        console.log(this.reservationDay + ' : ' + this.reservationTime + ' : ' + this.participantName);
+        console.log(this.reservationDate + ' : ' + this.reservationTime + ' : ' + this.participantName);
+      const time = this.reservationTime.substring(0, 2);
+      const formatTime = this.dateService.getFullTime(time);
+      const formatReservationDate = this.dateService.formatDate(this.reservationDate);
         this.agendaService.addReservation(this.participantName,
-            this.reservationDate,
-            this.reservationTime)
+          formatReservationDate,
+          formatTime)
             .subscribe(_ => this.getParticipants());
     }
 }

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Participant} from '../Domains/participant.model';
 import {Reservation} from '../Domains/reservation.model';
 import {AuthService} from './auth.service';
+import {User} from '../Domains/user.model';
 
 @Injectable({
     providedIn: 'root'
@@ -43,19 +44,23 @@ export class AgendaService {
         return this.http.get<Participant[]>(this.url + 'reservation/names', {headers : headers});
     }
 
-    addReservation(participantName: String, reservationDate: String, reservationTime: String) {
-        const reservation = new Reservation(participantName, reservationDate, reservationTime);
-        const headers = new HttpHeaders({Authorization: 'Basic' +
-                btoa(this.authService.getPassword() + ':' + this.authService.name)});
-        return this.http.post('/api/participant', reservation, {headers : headers});
+    addReservation(participantName: String, reservationDate: string, reservationTime: String) {
+      const loggedInUser: User[] = [];
+      loggedInUser.push(this.authService.loggedInUser);
+        const reservation = new Reservation(loggedInUser, reservationDate, reservationTime);
+      const securityToken = this.authService.getUserName() + ':' + this.authService.getPassword();
+      console.log('Security token is: ' + securityToken);
+        const headers = new HttpHeaders().set('Authorization', 'Basic ' +
+                btoa(securityToken));
+        return this.http.post<Reservation>(this.url + 'reservation/', reservation, {headers : headers});
     }
 
     removeReservation(participant: String, reservationDate: String, reservationTime: String) {
-        const reservation = new Reservation(participant, reservationDate, reservationTime);
+      const loggedInUser: User[] = [];
+      loggedInUser.push(this.authService.loggedInUser);
+        const reservation = new Reservation(loggedInUser, reservationDate, reservationTime);
         const options = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-            }),
+            headers: new HttpHeaders({'Content-Type': 'application/json'}),
             body: reservation,
         };
         return this.http.delete('/api/participant/', options);

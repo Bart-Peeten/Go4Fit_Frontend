@@ -1,11 +1,13 @@
+import {User} from './user.model';
+
 export class Reservation {
-    name: String;
+    users: User[];
     date: String;
     time: String;
 
 
-    constructor(name: String, date: String, time: String) {
-        this.name = name;
+    constructor(users: User[], date: String, time: String) {
+        this.users = users;
         this.date = date;
         this.time = time;
     }
