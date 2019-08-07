@@ -117,6 +117,7 @@ export class AgendaComponent implements OnInit {
       const time = this.reservationTime.substring(0, 2);
       const formatTime = this.dateService.getFullTime(time);
       const formatReservationDate = this.dateService.formatDate(this.reservationDate);
+      console.log('Formated date en tijd is: ' + formatTime + ' : ' + formatReservationDate);
         this.agendaService.addReservation(this.participantName,
           formatReservationDate,
           formatTime)

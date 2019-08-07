@@ -72,7 +72,7 @@ export class AdminAgendaComponent implements OnInit {
   }
 
   private getParticipants() {
-    this.participants = this.agendaService.getParticipants();
+    // this.participants = this.agendaService.getParticipants();
   }
 
   currentWeek() {

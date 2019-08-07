@@ -64,7 +64,12 @@ export class DateService {
     }
 
     formatDate(date: string) {
-      return moment(date).format('YYYY-MM-DD');
+      console.log('Date to format is: ' + date);
+      console.log('geformateerde date is: ' + date.substring(0, 2));
+      console.log('geformateerde date is: ' + date.substring(3, 5));
+      console.log('geformateerde date is: ' + date.substring(6, 10));
+      console.log(date.substring(6, 10) + '-' + date.substring(3, 5) + '-' + date.substring(0, 2));
+      return date.substring(6, 10) + '-' + date.substring(3, 5) + '-' + date.substring(0, 2);
     }
 
     getFullTime(time: string) {
