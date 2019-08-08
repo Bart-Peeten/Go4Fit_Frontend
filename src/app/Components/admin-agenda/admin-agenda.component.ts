@@ -3,6 +3,9 @@ import {AgendaService} from '../../Services/agenda.service';
 import {Participant} from '../../Domains/participant.model';
 import {Observable} from 'rxjs';
 import {DateService} from '../../Services/date.service';
+import {Reservation} from '../../Domains/reservation.model';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
+import index from '@angular/cli/lib/cli';
 
 @Component({
   selector: 'app-admin-agenda',
@@ -18,13 +21,14 @@ export class AdminAgendaComponent implements OnInit {
   private trainingsTimes: any[][];
   private trainingsTypes: any[][];
   private trainingDaysDatesList: any[];
-  private participants: Observable<Participant[]>;
+  private participants: String[][] = [];
   newParticipant: String;
   private nextWeek = 1;
   private nextWeekDays = 7;
   private reservationDay: string;
   private reservationTime: string;
   private reservationDate: string;
+  private htmlIndex = 0;
 
   constructor(private agendaService: AgendaService,
               private dateService: DateService) {
@@ -36,6 +40,7 @@ export class AdminAgendaComponent implements OnInit {
     this.getParticipants();
     this.trainingsTimes = this.agendaService.getTrainingsMoments();
     this.trainingsTypes = this.agendaService.getTrainingsType();
+    this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList).subscribe(result => this.fetchUsersFromData(result));
   }
 
   getWeekNumber() {
@@ -103,5 +108,39 @@ export class AdminAgendaComponent implements OnInit {
   removeParticipant() {
     this.agendaService.removeReservation(this.newParticipant, this.reservationDate, this.reservationTime)
       .subscribe(_ => this.getParticipants());
+  }
+
+  private fetchUsersFromData(result: Reservation[]) {
+    if (result != null) {
+      result.forEach(item => {
+          const users: Array<String> = [];
+          item.users.forEach(user => {
+            console.log('De huidige user is: ' + user);
+            const fullname = user.firstName + ' ' + user.lastName;
+            if (fullname != null) {
+              users.push(fullname);
+            } else {
+              users.push(' ');
+            }
+          });
+          console.log(users);
+          this.participants.push(users);
+        }
+      );
+    }
+    console.log('De lijst van participants ziet er als volgt uit: ' + this.participants[2]);
+    console.log(this.participants.length);
+  }
+
+  getIndex(i: number, x: number) {
+    if ((i + x) === 0) {
+      this.htmlIndex = 0;
+      return 0;
+    } else {
+      const indexx = this.htmlIndex + 1;
+      this.htmlIndex += 1;
+
+      return indexx;
+    }
   }
 }

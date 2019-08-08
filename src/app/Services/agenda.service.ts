@@ -54,7 +54,7 @@ export class AgendaService {
       .set('date', date)
       .set('time', time);
 
-    return this.http.get<Participant[]>(this.url + 'reservation/names', {headers: this.getHeaders()});
+    return this.http.get<Participant[]>(this.url + 'reservation/names', {headers: this.getHeaders(), params: params});
   }
 
   addReservation(participantName: String, reservationDate: string, reservationTime: String) {
@@ -76,15 +76,22 @@ export class AgendaService {
     return this.http.delete('/api/participant/', options);
   }
 
-    getDataForGivenWeek(trainingDaysDatesList: any[]) {
-        let formatDatesList: any[] = [];
-        for (let item of trainingDaysDatesList) {
-            let formatDate = this.dateService.formatDate(item);
-            formatDatesList.push(formatDate );
-        }
+  getDataForGivenWeek(trainingDaysDatesList: any[]) {
+    let formatDatesList: any[] = [];
+    formatDatesList = this.formatDates(trainingDaysDatesList);
+    console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
 
-        this.http.get(this.url + '', formatDatesList);
-    }
+    const params = new HttpParams()
+        .append('datesOfWeek', formatDatesList[0])
+        .append('datesOfWeek', formatDatesList[1])
+        .append('datesOfWeek', formatDatesList[2])
+        .append('datesOfWeek', formatDatesList[3])
+        .append('datesOfWeek', formatDatesList[4]);
+
+    console.log('De params voor de GET requst: ' + params);
+
+    return this.http.get<Reservation[]>(this.url + 'reservation/weekdata', {params: params});
+  }
 
   getNumberOfReservations(date: string, time: string) {
     const headers = new HttpHeaders({
@@ -99,5 +106,32 @@ export class AgendaService {
     const result = this.http.get(this.url + 'numberofreservations', {headers: headers, params: params});
 
     return result;
+  }
+
+  private formatDates(trainingDaysDatesList: any[]) {
+    const formatDatesList: any[] = [];
+    for (const item of trainingDaysDatesList) {
+      const formatDate = this.dateService.formatDate(item);
+      formatDatesList.push(formatDate);
+    }
+    return formatDatesList;
+  }
+
+  private formatTimes() {
+    let tmpFormatTimesList: Array<string> = [];
+    const formatTimesList: string[][] = [];
+    let i = 0;
+    for (const item of this.trainingsMoments) {
+      for (const time of item) {
+        const result = this.dateService.getFullTime(time);
+        console.log('de geformateerde tijd is: ', result);
+        tmpFormatTimesList.push(result);
+        i++;
+      }
+      formatTimesList.push(tmpFormatTimesList);
+      tmpFormatTimesList = [];
+    }
+    console.log('De geformateerde tijd lijst is: ', formatTimesList);
+    return [];
   }
 }

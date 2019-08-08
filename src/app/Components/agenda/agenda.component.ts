@@ -101,9 +101,9 @@ export class AgendaComponent implements OnInit {
 
     private getNumberOfReservations() {
         let numberReserved = null;
-        this.agendaService.getNumberOfReservations(this.reservationDate,
+        /* this.agendaService.getNumberOfReservations(this.reservationDate,
             this.reservationTime)
-            .subscribe(result => numberReserved = result);
+            .subscribe(result => numberReserved = result); */
         const free = 10 - numberReserved;
         console.log('Het aantal bezoekers is: ' + numberReserved);
         const freeString = 'Nog ' + free + ' plaatsen vrij';

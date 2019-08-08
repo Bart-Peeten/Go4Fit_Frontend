@@ -73,10 +73,11 @@ export class DateService {
     }
 
     getFullTime(time: string) {
-      if (time.charAt(1) === 'h') {
-        return '0' + time.charAt(0) + ':00';
+      const strip = time.substring(0, 2);
+      if (strip.charAt(1) === 'h') {
+        return '0' + strip.charAt(0) + ':00';
       } else {
-        return time + ':00';
+        return strip + ':00';
       }
     }
 }

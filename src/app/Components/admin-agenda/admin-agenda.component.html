@@ -41,8 +41,8 @@
                     <span style="border-bottom: 2px solid black">{{ time }}</span><br>
 
                     <div style="padding-top: 10px">
-                        <ul *ngFor="let participant of participants | async">
-                            <li > {{ participant.name }} </li >
+                      <ul *ngFor="let participant of participants[getIndex(i, x)]">
+                            <li > {{ participant }} </li >
                         </ul>
                     </div>
                 </div>
