@@ -40,7 +40,7 @@ export class AdminAgendaComponent implements OnInit {
     this.getParticipants();
     this.trainingsTimes = this.agendaService.getTrainingsMoments();
     this.trainingsTypes = this.agendaService.getTrainingsType();
-    this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList).subscribe(result => this.fetchUsersFromData(result));
+    this.getDataOfGivenWeek();
   }
 
   getWeekNumber() {
@@ -54,6 +54,7 @@ export class AdminAgendaComponent implements OnInit {
     this.getLastDayOfNextWeekString();
     this.nextWeek += 1;
     this.nextWeekDays += 7;
+    this.getDataOfGivenWeek();
   }
 
   private getFirstDayOfWeekString() {
@@ -85,6 +86,7 @@ export class AdminAgendaComponent implements OnInit {
     this.weekNumber = this.getWeekNumber();
     this.getFirstDayOfWeekString();
     this.getLastDayOfWeekString();
+    this.getDataOfGivenWeek();
     this.nextWeek = 1;
   }
 
@@ -108,6 +110,10 @@ export class AdminAgendaComponent implements OnInit {
   removeParticipant() {
     this.agendaService.removeReservation(this.newParticipant, this.reservationDate, this.reservationTime)
       .subscribe(_ => this.getParticipants());
+  }
+
+  private getDataOfGivenWeek() {
+    this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList).subscribe(result => this.fetchUsersFromData(result));
   }
 
   private fetchUsersFromData(result: Reservation[]) {
