@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AgendaService} from '../../Services/agenda.service';
-import {Participant} from '../../Domains/participant.model';
-import {Observable} from 'rxjs';
 import {DateService} from '../../Services/date.service';
 import {Reservation} from '../../Domains/reservation.model';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
-import index from '@angular/cli/lib/cli';
 
 @Component({
   selector: 'app-admin-agenda',
@@ -102,7 +98,7 @@ export class AdminAgendaComponent implements OnInit {
 
   addNewParticipant() {
     console.log(this.newParticipant);
-    this.agendaService.addReservation(this.newParticipant, this.reservationDate, this.reservationTime)
+    this.agendaService.addReservationWithOnlyFullName(this.newParticipant, this.reservationDate, this.reservationTime)
       .subscribe(_ => this.getParticipants());
     this.newParticipant = '';
   }
@@ -113,7 +109,7 @@ export class AdminAgendaComponent implements OnInit {
   }
 
   private getDataOfGivenWeek() {
-    this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList).subscribe(result => this.fetchUsersFromData(result));
+    this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList).subscribe(result => this.participants = result);
   }
 
   private fetchUsersFromData(result: Reservation[]) {

@@ -1,8 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DatePipe, formatDate} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
 import {AgendaService} from '../../Services/agenda.service';
-import {Observable} from 'rxjs';
-import {Participant} from '../../Domains/participant.model';
 import {DateService} from '../../Services/date.service';
 import {AuthService} from '../../Services/auth.service';
 
@@ -20,7 +17,6 @@ export class AgendaComponent implements OnInit {
     private trainingsTimes: any[][];
     private trainingsTypes: any[][];
     private trainingDaysDatesList: any[];
-    private participants: Observable<Participant[]>;
     private nextWeek = 1;
     private nextWeekDays = 7;
     private isOccupied: boolean;
@@ -28,7 +24,8 @@ export class AgendaComponent implements OnInit {
     private reservationDay: String;
     private reservationTime: string;
     private reservationDate: string;
-    private bezettingsString: string;
+    private numberOfReservations: number[] = [];
+    private htmlIndex: number;
 
     constructor(private agendaService: AgendaService,
                 private dateService: DateService,
@@ -38,8 +35,7 @@ export class AgendaComponent implements OnInit {
     ngOnInit() {
         this.currentWeek();
         this.fetchTrainingsDays();
-        this.getParticipants();
-        this.getNumberOfReservations();
+        this.getDataOfGivenWeek();
         this.trainingsTimes = this.agendaService.getTrainingsMoments();
         this.trainingsTypes = this.agendaService.getTrainingsType();
     }
@@ -59,6 +55,7 @@ export class AgendaComponent implements OnInit {
 
         // Here data for next weeks will be fetched.
         this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList);
+        this.getDataOfGivenWeek()
         this.nextWeek += 1;
         this.nextWeekDays += 7;
     }
@@ -83,10 +80,6 @@ export class AgendaComponent implements OnInit {
         this.trainingsDaysList = this.agendaService.getTrainingsdays();
     }
 
-    private getParticipants() {
-        // this.participants = this.agendaService.getParticipants();
-    }
-
     private currentWeek() {
         this.trainingDaysDatesList = this.dateService.getTrainingsDays();
         console.log('De datums van deze week: ');
@@ -94,22 +87,19 @@ export class AgendaComponent implements OnInit {
         this.weekNumber = this.getWeekNumber();
         this.getFirstDayOfWeekString();
         this.getLastDayOfWeekString();
+        this.getDataOfGivenWeek()
         // Here data for this week will be fetched.
 
       this.nextWeek = 1;
     }
 
-    private getNumberOfReservations() {
-        let numberReserved = null;
-        /* this.agendaService.getNumberOfReservations(this.reservationDate,
-            this.reservationTime)
-            .subscribe(result => numberReserved = result); */
-        const free = 10 - numberReserved;
-        console.log('Het aantal bezoekers is: ' + numberReserved);
+    private getNumberOfReservations(i: number, x: number) {
+        const free = 10 - this.numberOfReservations[this.getIndex(i, x)];
+        console.log('Het aantal bezoekers is: ' + this.numberOfReservations);
         const freeString = 'Nog ' + free + ' plaatsen vrij';
         this.isOccupied = free === 0;
 
-        this.bezettingsString =  free === 0 ? 'VOLZET' : freeString;
+        return free === 0 ? 'VOLZET' : freeString;
     }
 
     onTrainingDayClick(trainingDay: String, date: string) {
@@ -131,6 +121,22 @@ export class AgendaComponent implements OnInit {
         this.agendaService.addReservation(this.participantName,
           formatReservationDate,
           formatTime)
-            .subscribe(_ => this.getParticipants());
+            .subscribe(_ => this.getDataOfGivenWeek());
+    }
+
+    private getDataOfGivenWeek() {
+        this.agendaService.getNumberOfReservationsForGivenWeek(this.trainingDaysDatesList).subscribe(result => this.numberOfReservations = result);
+    }
+
+    private getIndex(i: number, x: number) {
+        if ((i + x) === 0) {
+            this.htmlIndex = 0;
+            return 0;
+        } else {
+            const indexx = this.htmlIndex + 1;
+            this.htmlIndex += 1;
+
+            return indexx;
+        }
     }
 }
