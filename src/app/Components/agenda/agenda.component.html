@@ -26,8 +26,7 @@
     <!-- End of TODO code -->
 
     <div class="row my-row-trainingsday">
-        <div class="col-md-1"></div>
-        <div *ngFor="let day of trainingsDaysList; let i = index" class="col-md-2 colmargintop" (click)="onTrainingDayClick(day, trainingDaysDatesList[i])">
+        <div *ngFor="let day of trainingsDaysList; let i = index" class="col-md-3 colmargintop" (click)="onTrainingDayClick(day, trainingDaysDatesList[i])">
             <div class="trianingdaytitle">
                 <span class="trainingday">{{ day }}</span><br>
                 <span class="spanmargin">{{ trainingDaysDatesList[i] }}</span>

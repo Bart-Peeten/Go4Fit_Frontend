@@ -26,6 +26,7 @@ export class AdminAgendaComponent implements OnInit {
   private reservationDate: string;
   private htmlIndex = 0;
   private newLastName: string;
+  private isClicked = false;
 
   constructor(private agendaService: AgendaService,
               private dateService: DateService) {
@@ -90,6 +91,7 @@ export class AdminAgendaComponent implements OnInit {
   onTrainingDayClick(trainingDay: string, date: string) {
     this.reservationDay = trainingDay;
     this.reservationDate = date;
+    this.isClicked = true;
     console.log('DE GESELECTEERDE DATUM: ' + date);
   }
 
@@ -107,6 +109,7 @@ export class AdminAgendaComponent implements OnInit {
       .subscribe(_ => this.getDataOfGivenWeek());
     this.newFirstName = '';
     this.newLastName = '';
+    this.isClicked = false;
   }
 
   removeParticipant() {
@@ -119,6 +122,7 @@ export class AdminAgendaComponent implements OnInit {
       .subscribe(_ => this.getDataOfGivenWeek());
     this.newFirstName = '';
     this.newLastName = '';
+    this.isClicked = false;
   }
 
   private getDataOfGivenWeek() {

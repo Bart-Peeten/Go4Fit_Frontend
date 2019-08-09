@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class NavbarComponent implements OnInit {
     isLoggedin: boolean;
     isLoggedinAsAdmin: boolean;
+    show = false;
 
   constructor(private authService: AuthService, private router: Router) {
       authService.getIsLoggedIn().subscribe(value => this.setIsLoggedIn(value));
@@ -32,4 +33,8 @@ export class NavbarComponent implements OnInit {
         this.authService.setIsLoggedInAsAdmin(false);
         this.router.navigate(['/home']);
     }
+
+  toggleCollapse() {
+    this.show = !this.show;
+  }
 }

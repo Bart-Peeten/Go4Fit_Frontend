@@ -11,16 +11,14 @@ import {DateService} from './date.service';
 })
 export class AgendaService {
   private url: String = 'http://localhost:8080/api/';
-  private trainingDays: Array<String> = ['Dinsdag', 'Woensdag', 'Donderdag', 'Zaterdag', 'Zondag'];
+  private trainingDays: Array<String> = ['Dinsdag', 'Woensdag', 'Donderdag', 'Zondag'];
   private trainingsType: any[][] = [['circuit training', 'circuit training'],
     ['circuit training', 'circuit training', 'circuit training', 'circuit training'],
-    ['cross training'],
     ['cross training'],
     ['circuit training', 'circuit training', 'circuit training']];
   private trainingsMoments: any[][] = [['19h - 20h', '20h - 21h'],
     ['9h - 10h', '10h - 11h', '19h - 20h', '20h - 21h'],
     ['19h - 20h'],
-    ['9h - 10h'],
     ['8h - 9h', '9h - 10h', '10h - 11h']];
 
   constructor(private http: HttpClient,
