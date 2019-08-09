@@ -27,6 +27,7 @@ export class AdminAgendaComponent implements OnInit {
   private htmlIndex = 0;
   private newLastName: string;
   private isClicked = false;
+  private closeResult: string;
 
   constructor(private agendaService: AgendaService,
               private dateService: DateService) {

@@ -17,8 +17,6 @@ import { AuthService } from './Services/auth.service';
 import { SignUpComponent } from './Components/signUp/sign-up.component';
 import { AdminAgendaComponent } from './Components/admin-agenda/admin-agenda.component';
 import { HttpClientModule } from '@angular/common/http';
-import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryService} from './Services/in-memory.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +38,7 @@ import {InMemoryService} from './Services/in-memory.service';
         AppRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule,
+        HttpClientModule
         // InMemoryWebApiModule.forRoot(InMemoryService, { delay: 1000 })
     ],
     providers: [AuthService],
