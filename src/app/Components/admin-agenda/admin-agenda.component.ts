@@ -96,8 +96,11 @@ export class AdminAgendaComponent implements OnInit {
     console.log('DE GESELECTEERDE DATUM: ' + date);
   }
 
-  onTrainingMomentClick(trainingMoment: string) {
+  onTrainingMomentClick(trainingMoment: string, trainingDay: string, date: string) {
     this.reservationTime = trainingMoment;
+    this.reservationDay = trainingDay;
+    this.reservationDate = date;
+    console.log('DE GESELECTEERDE DATUM: ' + date);
   }
 
   addNewParticipantWhenOnlyNameIsAvailable() {
