@@ -18,13 +18,14 @@ export class AdminAgendaComponent implements OnInit {
   private trainingsTypes: any[][];
   private trainingDaysDatesList: any[];
   private participants: String[][] = [];
-  newParticipant: String;
+  newFirstName: string;
   private nextWeek = 1;
   private nextWeekDays = 7;
   private reservationDay: string;
   private reservationTime: string;
   private reservationDate: string;
   private htmlIndex = 0;
+  private newLastName: string;
 
   constructor(private agendaService: AgendaService,
               private dateService: DateService) {
@@ -96,16 +97,28 @@ export class AdminAgendaComponent implements OnInit {
     this.reservationTime = trainingMoment;
   }
 
-  addNewParticipant() {
-    console.log(this.newParticipant);
-    this.agendaService.addReservationWithOnlyFullName(this.newParticipant, this.reservationDate, this.reservationTime)
-      .subscribe(_ => this.getParticipants());
-    this.newParticipant = '';
+  addNewParticipantWhenOnlyNameIsAvailable() {
+    console.log(this.newFirstName);
+    // Make sure the first and lastname starts with capital letter.
+    const firstName = this.newFirstName.charAt(0).toUpperCase() + this.newFirstName.slice(1);
+    const lastName = this.newLastName.charAt(0).toUpperCase() + this.newLastName.slice(1);
+
+    this.agendaService.addReservationWithOnlyFullName(firstName, lastName, this.reservationDate, this.reservationTime)
+      .subscribe(_ => this.getDataOfGivenWeek());
+    this.newFirstName = '';
+    this.newLastName = '';
   }
 
   removeParticipant() {
-    this.agendaService.removeReservation(this.newParticipant, this.reservationDate, this.reservationTime)
-      .subscribe(_ => this.getParticipants());
+    console.log(this.newFirstName);
+    // Make sure the first and lastname starts with capital letter.
+    const firstName = this.newFirstName.charAt(0).toUpperCase() + this.newFirstName.slice(1);
+    const lastName = this.newLastName.charAt(0).toUpperCase() + this.newLastName.slice(1);
+
+    this.agendaService.removeReservation(firstName, lastName, this.reservationDate, this.reservationTime)
+      .subscribe(_ => this.getDataOfGivenWeek());
+    this.newFirstName = '';
+    this.newLastName = '';
   }
 
   private getDataOfGivenWeek() {

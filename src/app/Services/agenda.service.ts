@@ -65,23 +65,33 @@ export class AgendaService {
     return this.http.post<Reservation>(this.url + 'reservation/', reservation, {headers: this.getHeaders()});
   }
 
-  addReservationWithOnlyFullName(participantName: String, reservationDate: string, reservationTime: String) {
-      const request = new HttpRequest('POST', this.url + 'reservation/onlyname', null,
-          {reportProgress: true,
-          responseType: 'text',
-          params: new HttpParams().set('firstname', ).set('lastname', )})
-      return this.http.post<Reservation>(this.url + 'reservation/', reservation, {headers: this.getHeaders()});
+  addReservationWithOnlyFullName(firstName: string, lastName: string, reservationDate: string, reservationTime: string) {
+    const formatDate = this.dateService.formatDate(reservationDate);
+    const formatTime = this.dateService.getFullTime(reservationTime);
+
+    const params = new HttpParams().set('firstname', firstName)
+      .set('lastname', lastName)
+      .set('date', formatDate)
+      .set('time', formatTime);
+
+    console.log(this.url + 'reservation/onlyname' + params);
+    return this.http.post<Reservation>(this.url + 'reservation/onlyname', params, {headers: this.getHeaders()});
   }
 
-  removeReservation(participant: String, reservationDate: String, reservationTime: String) {
-    const loggedInUser: User[] = [];
-    loggedInUser.push(this.authService.loggedInUser);
-    const reservation = new Reservation(loggedInUser, reservationDate, reservationTime);
+  removeReservation(firstName: string, lastName: string, reservationDate: string, reservationTime: string) {
+    const formatDate = this.dateService.formatDate(reservationDate);
+    const formatTime = this.dateService.getFullTime(reservationTime);
     const options = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}),
-      body: reservation,
+      headers: this.getHeaders(),
+      body: null,
+      params: new HttpParams()
+        .set('firstname', firstName)
+        .set('lastname', lastName)
+        .set('date', formatDate)
+        .set('time', formatTime)
     };
-    return this.http.delete('/api/participant/', options);
+    console.log(this.url + 'reservation/delete' + options);
+    return this.http.delete(this.url + 'reservation/delete', options);
   }
 
   getDataForGivenWeek(trainingDaysDatesList: any[]) {
@@ -90,33 +100,33 @@ export class AgendaService {
     console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
 
     const params = new HttpParams()
-        .append('datesOfWeek', formatDatesList[0])
-        .append('datesOfWeek', formatDatesList[1])
-        .append('datesOfWeek', formatDatesList[2])
-        .append('datesOfWeek', formatDatesList[3])
-        .append('datesOfWeek', formatDatesList[4]);
+      .append('datesOfWeek', formatDatesList[0])
+      .append('datesOfWeek', formatDatesList[1])
+      .append('datesOfWeek', formatDatesList[2])
+      .append('datesOfWeek', formatDatesList[3])
+      .append('datesOfWeek', formatDatesList[4]);
 
     console.log('De params voor de GET requst: ' + params);
 
     return this.http.get<String[][]>(this.url + 'reservation/weekusers', {params: params});
   }
 
-    getNumberOfReservationsForGivenWeek(trainingDaysDatesList: any[]) {
-        let formatDatesList: any[] = [];
-        formatDatesList = this.formatDates(trainingDaysDatesList);
-        console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
+  getNumberOfReservationsForGivenWeek(trainingDaysDatesList: any[]) {
+    let formatDatesList: any[] = [];
+    formatDatesList = this.formatDates(trainingDaysDatesList);
+    console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
 
-        const params = new HttpParams()
-            .append('datesOfWeek', formatDatesList[0])
-            .append('datesOfWeek', formatDatesList[1])
-            .append('datesOfWeek', formatDatesList[2])
-            .append('datesOfWeek', formatDatesList[3])
-            .append('datesOfWeek', formatDatesList[4]);
+    const params = new HttpParams()
+      .append('datesOfWeek', formatDatesList[0])
+      .append('datesOfWeek', formatDatesList[1])
+      .append('datesOfWeek', formatDatesList[2])
+      .append('datesOfWeek', formatDatesList[3])
+      .append('datesOfWeek', formatDatesList[4]);
 
-        console.log('De params voor de GET requst: ' + params);
+    console.log('De params voor de GET requst: ' + params);
 
-        return this.http.get<number[]>(this.url + 'reservation/weekreservaties', {params: params});
-    }
+    return this.http.get<number[]>(this.url + 'reservation/weekreservaties', {params: params});
+  }
 
   getNumberOfReservations(date: string, time: string) {
     const headers = new HttpHeaders({
