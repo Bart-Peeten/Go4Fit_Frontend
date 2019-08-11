@@ -91,6 +91,7 @@ export class AgendaComponent implements OnInit {
     // Here data for this week will be fetched.
 
     this.nextWeek = 1;
+      this.nextWeekDays = 7;
   }
 
   private getNumberOfReservations(i: number, x: number) {

@@ -20,7 +20,7 @@ export class PriceService {
         generatedPrice.push(price2);
         const price3 = new Prices('6 maandenkaart', '€360', '6 maanden geldig', 'eerste les = proefles');
         generatedPrice.push(price3);
-        const price4 = new Prices('10-beurtenkaart', '€350', '1 jaar geldig', 'gratis intake');
+        const price4 = new Prices('10-beurtenkaart', '€390', '1 jaar geldig', 'gratis intake');
         generatedPrice.push(price4);
 
         return generatedPrice;
