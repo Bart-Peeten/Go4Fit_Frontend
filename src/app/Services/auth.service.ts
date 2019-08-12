@@ -84,6 +84,9 @@ export class AuthService {
             .set('useremail', username)
             .set('userPassword', password);
 
+      this.setIsLoggedIn(true);
+      this.setIsLoggedInAsAdmin(true);
+
         console.log('De params zijn: ' + params);
 
         return this.http.get<User>(this.url + 'users/login', {params: params}).pipe(
@@ -135,4 +138,24 @@ export class AuthService {
             })
         );
     }
+
+  public createUserAsAdmin(lastName: string, firstName: string, email: string, phone: string, password: string, role?: string) {
+    const newUser = new User(lastName, firstName, email, phone, password, role);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    console.log(newUser);
+    return this.http.post<User>(this.url + 'users/registration', newUser, {headers: headers}).pipe(
+      map(result => {
+        sessionStorage.setItem('username', email);
+        this.setIsLoggedIn(true);
+        console.log('DE ROL IS: ' + result.role);
+        if (result.role === 'ROLE_ADMIN') {
+          this.setIsLoggedIn(true);
+          this.setIsLoggedInAsAdmin(true);
+        }
+        this.name = result.firstName + ' ' + result.lastName;
+        this.loggedInUser = result;
+        return result;
+      })
+    );
+  }
 }

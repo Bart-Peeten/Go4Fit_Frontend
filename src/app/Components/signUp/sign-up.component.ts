@@ -23,6 +23,5 @@ export class SignUpComponent implements OnInit {
     signIn() {
         this.authService.signIn(this.lastName, this.firstName, this.email, this.phone, this.password)
             .subscribe(_ => this.router.navigate(['/agenda']));
-        // this.router.navigate(['/agenda']);
     }
 }

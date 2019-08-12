@@ -17,6 +17,7 @@ import { AuthService } from './Services/auth.service';
 import { SignUpComponent } from './Components/signUp/sign-up.component';
 import { AdminAgendaComponent } from './Components/admin-agenda/admin-agenda.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SignUpAdminComponent } from './Components/sign-up-admin/sign-up-admin.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReservationComponent,
     LoginComponent,
     SignUpComponent,
-    AdminAgendaComponent
+    AdminAgendaComponent,
+    SignUpAdminComponent
   ],
     imports: [
         BrowserModule,
