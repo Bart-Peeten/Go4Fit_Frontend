@@ -27,7 +27,7 @@ export class AgendaComponent implements OnInit {
     private numberOfReservations: number[] = [];
     private htmlIndex = 0;
     private isReserved: boolean[];
-    private canOpenModalValue = 0;
+    private canOpenModalValue = false;
 
     constructor(private agendaService: AgendaService,
                 private dateService: DateService,
@@ -35,6 +35,7 @@ export class AgendaComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.canOpenModalValue = true;
         this.currentWeek();
         this.fetchTrainingsDays();
         this.trainingsTimes = this.agendaService.getTrainingsMoments();
@@ -96,23 +97,23 @@ export class AgendaComponent implements OnInit {
     }
 
     private getNumberOfReservations(i: number, x: number) {
-        let index = this.getIndex(i, x);
+      console.log('getNumberOfReservations() is actief!');
+      console.log('De waarde van de boolean is: ', this.canOpenModalValue);
+        const index = this.getIndex(i, x);
         console.log('De lijst isReserved is: ' + this.isReserved);
         if (this.isReserved[index] === false) {
             const free = 10 - this.numberOfReservations[index];
             console.log('Het aantal bezoekers is: ' + this.numberOfReservations);
             const freeString = 'Nog ' + free + ' plaatsen vrij';
             this.isOccupied = free === 0;
-            this.canOpenModalValue = 0;
 
             return free === 0 ? 'VOLZET' : freeString;
         } else {
-            this.canOpenModalValue = 1;
             return 'Je bent ingeschreven.';
         }
     }
 
-    onTrainingMomentClick(trainingMoment, trainingDay: String, date: string) {
+    onTrainingMomentClick(trainingMoment, trainingDay: String, date) {
         this.reservationTime = trainingMoment;
         this.reservationDay = trainingDay;
         this.reservationDate = date;
