@@ -44,9 +44,8 @@ export class DateService {
           let tuesday = moment().day(2).format('DD-MM-YYYY');
           let wednesday = moment().day(3).format('DD-MM-YYYY');
           let thursday = moment().day(4).format('DD-MM-YYYY');
-          let saturday = moment().day(6).format('DD-MM-YYYY');
           let sunday = moment().day(7).format('DD-MM-YYYY');
-          trainingsDays.push(tuesday, wednesday, thursday, saturday, sunday);
+          trainingsDays.push(tuesday, wednesday, thursday, sunday);
 
           return trainingsDays;
     }
@@ -56,9 +55,8 @@ export class DateService {
         let tuesday = moment().day(2 + nextWeek).format('DD-MM-YYYY');
         let wednesday = moment().day(3 + nextWeek).format('DD-MM-YYYY');
         let thursday = moment().day(4 + nextWeek).format('DD-MM-YYYY');
-        let saturday = moment().day(6 + nextWeek).format('DD-MM-YYYY');
         let sunday = moment().day(7 + nextWeek).format('DD-MM-YYYY');
-        trainingsDays.push(tuesday, wednesday, thursday, saturday, sunday);
+        trainingsDays.push(tuesday, wednesday, thursday, sunday);
 
         return trainingsDays;
     }

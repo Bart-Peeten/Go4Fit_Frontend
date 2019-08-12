@@ -8,8 +8,8 @@ export class User {
     role: String;
 
 
-    constructor(firstname: String, lastName: String, email: string, phone: String, password: String, role?: String) {
-        this.lastName = lastName;
+    constructor(lastname: String, firstname: String, email: string, phone: String, password: String, role?: String) {
+        this.lastName = lastname;
         this.firstName = firstname;
         this.email = email;
         this.phone = phone;

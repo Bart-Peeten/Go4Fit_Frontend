@@ -26,14 +26,14 @@
     <!-- End of TODO code -->
 
     <div class="row my-row-trainingsday">
-        <div *ngFor="let day of trainingsDaysList; let i = index" class="col-md-3 colmargintop" (click)="onTrainingDayClick(day, trainingDaysDatesList[i])">
+        <div *ngFor="let day of trainingsDaysList; let i = index" class="col-md-3 colmargintop">
             <div class="trianingdaytitle">
                 <span class="trainingday">{{ day }}</span><br>
                 <span class="spanmargin">{{ trainingDaysDatesList[i] }}</span>
             </div>
-            <div *ngFor="let time of trainingsTimes[i]; let x = index" (click)="onTrainingMomentClick(time)">
+            <div *ngFor="let time of trainingsTimes[i]; let x = index" (click)="onTrainingMomentClick(time, day, trainingDaysDatesList[i])">
                 <div class="reservation" disabled="isOccupied"
-                [style.border-left]="trainingsTypes[i][x] == 'circuit training' ? '5px solid greenyellow' : '5px solid red '"
+                [style.border-left]="trainingsTypes[i][x] == 'circuittraining' ? '5px solid greenyellow' : '5px solid red '"
                      data-toggle="modal"
                      data-target="#myModal">
                     <span class="reservationtitle"> {{ trainingsTypes[i][x] }}</span><br>
@@ -44,7 +44,7 @@
 
 
                 <!-- Modal -->
-                <div class="modal fade" id="myModal" role="dialog">
+                <div *ngIf="canOpenModal" class="modal fade" id="myModal" role="dialog">
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">
