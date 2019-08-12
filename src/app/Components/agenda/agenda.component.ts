@@ -112,13 +112,10 @@ export class AgendaComponent implements OnInit {
         }
     }
 
-    onTrainingDayClick(trainingDay: String, date: string) {
+    onTrainingMomentClick(trainingMoment, trainingDay: String, date: string) {
+        this.reservationTime = trainingMoment;
         this.reservationDay = trainingDay;
         this.reservationDate = date;
-    }
-
-    onTrainingMomentClick(trainingMoment) {
-        this.reservationTime = trainingMoment;
         this.participantName = this.authService.name;
     }
 
@@ -153,14 +150,6 @@ export class AgendaComponent implements OnInit {
             this.htmlIndex += 1;
 
             return indexx;
-        }
-    }
-
-    private canOpenModal(): boolean {
-        if (this.canOpenModalValue === 0) {
-            return false;
-        } else {
-            return true;
         }
     }
 }
