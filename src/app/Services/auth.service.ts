@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../Domains/user.model';
 import {map} from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,7 @@ export class AuthService {
     private _firstname: String;
     private _lastname: String;
     private _loggedInUser: User;
-    private url = 'http://localhost:8080/api/';
+    private url = environment.url;
     private username: string;
 
     constructor(private http: HttpClient) {

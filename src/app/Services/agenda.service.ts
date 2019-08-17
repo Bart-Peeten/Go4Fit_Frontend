@@ -5,6 +5,7 @@ import {Reservation} from '../Domains/reservation.model';
 import {AuthService} from './auth.service';
 import {User} from '../Domains/user.model';
 import {DateService} from './date.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ import {DateService} from './date.service';
 export class AgendaService {
     private CIRCUITTRAINING = 'circuittraining';
     private CROSSTRAINING = 'crosstraining';
-    private url: String = 'http://localhost:8080/api/';
+    private url: String = environment.url;
     private trainingDays: Array<String> = ['Dinsdag', 'Woensdag', 'Donderdag', 'Zondag'];
     private trainingsType: any[][] = [[this.CIRCUITTRAINING, this.CIRCUITTRAINING],
         [this.CIRCUITTRAINING, this.CIRCUITTRAINING, this.CIRCUITTRAINING],
