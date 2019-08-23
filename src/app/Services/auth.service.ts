@@ -85,8 +85,8 @@ export class AuthService {
             .set('useremail', username)
             .set('userPassword', password);
 
-      this.setIsLoggedIn(true);
-      this.setIsLoggedInAsAdmin(true);
+      // this.setIsLoggedIn(true);
+      // this.setIsLoggedInAsAdmin(true);
 
         console.log('De params zijn: ' + params);
 

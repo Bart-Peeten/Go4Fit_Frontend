@@ -9,11 +9,11 @@ import {Reservation} from '../../Domains/reservation.model';
     styleUrls: ['./admin-agenda.component.css']
 })
 export class AdminAgendaComponent implements OnInit {
-    private weekNumber: number;
-    private firstDayOfWeekString: string;
-    private dateOfWeek: Date;
-    private lastdayOfWeekString: string;
-    private trainingsDaysList: String[];
+    weekNumber: number;
+    firstDayOfWeekString: string;
+    dateOfWeek: Date;
+    lastdayOfWeekString: string;
+    trainingsDaysList: String[];
     private trainingsTimes: any[][];
     private trainingsTypes: any[][];
     private trainingDaysDatesList: any[];

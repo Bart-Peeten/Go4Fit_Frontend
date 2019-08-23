@@ -9,11 +9,11 @@ import {AuthService} from '../../Services/auth.service';
     styleUrls: ['./agenda.component.css']
 })
 export class AgendaComponent implements OnInit {
-    private weekNumber: number;
-    private firstDayOfWeekString: string;
-    private dateOfWeek: Date;
-    private lastdayOfWeekString: string;
-    private trainingsDaysList: String[];
+    weekNumber: number;
+    firstDayOfWeekString: string;
+    dateOfWeek: Date;
+    lastdayOfWeekString: string;
+    trainingsDaysList: String[];
     private trainingsTimes: any[][];
     private trainingsTypes: any[][];
     private trainingDaysDatesList: any[];
@@ -46,7 +46,7 @@ export class AgendaComponent implements OnInit {
         return this.dateService.getWeekNumber();
     }
 
-    private currentWeek() {
+    currentWeek() {
         this.trainingDaysDatesList = this.dateService.getTrainingsDays();
         console.log('De datums van deze week: ');
         console.log(this.trainingDaysDatesList);
@@ -97,8 +97,6 @@ export class AgendaComponent implements OnInit {
     }
 
     private getNumberOfReservations(i: number, x: number) {
-      console.log('getNumberOfReservations() is actief!');
-      console.log('De waarde van de boolean is: ', this.canOpenModalValue);
         const index = this.getIndex(i, x);
         console.log('De lijst isReserved is: ' + this.isReserved);
         if (this.isReserved[index] === false) {
@@ -106,9 +104,11 @@ export class AgendaComponent implements OnInit {
             console.log('Het aantal bezoekers is: ' + this.numberOfReservations);
             const freeString = 'Nog ' + free + ' plaatsen vrij';
             this.isOccupied = free === 0;
+            this.canOpenModalValue = true;
 
             return free === 0 ? 'VOLZET' : freeString;
         } else {
+            this.canOpenModalValue = false;
             return 'Je bent ingeschreven.';
         }
     }
