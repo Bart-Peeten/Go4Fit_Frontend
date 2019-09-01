@@ -15,7 +15,7 @@ export class DateService {
 
     getWeekNumber() {
           console.log(moment().week());
-          return moment().week();
+          return moment().startOf('isoWeek').week();
     }
 
     getWeekNumberOfNextWeek(nextWeek: number) {
@@ -24,11 +24,11 @@ export class DateService {
     }
 
     getFirstDayOfWeek() {
-        return moment().day(1).format('DD-MMM');
+        return moment().startOf('isoWeek').day(1).format('DD-MMM');
     }
 
     getLastDayOfWeek() {
-        return moment().day(8).format('DD-MMM');
+        return moment().startOf('isoWeek').day(7).format('DD-MMM');
     }
 
     getFirstDayOfNextWeek(nextWeek: number) {
@@ -41,10 +41,10 @@ export class DateService {
 
     getTrainingsDays() {
           let trainingsDays = [];
-          let tuesday = moment().day(2).format('DD-MM-YYYY');
-          let wednesday = moment().day(3).format('DD-MM-YYYY');
-          let thursday = moment().day(4).format('DD-MM-YYYY');
-          let sunday = moment().day(7).format('DD-MM-YYYY');
+          let tuesday = moment().startOf('isoWeek').day(2).format('DD-MM-YYYY');
+          let wednesday = moment().startOf('isoWeek').day(3).format('DD-MM-YYYY');
+          let thursday = moment().startOf('isoWeek').day(4).format('DD-MM-YYYY');
+          let sunday = moment().startOf('isoWeek').day(7).format('DD-MM-YYYY');
           trainingsDays.push(tuesday, wednesday, thursday, sunday);
 
           return trainingsDays;
