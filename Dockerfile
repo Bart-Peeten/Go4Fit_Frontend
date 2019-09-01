@@ -1,4 +1,4 @@
-FROM nginx:1.17.2-alpine
+FROM nginx:1.17.3-alpine
 
 COPY ./dist/Frontend /usr/share/nginx/html
 
