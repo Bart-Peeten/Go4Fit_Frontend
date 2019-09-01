@@ -88,7 +88,7 @@ export class AuthService {
       // this.setIsLoggedIn(true);
       // this.setIsLoggedInAsAdmin(true);
 
-        console.log('De params zijn: ' + params);
+        // console.log('De params zijn: ' + params);
 
         return this.http.get<User>(this.url + 'users/login', {params: params}).pipe(
             map(result => {
@@ -96,7 +96,7 @@ export class AuthService {
                 this.firstname = result.firstName;
                 this.lastname = result.lastName;
                 this.setIsLoggedIn(true);
-                console.log('DE ROL IS: ' + result.role);
+                // console.log('DE ROL IS: ' + result.role);
                 if (result.role === 'ROLE_ADMIN') {
                     this.setIsLoggedIn(true);
                     this.setIsLoggedInAsAdmin(true);
