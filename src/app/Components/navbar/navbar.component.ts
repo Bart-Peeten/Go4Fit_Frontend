@@ -33,8 +33,4 @@ export class NavbarComponent implements OnInit {
         this.authService.setIsLoggedInAsAdmin(false);
         this.router.navigate(['/home']);
     }
-
-  toggleCollapse() {
-    this.show = !this.show;
-  }
 }
