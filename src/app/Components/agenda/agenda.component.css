@@ -1,7 +1,7 @@
 .my-container {
-    background-color: black;
-    background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
-    position: relative;
+  background-color: black;
+  background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
+  position: relative;
 }
 
 .fullscreen {
@@ -14,90 +14,95 @@
 }
 
 .row:before, .row:after {
-    display: none !important;
+  display: none !important;
 }
 
 .my-row {
-    margin-left: 30px;
-    margin-right: 30px;
-    background-color: ghostwhite;
-    clear: both;
+  margin-left: 30px;
+  margin-right: 30px;
+  clear: both;
+  color: greenyellow;
 }
 
 .my-header-row {
-    margin-top: 70px;
-    background-color: black;
+  margin-top: 70px;
+  background-color: black;
 }
 
 .my-col {
-    border: 1px solid blue;
+  border: 1px solid blue;
 }
 
 .title {
-    font-size: 35px;
-    color: greenyellow;
-    font-weight: bold;
+  font-size: 35px;
+  color: greenyellow;
+  font-weight: bold;
 }
- .nextWeekButton {
-     border: black;
-     font-weight: bolder;
-     background-color: grey;
-     border-radius: 50%;
- }
+
+.nextWeekButton {
+  border: black;
+  font-weight: bolder;
+  border-radius: 50%;
+  background: black;
+}
 
 .thisWeekButton {
-    border: black;
-    background-color: grey;
+  border: black;
+  background-color: black;
 }
 
- .weekLabel {
-     text-align: center;
- }
+.weekLabel {
+  text-align: center;
+}
 
- .training  day {
-     font-weight: bold;
- }
+.trainingday {
+  font-weight: bold;
+  color: greenyellow;
+}
 
 .my-row-trainingsday {
-    padding-top: 20px;
-    margin-left: 30px;
-    margin-right: 30px;
-    min-height: 500px;
-    text-align: center;
-    background-color: ghostwhite;
+  padding-top: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+  min-height: 500px;
+  text-align: center;
 }
 
 .trianingdaytitle {
-    border-bottom: 1px solid black;
-    margin-bottom: 30px;
+  border-bottom: 1px solid black;
+  margin-bottom: 30px;
 }
 
 .colmargintop {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
- .trianingdayreservation {
-     margin-left: 30px;
-     margin-right: 30px;
-     min-height: 500px;
-     background-color: ghostwhite;
-     border-top: 1px solid black;
-     border-bottom: 1px solid black;
+.trianingdayreservation {
+  margin-left: 30px;
+  margin-right: 30px;
+  min-height: 500px;
+  background-color: ghostwhite;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 
- }
+}
 
 .reservation {
-    height: 120px;
-    padding: 20px;
-    background-color: darkgray;
-    margin-top: 5px;
-    border-left: 2px solid;
+  height: 120px;
+  padding: 20px;
+  background-color: white;
+  margin-top: 5px;
+  border-left: 2px solid;
 }
 
 .reservation:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .reservationtitle {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+.roundborder {
+  border-radius: 10%;
 }

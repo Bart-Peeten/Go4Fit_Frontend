@@ -102,7 +102,7 @@ export class AgendaComponent implements OnInit {
     if (this.isReserved[index] === false) {
       const free = 10 - this.numberOfReservations[index];
       console.log('Het aantal bezoekers is: ' + this.numberOfReservations);
-      const freeString = 'Nog ' + free + ' plaatsen vrij';
+      const freeString = free === 1 ? 'Nog ' + free + ' plaats vrij' : 'Nog ' + free + ' plaatsen vrij';
       this.isOccupied = free === 0;
       this.canOpenModalValue = true;
 
@@ -118,7 +118,7 @@ export class AgendaComponent implements OnInit {
     console.log('De lijst isReserved is: ' + this.isReserved);
     if (this.isReserved[index] === false) {
       const free = 6 - this.numberOfReservations[index];
-      const freeString = 'Nog ' + free + ' plaatsen vrij';
+      const freeString = free === 1 ? 'Nog ' + free + ' plaats vrij' : 'Nog ' + free + ' plaatsen vrij';
       this.isOccupied = free === 0;
       this.canOpenModalValue = true;
 

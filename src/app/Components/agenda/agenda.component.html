@@ -11,8 +11,8 @@
     <div class="col-md-4">
       <button class="thisWeekButton" (click)="currentWeek()">Deze week</button>
     </div>
-    <label class="col-md-4  weekLabel">{{ firstDayOfWeekString }} {{ dateOfWeek | date:'MMM' }} -
-      {{ lastdayOfWeekString }} {{ dateOfWeek | date:'MMM' }}
+    <label class="col-md-4  weekLabel">{{ firstDayOfWeekString }} {{ dateOfWeek | date:'MMM' }}
+      &nbsp; &nbsp; - &nbsp; &nbsp; {{ lastdayOfWeekString }} {{ dateOfWeek | date:'MMM' }}
       {{ dateOfWeek | date:'yyyy'}}</label>
     <div class="col-md-2"></div>
     <div class="col-md-1 ">
@@ -28,11 +28,11 @@
     <div *ngFor="let day of trainingsDaysList; let i = index" class="col-md-3 colmargintop">
       <div class="trianingdaytitle">
         <span class="trainingday">{{ day }}</span><br>
-        <span class="spanmargin">{{ trainingDaysDatesList[i] }}</span>
+        <span class="trainingday spanmargin">{{ trainingDaysDatesList[i] }}</span>
       </div>
       <div *ngFor="let time of trainingsTimes[i]; let x = index"
            (click)="onTrainingMomentClick(time, day, trainingDaysDatesList[i])">
-        <div class="reservation" disabled="isOccupied"
+        <div class="reservation roundborder" disabled="isOccupied"
              [style.border-left]="trainingsTypes[i][x] == 'circuittraining' ? '5px solid greenyellow' : '5px solid red '"
              data-toggle="modal"
              data-target="#myModal">
