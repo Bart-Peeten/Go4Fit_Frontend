@@ -106,3 +106,10 @@
 .roundborder {
   border-radius: 10%;
 }
+
+.welkom {
+  font-size: 15px;
+  text-align: right;
+  vertical-align: top;
+  color: greenyellow;
+}

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AgendaService} from '../../Services/agenda.service';
 import {DateService} from '../../Services/date.service';
 import {Reservation} from '../../Domains/reservation.model';
+import {AuthService} from '../../Services/auth.service';
 
 @Component({
     selector: 'app-admin-agenda',
@@ -30,7 +31,8 @@ export class AdminAgendaComponent implements OnInit {
     private closeResult: string;
 
     constructor(private agendaService: AgendaService,
-                private dateService: DateService) {
+                private dateService: DateService,
+                private authService: AuthService) {
     }
 
     ngOnInit() {

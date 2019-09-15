@@ -87,7 +87,7 @@
             ],
             "scripts": [],
             "assets": [
-              "src/go4fit.ico",
+              "src/favicon.ico",
               "src/assets"
             ]
           }

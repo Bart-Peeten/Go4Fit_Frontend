@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
           this.isLoggedin = true;
         }, error => {
           this.isLoggedin = false;
+          // window.confirm(`Error Code: ${error.status}\nMessage: ${error.message}`);
         }
       );
     }
