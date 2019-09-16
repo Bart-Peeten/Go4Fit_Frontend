@@ -39,7 +39,7 @@
         <div class="reservation roundborder" disabled="isOccupied"
              [style.border-left]="trainingsTypes[i][x] == 'circuittraining' ? '5px solid greenyellow' : '5px solid red '"
              data-toggle="modal"
-             data-target="#myModal">
+             data-target="#myModal" (click)="gatherDataForModal(i, x)">
           <span class="reservationtitle"> {{ trainingsTypes[i][x] }}</span><br>
           <span>{{ time }}</span><br>
           <span *ngIf="trainingsTypes[i][x] == 'circuittraining'"
@@ -51,7 +51,7 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
+        <div *ngIf="mayOpenModal" class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -65,8 +65,11 @@
                 <label>uur: {{ reservationTime }}</label>
               </div>
               <div class="modal-footer pull-left">
-                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="confirmReservation()">
+                <button *ngIf="isAllowedToMakeReservation" type="button" class="btn btn-default" data-dismiss="modal" (click)="confirmReservation()">
                   Bevestig
+                </button>
+                <button *ngIf="!isAllowedToMakeReservation" type="button" class="btn btn-default" data-dismiss="modal" (click)="deleteReservation()">
+                  Verwijder
                 </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
               </div>

@@ -25,9 +25,9 @@ export class AgendaComponent implements OnInit {
   private reservationTime: string;
   private reservationDate: string;
   private numberOfReservations: number[] = [];
-  private htmlIndex = 0;
   private isReserved: boolean[];
-  private canOpenModalValue = false;
+  private isAllowedToMakeReservation = true;
+  mayOpenModal: boolean = true;
 
   constructor(private agendaService: AgendaService,
               private dateService: DateService,
@@ -35,7 +35,6 @@ export class AgendaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.canOpenModalValue = true;
     this.currentWeek();
     this.fetchTrainingsDays();
     this.trainingsTimes = this.agendaService.getTrainingsMoments();
@@ -48,8 +47,8 @@ export class AgendaComponent implements OnInit {
 
   currentWeek() {
     this.trainingDaysDatesList = this.dateService.getTrainingsDays();
-    console.log('De datums van deze week: ');
-    console.log(this.trainingDaysDatesList);
+    // console.log('De datums van deze week: ');
+    // console.log(this.trainingDaysDatesList);
     this.weekNumber = this.getWeekNumber();
     this.getFirstDayOfWeekString();
     this.getLastDayOfWeekString();
@@ -66,8 +65,8 @@ export class AgendaComponent implements OnInit {
     this.getFirstDayOfNextWeekString();
     this.getLastDayOfNextWeekString();
     // this.getNumberOfReservations();
-    console.log('De datums van deze week: ');
-    console.log(this.trainingDaysDatesList);
+    // console.log('De datums van deze week: ');
+    // console.log(this.trainingDaysDatesList);
 
     // Here data for next weeks will be fetched.
     this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList);
@@ -98,33 +97,29 @@ export class AgendaComponent implements OnInit {
 
   private getNumberOfReservations(i: number, x: number) {
     const index = this.getIndex(i, x);
-    console.log('De lijst isReserved is: ' + this.isReserved);
+    // console.log('De lijst isReserved is: ' + this.isReserved);
     if (this.isReserved[index] === false) {
       const free = 10 - this.numberOfReservations[index];
-      console.log('Het aantal bezoekers is: ' + this.numberOfReservations);
+      // console.log('Het aantal bezoekers is: ' + this.numberOfReservations);
       const freeString = free === 1 ? 'Nog ' + free + ' plaats vrij' : 'Nog ' + free + ' plaatsen vrij';
       this.isOccupied = free === 0;
-      this.canOpenModalValue = true;
 
       return free === 0 ? 'VOLZET' : freeString;
     } else {
-      this.canOpenModalValue = false;
       return 'Je bent ingeschreven.';
     }
   }
 
   getNumberOfReservationsForCrossTraining(i: number, x: number) {
     const index = this.getIndex(i, x);
-    console.log('De lijst isReserved is: ' + this.isReserved);
+    // console.log('De lijst isReserved is: ' + this.isReserved);
     if (this.isReserved[index] === false) {
       const free = 6 - this.numberOfReservations[index];
       const freeString = free === 1 ? 'Nog ' + free + ' plaats vrij' : 'Nog ' + free + ' plaatsen vrij';
       this.isOccupied = free === 0;
-      this.canOpenModalValue = true;
 
       return free <= 0 ? 'VOLZET' : freeString;
     } else {
-      this.canOpenModalValue = false;
       return 'Je bent ingeschreven.';
     }
   }
@@ -137,11 +132,11 @@ export class AgendaComponent implements OnInit {
   }
 
   confirmReservation() {
-    console.log(this.reservationDate + ' : ' + this.reservationTime + ' : ' + this.participantName);
+    // console.log(this.reservationDate + ' : ' + this.reservationTime + ' : ' + this.participantName);
     const time = this.reservationTime.substring(0, 2);
     const formatTime = this.dateService.getFullTime(time);
     const formatReservationDate = this.dateService.formatDate(this.reservationDate);
-    console.log('Formated date en tijd is: ' + formatTime + ' : ' + formatReservationDate);
+    // console.log('Formated date en tijd is: ' + formatTime + ' : ' + formatReservationDate);
     this.agendaService.addReservation(this.participantName,
       formatReservationDate,
       formatTime)
@@ -155,18 +150,57 @@ export class AgendaComponent implements OnInit {
       .subscribe(isReserved => this.isReserved = isReserved);
   }
 
-  private getIndex(i: number, x: number) {
-    console.log('Het inkomende nummer i is: ' + i);
-    console.log('Het inkomende nummer x is: ' + x);
-    console.log('this.htmlIndex is: ' + this.htmlIndex);
-    if ((i + x) === 0) {
-      this.htmlIndex = 0;
-      return 0;
-    } else {
-      const indexx = this.htmlIndex + 1;
-      this.htmlIndex += 1;
+  deleteReservation() {
+    const time = this.reservationTime.substring(0, 2);
+    const formatTime = this.dateService.getFullTime(time);
+    const formatReservationDate = this.dateService.formatDate(this.reservationDate);
 
-      return indexx;
+    this.agendaService.removeReservation(this.authService.firstname,
+                                         this.authService.lastname,
+                                          formatReservationDate,
+                                          formatTime)
+      .subscribe(_ => this.getDataOfGivenWeek(),
+          error => console.log(error.message));
+
+  }
+
+  gatherDataForModal(i: number, x: number) {
+    let index = this.getIndex(i, x);
+    if (this.getNumberOfReservations(i, x) === 'VOLZET' ||
+      this.getNumberOfReservations(i, x) === 'Je bent ingeschreven.') {
+      this.mayOpenModal = false;
+    } else {
+      this.mayOpenModal = true;
+    }
+  }
+
+  private getIndex(i: number, x: number) {
+    if (i === 0 && x === 0) {
+      return 0;
+    }
+    if (i === 0 && x === 1) {
+      return 1;
+    }
+    if (i === 1 && x === 0) {
+      return 2;
+    }
+    if (i === 1 && x === 1) {
+      return 3;
+    }
+    if (i === 1 && x === 2) {
+      return 4;
+    }
+    if (i === 2 && x === 0) {
+      return 5;
+    }
+    if (i === 3 && x === 0) {
+      return 6;
+    }
+    if (i === 3 && x === 1) {
+      return 7;
+    }
+    if (i === 3 && x === 2) {
+      return 8;
     }
   }
 }

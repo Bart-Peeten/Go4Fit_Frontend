@@ -126,7 +126,8 @@ export class AdminAgendaComponent implements OnInit {
         const lastName = this.newLastName.charAt(0).toUpperCase() + this.newLastName.slice(1);
 
         this.agendaService.removeReservation(firstName, lastName, this.reservationDate, this.reservationTime)
-            .subscribe(_ => this.getDataOfGivenWeek());
+            .subscribe(_ => this.getDataOfGivenWeek(),
+              error => console.log(error.message));
         this.newFirstName = '';
         this.newLastName = '';
         this.isClicked = false;

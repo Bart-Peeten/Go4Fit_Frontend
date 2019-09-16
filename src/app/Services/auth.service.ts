@@ -11,8 +11,8 @@ export class AuthService {
   isLoggedInAsAdmin: BehaviorSubject<boolean>;
   private password: string;
   private _name: string;
-  private _firstname: String;
-  private _lastname: String;
+  private _firstname: string;
+  private _lastname: string;
   private _loggedInUser: User;
   private url = environment.url;
   private username: string;
@@ -31,19 +31,19 @@ export class AuthService {
     this._loggedInUser = value;
   }
 
-  get lastname(): String {
+  get lastname(): string {
     return this._lastname;
   }
 
-  set lastname(value: String) {
+  set lastname(value: string) {
     this._lastname = value;
   }
 
-  get firstname(): String {
+  get firstname(): string {
     return this._firstname;
   }
 
-  set firstname(value: String) {
+  set firstname(value: string) {
     this._firstname = value;
   }
 
@@ -94,8 +94,8 @@ export class AuthService {
     return this.http.get<User>(this.url + 'users/login', {params: params}).pipe(
       map(result => {
         sessionStorage.setItem('username', username);
-        this.firstname = result.firstName;
-        this.lastname = result.lastName;
+        this.firstname = <string>result.firstName;
+        this.lastname = <string>result.lastName;
         this.setIsLoggedIn(true);
         // console.log('DE ROL IS: ' + result.role);
         if (result.role === 'ROLE_ADMIN') {
