@@ -15,11 +15,12 @@ export class AdminAgendaComponent implements OnInit {
     dateOfWeek: Date;
     lastdayOfWeekString: string;
     trainingsDaysList: String[];
+    private participants: String[][] = [];
+    private cancellations: String[][] = [];
+    newFirstName: string;
     private trainingsTimes: any[][];
     private trainingsTypes: any[][];
     private trainingDaysDatesList: any[];
-    private participants: String[][] = [];
-    newFirstName: string;
     private nextWeek = 1;
     private nextWeekDays = 7;
     private reservationDay: string;
@@ -32,7 +33,7 @@ export class AdminAgendaComponent implements OnInit {
 
     constructor(private agendaService: AgendaService,
                 private dateService: DateService,
-                private authService: AuthService) {
+                public  authService: AuthService) {
     }
 
     ngOnInit() {
@@ -134,7 +135,10 @@ export class AdminAgendaComponent implements OnInit {
     }
 
     private getDataOfGivenWeek() {
-        this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList).subscribe(result => this.participants = result);
+        this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList)
+          .subscribe(result => this.participants = result);
+        this.agendaService.getCancellationsForGivenWeek(this.trainingDaysDatesList)
+          .subscribe(result => this.cancellations = result);
     }
 
     private fetchUsersFromData(result: Reservation[]) {
@@ -160,9 +164,9 @@ export class AdminAgendaComponent implements OnInit {
     }
 
     getIndex(i: number, x: number) {
-        console.log('Het inkomende nummer i is: ' + i);
-        console.log('Het inkomende nummer x is: ' + x);
-        console.log('this.htmlIndex is: ' + this.htmlIndex);
+        // console.log('Het inkomende nummer i is: ' + i);
+        // console.log('Het inkomende nummer x is: ' + x);
+        // console.log('this.htmlIndex is: ' + this.htmlIndex);
         if ((i + x) === 0) {
             this.htmlIndex = 0;
             return 0;

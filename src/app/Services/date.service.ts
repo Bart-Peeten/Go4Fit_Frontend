@@ -19,7 +19,7 @@ export class DateService {
   }
 
   getNowTime() {
-    return moment().format('hh');
+    return moment().format('HH');
   }
 
   getWeekNumber() {

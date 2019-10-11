@@ -6,11 +6,10 @@ export class User {
   password: String;
   enabled: number;
   role: String;
-  removedReservation: boolean;
 
 
   // tslint:disable-next-line:max-line-length
-  constructor(lastname: String, firstname: String, email: string, phone: String, password: String, role?: String, removedReservation?: boolean) {
+  constructor(lastname: String, firstname: String, email: string, phone: String, password: String, role?: String) {
     this.lastName = lastname;
     this.firstName = firstname;
     this.email = email;
@@ -18,7 +17,6 @@ export class User {
     this.password = password;
     this.enabled = 1;
     this.role = role;
-    this.removedReservation = removedReservation;
   }
 
   getRole() {
@@ -35,9 +33,5 @@ export class User {
 
   getEmail() {
     return this.email;
-  }
-
-  getRemovedReservation() {
-    return this.removedReservation;
   }
 }

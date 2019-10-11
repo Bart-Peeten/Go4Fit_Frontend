@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ErrorHandlerService} from '../../Services/error-handler.service';
 
 @Component({
     selector: 'app-login',
@@ -13,7 +14,9 @@ export class LoginComponent implements OnInit {
     password: string;
     isLoggedin: boolean;
 
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private authService: AuthService,
+                private router: Router,
+                private errorHandler: ErrorHandlerService) { }
 
     ngOnInit() {
         // this.authService.getIsLoggedIn().subscribe(value => this.setIsLoggedIn(value));
@@ -28,23 +31,9 @@ export class LoginComponent implements OnInit {
           this.isLoggedin = true;
         }, error => {
           this.isLoggedin = false;
-          // window.confirm(`Error Code: ${error.status}\nMessage: ${error.message}`);
+          const errorMessage = this.errorHandler.getErrorMessage(error);
+          window.confirm(errorMessage);
         }
       );
     }
-
-
-        /*if (this.authService.login(this.username, this.password)) {
-          console.log('logging in...');
-          this.isLoggedin = true;
-          this.router.navigate(['/agenda']);
-        } else {
-          this.isLoggedin = false;
-        }
-    }*/
-
-    /*setIsLoggedIn(status: boolean) {
-        this.isLoggedin = status;
-    }*/
-
 }
