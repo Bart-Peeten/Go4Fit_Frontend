@@ -50,6 +50,11 @@
               <li> {{ participant }} </li>
             </ul>
           </div>
+          <div style="color: red">
+            <ul *ngFor="let cancellation of cancellations[getIndex(i, x)]">
+              <li>{{ cancellation }}</li>
+            </ul>
+          </div>
         </div>
       </div>
 

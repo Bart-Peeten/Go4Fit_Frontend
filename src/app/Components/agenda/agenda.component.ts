@@ -207,7 +207,7 @@ export class AgendaComponent implements OnInit {
     return isAllowed;
   }
 
-  private getIndex(i: number, x: number) {
+  getIndex(i: number, x: number) {
     if (i === 0 && x === 0) {
       return 0;
     }
