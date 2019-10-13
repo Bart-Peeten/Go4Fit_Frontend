@@ -160,20 +160,22 @@ export class AgendaComponent implements OnInit {
     // console.log('Formatted date en tijd in deleteReservation is: ' + formatTime + ' : ' + formatReservationDate);
 
     const isAllowed = this.isInTimeRangeToDeleteReservation(formatTime, formatReservationDate);
-
-    this.agendaService.removeReservation(this.authService.firstname,
-      this.authService.lastname,
-      formatReservationDate,
-      formatTime,
-      isAllowed)
-      .subscribe(_ => {
-        this.getDataOfGivenWeek();
-        },
-        error => {
-          // console.log(error.message);
-          const errorMessage = this.errorHandler.getErrorMessage(error);
-          window.confirm(errorMessage);
-        });
+    console.log('isAllowed heeft als waarde: ' + isAllowed);
+    if (isAllowed != null) {
+      this.agendaService.removeReservation(this.authService.firstname,
+        this.authService.lastname,
+        formatReservationDate,
+        formatTime,
+        isAllowed)
+        .subscribe(_ => {
+            this.getDataOfGivenWeek();
+          },
+          error => {
+            // console.log(error.message);
+            const errorMessage = this.errorHandler.getErrorMessage(error);
+            window.confirm(errorMessage);
+          });
+    }
   }
 
   gatherDataForModal(i: number, x: number) {
@@ -197,7 +199,11 @@ export class AgendaComponent implements OnInit {
         isAllowed = true;
       } else {
         // tslint:disable-next-line:max-line-length
-        isAllowed = !window.confirm('Verwijderen van de reservatie is binnen de 6h voor de start van de training, bij bevestigen wordt er een beurt aangerekend.');
+        if (window.confirm('Verwijderen van de reservatie is binnen de 6h voor de start van de training, bij bevestigen wordt er een beurt aangerekend.')) {
+          isAllowed = false;
+        } else {
+          isAllowed = null;
+        }
       }
     } else {
       // console.log('De datums zijn NIET gelijk!!');
