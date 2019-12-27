@@ -3,6 +3,7 @@ import {AgendaService} from '../../Services/agenda.service';
 import {DateService} from '../../Services/date.service';
 import {AuthService} from '../../Services/auth.service';
 import * as moment from 'moment';
+import {ErrorHandlerService} from '../../Services/error-handler.service';
 
 @Component({
   selector: 'app-agenda',
@@ -15,7 +16,7 @@ export class AgendaComponent implements OnInit {
   dateOfWeek: Date;
   lastdayOfWeekString: string;
   trainingsDaysList: String[];
-  private trainingsTimes: any[][];
+  private trainingsTimes: any[];
   private trainingsTypes: any[][];
   private trainingDaysDatesList: any[];
   private nextWeek = 1;
@@ -26,13 +27,14 @@ export class AgendaComponent implements OnInit {
   private reservationTime: string;
   private reservationDate: string;
   private numberOfReservations: number[] = [];
-  private isReserved: boolean[];
-  private isAllowedToMakeReservation = true;
+  private isReserved: boolean[] = [false];
+  private isAllowedToDeleteReservation: boolean;
   mayOpenModal = true;
 
   constructor(private agendaService: AgendaService,
               private dateService: DateService,
-              private authService: AuthService) {
+              public  authService: AuthService,
+              private errorHandler: ErrorHandlerService) {
   }
 
   ngOnInit() {
@@ -151,26 +153,36 @@ export class AgendaComponent implements OnInit {
       .subscribe(isReserved => this.isReserved = isReserved);
   }
 
-  deleteReservation() {
+  removeReservation() {
     const time = this.reservationTime.substring(0, 2);
     const formatTime = this.dateService.getFullTime(time);
     const formatReservationDate = this.dateService.formatDate(this.reservationDate);
-    console.log('Formatted date en tijd in deleteReservation is: ' + formatTime + ' : ' + formatReservationDate);
+    // console.log('Formatted date en tijd in deleteReservation is: ' + formatTime + ' : ' + formatReservationDate);
 
     const isAllowed = this.isInTimeRangeToDeleteReservation(formatTime, formatReservationDate);
-
-    this.agendaService.removeReservation(this.authService.firstname,
-      this.authService.lastname,
-      formatReservationDate,
-      formatTime,
-      isAllowed)
-      .subscribe(_ => this.getDataOfGivenWeek(),
-        error => console.log(error.message));
+    console.log('isAllowed heeft als waarde: ' + isAllowed);
+    if (isAllowed != null) {
+      this.agendaService.removeReservation(this.authService.firstname,
+        this.authService.lastname,
+        formatReservationDate,
+        formatTime,
+        isAllowed)
+        .subscribe(_ => {
+            this.getDataOfGivenWeek();
+          },
+          error => {
+            // console.log(error.message);
+            const errorMessage = this.errorHandler.getErrorMessage(error);
+            window.confirm(errorMessage);
+          });
+    }
   }
 
   gatherDataForModal(i: number, x: number) {
     const index = this.getIndex(i, x);
-    this.mayOpenModal = this.getNumberOfReservations(i, x) !== 'VOLZET';
+    this.isAllowedToDeleteReservation = this.isReserved[index];
+    // console.log('isAllowedToMakeReservation is: ' + this.isAllowedToDeleteReservation);
+    // console.log('isReserved ziet er als volgt uit: ' + this.isReserved);
   }
 
   private isInTimeRangeToDeleteReservation(reservationTime: string, reservationDate: string): boolean {
@@ -180,11 +192,18 @@ export class AgendaComponent implements OnInit {
     if (reservationDate.substring(8, 10) === dayOfMonth) {
       // console.log('De datums zijn gelijk!!');
       // If the dates are the same check if it takes 6h before start of training
+      console.log(Number(reservationTime.substring(0, 2)));
+      console.log(Number(nowTime));
+      console.log('Tijd tot verwijderen is: ' + (Number(reservationTime.substring(0, 2)) - Number(nowTime)));
       if ((Number(reservationTime.substring(0, 2)) - Number(nowTime)) > 6) {
         isAllowed = true;
       } else {
         // tslint:disable-next-line:max-line-length
-        isAllowed = window.confirm('Verwijderen van de reservatie is binnen de 6h voor de start van de training, bij bevestigen wordt er een beurt aangerekend.');
+        if (window.confirm('Verwijderen van de reservatie is binnen de 6h voor de start van de training, bij bevestigen wordt er een beurt aangerekend.')) {
+          isAllowed = false;
+        } else {
+          isAllowed = null;
+        }
       }
     } else {
       // console.log('De datums zijn NIET gelijk!!');
@@ -194,7 +213,7 @@ export class AgendaComponent implements OnInit {
     return isAllowed;
   }
 
-  private getIndex(i: number, x: number) {
+  getIndex(i: number, x: number) {
     if (i === 0 && x === 0) {
       return 0;
     }

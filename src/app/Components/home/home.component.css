@@ -79,7 +79,7 @@ h1 {
 h2 {
   animation: 3s ease-out 0s 1 slideInFromLeft;
   color: #4efc03;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bolder;
   font-family: 'Roboto Light', serif;
   text-transform: uppercase
@@ -104,7 +104,7 @@ h2 {
 
 @media screen and (max-width: 650px) {
   .mobile-margin_h2  {margin-top:40px;
-    font-size: 20px}
+    font-size: 15px}
 }
 
 @media screen and (max-width: 650px) {

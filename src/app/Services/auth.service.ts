@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../Domains/user.model';
 import {map} from 'rxjs/operators';
 import {environment} from 'src/environments/environment';
+import {error} from 'util';
 
 @Injectable()
 export class AuthService {
@@ -86,12 +87,8 @@ export class AuthService {
       .set('useremail', username)
       .set('userPassword', password);
 
-    // this.setIsLoggedIn(true);
-    // this.setIsLoggedInAsAdmin(true);
-
-    // console.log('De params zijn: ' + params);
-
-    return this.http.get<User>(this.url + 'users/login', {params: params}).pipe(
+    return this.http.get<User>(this.url + 'users/login',
+      {headers: this.getHeaders(), params: params}).pipe(
       map(result => {
         sessionStorage.setItem('username', username);
         this.firstname = <string>result.firstName;
@@ -144,7 +141,7 @@ export class AuthService {
   public createUserAsAdmin(lastName: string, firstName: string, email: string, phone: string, password: string, role?: string) {
     const newUser = new User(lastName, firstName, email, phone, password, role);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    console.log(newUser);
+    // console.log(newUser);
     return this.http.post<User>(this.url + 'users/registration', newUser, {headers: headers}).pipe(
       map(result => {
         sessionStorage.setItem('username', email);
@@ -159,5 +156,12 @@ export class AuthService {
         return result;
       })
     );
+  }
+
+  public getHeaders() {
+    const securityToken = this.getUserName() + ':' + this.getPassword();
+    console.log('Security token is: ' + securityToken);
+    return new HttpHeaders().set('Authorization', 'Basic ' +
+      btoa(securityToken));
   }
 }

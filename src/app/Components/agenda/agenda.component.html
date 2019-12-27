@@ -65,10 +65,10 @@
                 <label>uur: {{ reservationTime }}</label>
               </div>
               <div class="modal-footer pull-left">
-                <button *ngIf="isAllowedToMakeReservation" type="button" class="btn btn-default" data-dismiss="modal" (click)="confirmReservation()">
+                <button *ngIf="!isAllowedToDeleteReservation" type="button" class="btn btn-default" data-dismiss="modal" (click)="confirmReservation()">
                   Bevestig
                 </button>
-                <button *ngIf="!isAllowedToMakeReservation" type="button" class="btn btn-default" data-dismiss="modal" (click)="deleteReservation()">
+                <button *ngIf="isAllowedToDeleteReservation" type="button" class="btn btn-default" data-dismiss="modal" (click)="removeReservation()">
                   Verwijder
                 </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
