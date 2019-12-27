@@ -24,8 +24,7 @@ const routes: Routes = [
     },
     {
         path: 'circuit',
-        component: CircuitComponent,
-        canActivate: [CannotActivateGuard]
+        component: CircuitComponent
     },
     {
         path: 'personal',

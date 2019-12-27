@@ -1,0 +1,28 @@
+.blackbackground {
+  background-color: black;
+  background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
+  width: 100vw;
+}
+
+p {
+  font-size: 20px;
+}
+
+.header {
+  color: greenyellow;
+  margin-top: 80px;
+  text-align: center;
+  font-family: "Roboto Light", serif;
+}
+
+.text_area {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  text-align: center;
+  color: greenyellow;
+  font-family: "Roboto Light", serif;
+}
+
+.text_center {
+  vertical-align: middle;
+}
