@@ -1,5 +1,19 @@
-<div>
-    <p>
-        contact works!
-    </p>
+<div class="main fullscreen">
+    <div>
+        <img class="center-block img-circle mobile_img_size" src="assets/Go4Fit_logo.png"
+             width="350" height="350">
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4 text-center adress animation">
+                <label>{{ company.name }}</label><br>
+                <label>{{ company.street }}</label><br>
+                <label>{{ company.postalCode }} {{ company.city}}</label><br>
+                <label>Tel: {{ company.phoneNumber }}</label><br>
+                <label> Email: {{ company.email }}</label>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
 </div>

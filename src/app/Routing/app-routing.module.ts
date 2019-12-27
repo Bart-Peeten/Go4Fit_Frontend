@@ -55,8 +55,7 @@ const routes: Routes = [
     },
     {
         path: 'contact',
-        component: ContactComponent,
-        canActivate: [CannotActivateGuard]
+        component: ContactComponent
     }
 ];
 

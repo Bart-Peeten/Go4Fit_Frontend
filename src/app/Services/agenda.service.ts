@@ -93,7 +93,7 @@ export class AgendaService {
         .set('isAllowed', isAllowed.toString())
     };
     console.log(this.url + 'reservation/delete' + options);
-    return this.http.delete(this.url + 'reservation/delete', options);
+    return this.http.put(this.url + 'reservation/delete', null, options);
   }
 
   getDataForGivenWeek(trainingDaysDatesList: any[]) {

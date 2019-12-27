@@ -1,1 +1,126 @@
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+img {
+  animation: 2s ease-out 0s 1 slideInFromTop;
+  margin-top: 150px;
+  opacity: 1;
+}
+
+.animation {
+  animation: 2s ease-out 0s 1 slideInFromTop;
+}
+
+.main {
+  background-color: black;
+  background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.adress {
+  margin-top: 20px;
+  font-size: 20px;
+  color: greenyellow;
+}
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  animation: 2s ease-out 0s 1 slideInFromLeft;
+  color: #4efc03;
+  font-size: 80px;
+  font-weight: bolder;
+  font-family: 'Roboto Light', serif;
+  text-transform: uppercase
+}
+
+h2 {
+  animation: 3s ease-out 0s 1 slideInFromLeft;
+  color: #4efc03;
+  font-size: 40px;
+  font-weight: bolder;
+  font-family: 'Roboto Light', serif;
+  text-transform: uppercase
+}
+
+.overlay-effect {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: .4;
+  transition: .5s ease;
+  background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
+  overflow: hidden;
+}
+
+@media screen and (max-width: 650px) {
+  .mobile-margin_h1 {
+    margin-top: 40px;
+    font-size: 40px
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .mobile-margin_h2 {
+    margin-top: 40px;
+    font-size: 20px
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .mobile_img_size {
+    width: 75px;
+    height: 75px;
+  }
+}
 

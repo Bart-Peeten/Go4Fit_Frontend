@@ -32,7 +32,7 @@ export class AdminAgendaComponent implements OnInit {
 
     constructor(private agendaService: AgendaService,
                 private dateService: DateService,
-                private authService: AuthService) {
+                authService: AuthService) {
     }
 
     ngOnInit() {

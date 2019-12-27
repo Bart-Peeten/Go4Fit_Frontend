@@ -1,3 +1,16 @@
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animation {
+  animation: 1s ease-out 0s 1 slideInFromTop;
+}
+
 .topmargin {
     margin-top: 40px;
     background-color: #EAEAEA;
