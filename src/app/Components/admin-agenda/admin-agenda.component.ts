@@ -125,8 +125,11 @@ export class AdminAgendaComponent implements OnInit {
     // Make sure the first and lastname starts with capital letter.
     const firstName = this.newFirstName.charAt(0).toUpperCase() + this.newFirstName.slice(1);
     const lastName = this.newLastName.charAt(0).toUpperCase() + this.newLastName.slice(1);
+    const time = this.reservationTime.substring(0, 2);
+    const formatTime = this.dateService.getFullTime(time);
+    const formatReservationDate = this.dateService.formatDate(this.reservationDate);
 
-    this.agendaService.removeReservation(firstName, lastName, this.reservationDate, this.reservationTime, true)
+    this.agendaService.removeReservation(firstName, lastName, formatReservationDate, formatTime, true)
       .subscribe(_ => this.getDataOfGivenWeek(),
         error => console.log(error.message));
     this.newFirstName = '';

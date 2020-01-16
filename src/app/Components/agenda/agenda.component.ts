@@ -160,7 +160,7 @@ export class AgendaComponent implements OnInit {
     // console.log('Formatted date en tijd in deleteReservation is: ' + formatTime + ' : ' + formatReservationDate);
 
     const isAllowed = this.isInTimeRangeToDeleteReservation(formatTime, formatReservationDate);
-    console.log('isAllowed heeft als waarde: ' + isAllowed);
+    // console.log('isAllowed heeft als waarde: ' + isAllowed);
     if (isAllowed != null) {
       this.agendaService.removeReservation(this.authService.firstname,
         this.authService.lastname,

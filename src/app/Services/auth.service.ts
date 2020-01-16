@@ -90,6 +90,7 @@ export class AuthService {
     return this.http.get<User>(this.url + 'users/login',
       {headers: this.getHeaders(), params: params}).pipe(
       map(result => {
+        console.log('Er is ingelogd!');
         sessionStorage.setItem('username', username);
         this.firstname = <string>result.firstName;
         this.lastname = <string>result.lastName;
@@ -121,12 +122,12 @@ export class AuthService {
   public signIn(lastName: string, firstName: string, email: string, phone: string, password: string) {
     const newUser = new User(lastName, firstName, email, phone, password);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    console.log(newUser);
+    // console.log(newUser);
     return this.http.post<User>(this.url + 'users/registration', newUser, {headers: headers}).pipe(
       map(result => {
         sessionStorage.setItem('username', email);
         this.setIsLoggedIn(true);
-        console.log('DE ROL IS: ' + result.role);
+        // console.log('DE ROL IS: ' + result.role);
         if (result.role === 'ROLE_ADMIN') {
           this.setIsLoggedIn(true);
           this.setIsLoggedInAsAdmin(true);
@@ -146,7 +147,7 @@ export class AuthService {
       map(result => {
         sessionStorage.setItem('username', email);
         this.setIsLoggedIn(true);
-        console.log('DE ROL IS: ' + result.role);
+        // console.log('DE ROL IS: ' + result.role);
         if (result.role === 'ROLE_ADMIN') {
           this.setIsLoggedIn(true);
           this.setIsLoggedInAsAdmin(true);
@@ -160,7 +161,7 @@ export class AuthService {
 
   public getHeaders() {
     const securityToken = this.getUserName() + ':' + this.getPassword();
-    console.log('Security token is: ' + securityToken);
+    // console.log('Security token is: ' + securityToken);
     return new HttpHeaders().set('Authorization', 'Basic ' +
       btoa(securityToken));
   }
