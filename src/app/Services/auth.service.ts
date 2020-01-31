@@ -120,7 +120,7 @@ export class AuthService {
   }
 
   public signIn(lastName: string, firstName: string, email: string, phone: string, password: string, password_confirmation: string) {
-    const newUser = new User(lastName, firstName, email, phone, password);
+    const newUser = new User(lastName, firstName, email, phone, password, password_confirmation);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     // console.log(newUser);
     return this.http.post<User>(this.url + 'users/registration', newUser, {headers: headers}).pipe(

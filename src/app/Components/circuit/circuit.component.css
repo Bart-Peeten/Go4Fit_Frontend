@@ -36,10 +36,20 @@ img {
   background-color: black;
 }
 
+.mobile {
+  display: none;
+}
+
 @media screen and (max-width: 650px) {
   .mobile_img_size  {
     height: 250px;
     width: 450px;
+  }
+  .mobile {
+    display: table;
+  }
+  .desktop {
+    display: none;
   }
 }
 
