@@ -119,7 +119,7 @@ export class AuthService {
     this.setIsLoggedIn(false);
   }
 
-  public signIn(lastName: string, firstName: string, email: string, phone: string, password: string) {
+  public signIn(lastName: string, firstName: string, email: string, phone: string, password: string, password_confirmation: string) {
     const newUser = new User(lastName, firstName, email, phone, password);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     // console.log(newUser);

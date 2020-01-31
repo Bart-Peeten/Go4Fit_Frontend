@@ -13,6 +13,7 @@ export class SignUpComponent implements OnInit {
     email: string;
     phone: string;
     password: string;
+    password_confirmation: string;
 
     constructor(private authService: AuthService, private router: Router) {
     }
@@ -21,7 +22,7 @@ export class SignUpComponent implements OnInit {
     }
 
     signIn() {
-        this.authService.signIn(this.lastName, this.firstName, this.email, this.phone, this.password)
+        this.authService.signIn(this.lastName, this.firstName, this.email, this.phone, this.password, this.password_confirmation)
             .subscribe(_ => this.router.navigate(['/login']));
     }
 }

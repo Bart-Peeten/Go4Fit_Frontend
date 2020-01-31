@@ -13,7 +13,7 @@
                         </div>
                         <div class="form-group">
                             <label for="firstName" class="text_color">Voornaam:</label><br>
-                            <input type="text" name="firtsName" id="firtsName" class="form-control" [(ngModel)]="firstName" required>
+                            <input type="text" name="firtsName" id="firstName" class="form-control" [(ngModel)]="firstName" required>
                             <p *ngIf="form.controls.firtsName?.errors?.required" class="error">Voornaam is een verplicht veld!</p>
                         </div>
                         <div class="form-group">
@@ -32,6 +32,11 @@
                             <input type="password" name="password" id="password" class="form-control" [(ngModel)]="password" minlength="5" required>
                             <p *ngIf="form.controls.password?.errors?.minlength" class="error">Het paswoord moet min 5 characters hebben.</p>
                         </div>
+                      <div class="form-group">
+                        <label for="password_confirmation" class="text_color  ">Bevestig paswoord:</label><br>
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" [(ngModel)]="passwordConfimation" minlength="5" required>
+                        <p *ngIf="form.controls.password?.errors?.minlength" class="error">Het paswoord moet min 5 characters hebben.</p>
+                      </div>
                         <div class="form-group">
                             <input type="submit" name="submit" class="btn btn-info btn-md" style="background-color: black" value="submit" (click)="signIn()">
                         </div>
