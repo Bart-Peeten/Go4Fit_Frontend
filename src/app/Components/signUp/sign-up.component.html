@@ -34,7 +34,7 @@
                         </div>
                       <div class="form-group">
                         <label for="password_confirmation" class="text_color  ">Bevestig paswoord:</label><br>
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" [(ngModel)]="passwordConfimation" minlength="5" required>
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" [(ngModel)]="password_confirmation" minlength="5" required>
                         <p *ngIf="form.controls.password?.errors?.minlength" class="error">Het paswoord moet min 5 characters hebben.</p>
                       </div>
                         <div class="form-group">
