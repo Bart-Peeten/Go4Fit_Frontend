@@ -1,8 +1,8 @@
 export class User {
-  firstName: String;
-  lastName: String;
+  firstname: String;
+  name: String;
   email: string;
-  phone: String;
+  telephone: String;
   password: String;
   password_confirmation: string;
   enabled: number;
@@ -11,10 +11,10 @@ export class User {
 
   // tslint:disable-next-line:max-line-length
   constructor(lastname: String, firstname: String, email: string, phone: String, password: String, password_confirmation: string, role?: String) {
-    this.lastName = lastname;
-    this.firstName = firstname;
+    this.name = lastname;
+    this.firstname = firstname;
     this.email = email;
-    this.phone = phone;
+    this.telephone = phone;
     this.password = password;
     this.password_confirmation = password_confirmation;
     this.enabled = 1;
@@ -26,11 +26,11 @@ export class User {
   }
 
   getFirstName() {
-    return this.firstName;
+    return this.firstname;
   }
 
   getLastName() {
-    return this.lastName;
+    return this.name;
   }
 
   getEmail() {

@@ -13,7 +13,7 @@ body {
 #Signin .container #Signin-row #Signin-column #Signin-box {
     margin-top: 100px;
     max-width: 600px;
-    height: 550px;
+    min-height: 600px;
     border: 1px solid #9C9C9C;
     background-color: #EAEAEA;
 }

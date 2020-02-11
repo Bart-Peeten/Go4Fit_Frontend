@@ -92,8 +92,8 @@ export class AuthService {
       map(result => {
         console.log('Er is ingelogd!');
         sessionStorage.setItem('username', username);
-        this.firstname = <string>result.firstName;
-        this.lastname = <string>result.lastName;
+        this.firstname = <string>result.firstname;
+        this.lastname = <string>result.name;
         this.setIsLoggedIn(true);
         // console.log('DE ROL IS: ' + result.role);
         if (result.role === 'ROLE_ADMIN') {
@@ -101,7 +101,7 @@ export class AuthService {
           this.setIsLoggedInAsAdmin(true);
         }
 
-        this.name = result.firstName + ' ' + result.lastName;
+        this.name = result.firstname + ' ' + result.name;
         this.loggedInUser = result;
         return result;
       })
@@ -122,8 +122,8 @@ export class AuthService {
   public signIn(lastName: string, firstName: string, email: string, phone: string, password: string, password_confirmation: string) {
     const newUser = new User(lastName, firstName, email, phone, password, password_confirmation);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    // console.log(newUser);
-    return this.http.post<User>(this.url + 'users/registration', newUser, {headers: headers}).pipe(
+    console.log(newUser);
+    return this.http.post<User>(this.url + 'register/', JSON.stringify(newUser), {headers: headers}).pipe(
       map(result => {
         sessionStorage.setItem('username', email);
         this.setIsLoggedIn(true);
@@ -132,7 +132,7 @@ export class AuthService {
           this.setIsLoggedIn(true);
           this.setIsLoggedInAsAdmin(true);
         }
-        this.name = result.firstName + ' ' + result.lastName;
+        this.name = result.firstname + ' ' + result.name;
         this.loggedInUser = result;
         return result;
       })
@@ -152,7 +152,7 @@ export class AuthService {
           this.setIsLoggedIn(true);
           this.setIsLoggedInAsAdmin(true);
         }
-        this.name = result.firstName + ' ' + result.lastName;
+        this.name = result.firstname + ' ' + result.name;
         this.loggedInUser = result;
         return result;
       })

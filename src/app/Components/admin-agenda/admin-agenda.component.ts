@@ -150,7 +150,7 @@ export class AdminAgendaComponent implements OnInit {
           const users: Array<String> = [];
           item.users.forEach(user => {
             console.log('De huidige user is: ' + user);
-            const fullname = user.firstName + ' ' + user.lastName;
+            const fullname = user.firstname + ' ' + user.name;
             if (fullname != null) {
               users.push(fullname);
             } else {
