@@ -94,11 +94,12 @@ export class AuthService {
 
     return this.http.post<User>(this.url + 'login', {email: username, password: password}).pipe(
       map(result => {
-        console.log('Er is ingelogd!');
-        console.log(result);
+        // console.log('Er is ingelogd!');
+        // console.log(result['user'].name);
         sessionStorage.setItem('username', username);
-        this.firstname = <string>result.firstname;
-        this.lastname = <string>result.name;
+        this.setToken(result['token']);
+        this.firstname = result['user'].firstname;
+        this.lastname = result['user'].name;
         this.setIsLoggedIn(true);
         // console.log('DE ROL IS: ' + result.role);
         if (result.role === 'ROLE_ADMIN') {
