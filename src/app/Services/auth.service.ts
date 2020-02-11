@@ -4,7 +4,6 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../Domains/user.model';
 import {map} from 'rxjs/operators';
 import {environment} from 'src/environments/environment';
-import {error} from 'util';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +17,7 @@ export class AuthService {
   private url = environment.url;
   private username: string;
   private fullName: string;
+  private token: string;
 
   constructor(private http: HttpClient) {
     this.isLoggedIn = new BehaviorSubject<boolean>(false);
@@ -54,6 +54,14 @@ export class AuthService {
 
   get name(): string {
     return this._name;
+  }
+
+  public setToken(value: string) {
+    this.token = value;
+  }
+
+  public getToken() {
+    return this.token;
   }
 
   public getPassword(): string {
@@ -122,9 +130,12 @@ export class AuthService {
   public signIn(lastName: string, firstName: string, email: string, phone: string, password: string, password_confirmation: string) {
     const newUser = new User(lastName, firstName, email, phone, password, password_confirmation);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    console.log(newUser);
+    // console.log(newUser);
     return this.http.post<User>(this.url + 'register/', JSON.stringify(newUser), {headers: headers}).pipe(
       map(result => {
+        // console.log(result['token']);
+        this.setToken(result['token']);
+        console.log(this.getToken());
         sessionStorage.setItem('username', email);
         this.setIsLoggedIn(true);
         // console.log('DE ROL IS: ' + result.role);
