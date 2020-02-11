@@ -91,14 +91,11 @@ export class AuthService {
   public login(username: string, password: string) {
     this.password = password;
     this.username = username;
-    const params = new HttpParams()
-      .set('useremail', username)
-      .set('userPassword', password);
 
-    return this.http.get<User>(this.url + 'users/login',
-      {headers: this.getHeaders(), params: params}).pipe(
+    return this.http.post<User>(this.url + 'login', {email: username, password: password}).pipe(
       map(result => {
         console.log('Er is ingelogd!');
+        console.log(result);
         sessionStorage.setItem('username', username);
         this.firstname = <string>result.firstname;
         this.lastname = <string>result.name;
