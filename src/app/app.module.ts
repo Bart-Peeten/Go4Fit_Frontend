@@ -18,6 +18,7 @@ import { SignUpComponent } from './Components/signUp/sign-up.component';
 import { AdminAgendaComponent } from './Components/admin-agenda/admin-agenda.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignUpAdminComponent } from './Components/sign-up-admin/sign-up-admin.component';
+import {httpInterceptProviders} from './Services/Http_Interceptors';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { SignUpAdminComponent } from './Components/sign-up-admin/sign-up-admin.c
         HttpClientModule
         // InMemoryWebApiModule.forRoot(InMemoryService, { delay: 1000 })
     ],
-    providers: [AuthService],
+    providers: [AuthService, httpInterceptProviders],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
