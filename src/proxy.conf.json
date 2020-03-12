@@ -1,0 +1,7 @@
+{
+  "/v1/*": {
+    "target": "https://go4fit.herokuapp.com",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
