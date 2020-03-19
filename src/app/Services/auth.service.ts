@@ -131,7 +131,7 @@ export class AuthService {
                                                'accept': 'application/json'});
     console.log(this.url);
     // console.log(newUser);
-    return this.http.post<User>(this.url + 'v1/register', JSON.stringify(newUser), {headers: headers}).pipe(
+    return this.http.post<User>(this.url + 'v1/register', newUser, {headers: headers}).pipe(
       map(result => {
         // console.log(result['token']);
         this.setToken(result['token']);
