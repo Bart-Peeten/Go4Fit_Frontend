@@ -131,11 +131,11 @@ export class AuthService {
                                                'accept': 'application/json'});
     console.log(this.url);
     // console.log(newUser);
-    return this.http.post<User>(this.url + 'v1/register', {'name': 'Brouwers',
-                                                                      'firstname': 'katleen',
-                                                                      'email': 'brouwers_katleen@gmail.com',
-                                                                      'telephone': '0477132352',
-                                                                      'password': 'test123'})
+    return this.http.post<User>(this.url + 'v1/register', {'name': lastName,
+                                                                      'firstname': firstName,
+                                                                      'email': email,
+                                                                      'telephone': phone,
+                                                                      'password': password})
       .pipe(
       map(result => {
         // console.log(result['token']);
