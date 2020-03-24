@@ -127,8 +127,8 @@ export class AuthService {
 
   public signIn(lastName: string, firstName: string, email: string, phone: string, password: string, password_confirmation: string) {
     const newUser = new User(lastName, firstName, email, phone, password, password_confirmation);
-    const headers = new HttpHeaders({'content-type': 'application/json',
-                                               'accept': 'application/json'});
+    const headers = new HttpHeaders({'Content-Type': 'application/json',
+                                               'Accept': 'application/json'});
     console.log(this.url);
     // console.log(newUser);
     return this.http.post<User>(this.url + 'v1/register', JSON.stringify(newUser), {headers: headers}).pipe(
