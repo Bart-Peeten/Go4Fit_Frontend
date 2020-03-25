@@ -16,7 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './Services/auth.service';
 import {SignUpComponent} from './Components/signUp/sign-up.component';
 import {AdminAgendaComponent} from './Components/admin-agenda/admin-agenda.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {SignUpAdminComponent} from './Components/sign-up-admin/sign-up-admin.component';
 import {httpInterceptProviders} from './Services/Http_Interceptors';
 import {LoaderComponent} from './Components/shared/loader/loader.component';
@@ -46,7 +46,8 @@ import {LoaderService} from './Services/loader-service.service';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    HttpClientJsonpModule,
+    MatProgressSpinnerModule,
     // InMemoryWebApiModule.forRoot(InMemoryService, { delay: 1000 })
   ],
   providers: [
