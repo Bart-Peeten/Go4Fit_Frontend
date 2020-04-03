@@ -29,7 +29,7 @@
     "moment": "^2.24.0",
     "ngx-moment": "^3.5.0",
     "ngx-page-scroll": "^5.0.1",
-    "rxjs": "^6.5.4",
+    "rxjs": "^6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
