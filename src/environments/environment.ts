@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://go4fit.herokuapp.com/'
+  url: 'http://localhost:8000/'
 };
 
 /*
