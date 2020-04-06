@@ -153,7 +153,7 @@ export class AuthService {
     const newUser = new User(lastName, firstName, email, phone, password, role);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     // console.log(newUser);
-    return this.http.post<User>(this.url + 'users/registration', newUser, {headers: headers}).pipe(
+    return this.http.post<User>(this.url + 'v1/register', newUser, {headers: headers}).pipe(
       map(result => {
         sessionStorage.setItem('username', email);
         this.setIsLoggedIn(true);

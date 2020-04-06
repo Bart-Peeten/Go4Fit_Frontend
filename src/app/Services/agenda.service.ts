@@ -54,7 +54,7 @@ export class AgendaService {
     loggedInUser.push(this.authService.loggedInUser);
     const reservation = new Reservation(loggedInUser, reservationDate, reservationTime);
 
-    return this.http.post<Reservation>(this.url + 'reservation/', reservation, {headers: this.authService.getHeaders()});
+    return this.http.post<Reservation>(this.url + 'v1/reservation', reservation, {headers: this.authService.getHeaders()});
   }
 
   addReservationWithOnlyFullName(firstName: string, lastName: string, reservationDate: string, reservationTime: string) {
@@ -67,7 +67,7 @@ export class AgendaService {
       .set('time', formatTime);
 
     // console.log(this.url + 'reservation/onlyname' + params);
-    return this.http.post<Reservation>(this.url + 'reservation/onlyname', params, {headers: this.authService.getHeaders()});
+    return this.http.post<Reservation>(this.url + 'v1/reservationwithonlyfullname', params, {headers: this.authService.getHeaders()});
   }
 
   removeReservation(firstName: string, lastName: string, reservationDate: string, reservationTime: string, isAllowed: boolean) {
@@ -85,21 +85,21 @@ export class AgendaService {
     console.log('WE GAAN EEN RESERVATIE VERWIJDEREN!!');
     console.log('De datum is: ' + reservationDate);
     console.log(this.url + 'reservation/delete' + options.params);
-    return this.http.put(this.url + 'reservation/delete', null, options);
+    return this.http.put(this.url + 'v1/deletereservation', null, options);
   }
 
   getDataForGivenWeek(trainingDaysDatesList: any[]) {
     const params = this.prepareParams(trainingDaysDatesList);
     console.log('De params voor de GET requst: ' + params);
 
-    return this.http.get<String[][]>(this.url + 'reservation/weekusers', {params: params});
+    return this.http.get<String[][]>(this.url + 'v1/weekusers', {params: params});
   }
 
   getCancellationsForGivenWeek(trainingDaysDatesList: any[]) {
     const params = this.prepareParams(trainingDaysDatesList);
     console.log('De params voor de GET request in CANCELLATION: ' + params);
 
-    return this.http.get<String[][]>(this.url + 'reservation/cancellations', {params: params});
+    return this.http.get<String[][]>(this.url + 'v1/cancellations', {params: params});
 
   }
 
@@ -116,7 +116,7 @@ export class AgendaService {
 
     console.log('De params voor de GET requst: ' + params);
 
-    return this.http.get<number[]>(this.url + 'reservation/weekreservaties', {params: params});
+    return this.http.get<number[]>(this.url + 'v1/weekreservaties', {params: params});
   }
 
 
@@ -134,7 +134,7 @@ export class AgendaService {
 
     console.log('De params voor de GET requst: ' + params);
 
-    return this.http.get<boolean[]>(this.url + 'reservation/isParticipantReserved', {params: params});
+    return this.http.get<boolean[]>(this.url + 'v1/isParticipantReserved', {params: params});
   }
 
   getNumberOfReservations(date: string, time: string) {
