@@ -126,7 +126,7 @@ export class AgendaService {
 
     const params = new HttpParams()
       .set('firstname', this.authService.firstname.toString())
-      .set('lastname', this.authService.lastname.toString())
+      .set('name', this.authService.lastname.toString())
       .append('tuesday', formatDatesList[0])
       .append('wednesday', formatDatesList[1])
       .append('thursday', formatDatesList[2])
