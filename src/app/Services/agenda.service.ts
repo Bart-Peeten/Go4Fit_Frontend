@@ -109,10 +109,10 @@ export class AgendaService {
     console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
 
     const params = new HttpParams()
-      .append('datesOfWeek', formatDatesList[0])
-      .append('datesOfWeek', formatDatesList[1])
-      .append('datesOfWeek', formatDatesList[2])
-      .append('datesOfWeek', formatDatesList[3]);
+      .append('tuesday', formatDatesList[0])
+      .append('wednesday', formatDatesList[1])
+      .append('thursday', formatDatesList[2])
+      .append('sunday', formatDatesList[3]);
 
     console.log('De params voor de GET requst: ' + params);
 
@@ -127,10 +127,10 @@ export class AgendaService {
     const params = new HttpParams()
       .set('firstname', this.authService.firstname.toString())
       .set('lastname', this.authService.lastname.toString())
-      .append('datesOfWeek', formatDatesList[0])
-      .append('datesOfWeek', formatDatesList[1])
-      .append('datesOfWeek', formatDatesList[2])
-      .append('datesOfWeek', formatDatesList[3]);
+      .append('tuesday', formatDatesList[0])
+      .append('wednesday', formatDatesList[1])
+      .append('thursday', formatDatesList[2])
+      .append('sunday', formatDatesList[3]);
 
     console.log('De params voor de GET requst: ' + params);
 
@@ -158,10 +158,10 @@ export class AgendaService {
     console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
 
     const params = new HttpParams()
-      .append('datesOfWeek', formatDatesList[0])
-      .append('datesOfWeek', formatDatesList[1])
-      .append('datesOfWeek', formatDatesList[2])
-      .append('datesOfWeek', formatDatesList[3]);
+      .append('tuesday', formatDatesList[0])
+      .append('wednesday', formatDatesList[1])
+      .append('thursday', formatDatesList[2])
+      .append('sunday', formatDatesList[3]);
     return params;
   }
 
