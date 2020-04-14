@@ -50,10 +50,13 @@ export class AgendaService {
   }
 
   addReservation(participantName: String, date: string, time: string) {
-    const user = this.authService.loggedInUser;
+    const email = this.authService.getEmail();
     const params = new HttpParams().set('date', date)
       .set('time', time)
-      .set('email', user.getEmail());
+      .set('email', email);
+
+    console.log('De parameters verzonden naar reservation zijn:');
+    console.log(date + ' ' + time + ' ' + email);
 
     return this.http.post<Reservation>(this.url + 'v1/reservation', params, {headers: this.authService.getHeaders()});
   }

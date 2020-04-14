@@ -17,6 +17,7 @@ export class AuthService {
   private url = environment.url;
   private username: string;
   private fullName: string;
+  private email: string;
   private token: string;
 
   constructor(private http: HttpClient) {
@@ -76,6 +77,10 @@ export class AuthService {
     return this.isLoggedIn.asObservable();
   }
 
+  public getEmail(): string {
+    return this.email;
+  }
+
   public setIsLoggedIn(newValue: boolean): void {
     this.isLoggedIn.next(newValue);
   }
@@ -100,6 +105,7 @@ export class AuthService {
         this.setToken(result['token']);
         this.firstname = result['user'].firstname;
         this.lastname = result['user'].name;
+        this.email = result['user'].email;
         this.setIsLoggedIn(true);
         // console.log('DE ROL IS: ' + result.role);
         if (result.role === 'ROLE_ADMIN') {
