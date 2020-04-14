@@ -49,12 +49,13 @@ export class AgendaService {
     return this.http.get<Participant[]>(this.url + 'reservation/names', {headers: this.authService.getHeaders(), params: params});
   }
 
-  addReservation(participantName: String, reservationDate: string, reservationTime: String) {
-    const loggedInUser: User[] = [];
-    loggedInUser.push(this.authService.loggedInUser);
-    const reservation = new Reservation(loggedInUser, reservationDate, reservationTime);
+  addReservation(participantName: String, date: string, time: string) {
+    const email = this.authService.loggedInUser.getEmail();
+    const params = new HttpParams().set('date', date)
+      .set('time', time)
+      .set('email', email);
 
-    return this.http.post<Reservation>(this.url + 'v1/reservation', reservation, {headers: this.authService.getHeaders()});
+    return this.http.post<Reservation>(this.url + 'v1/reservation', params, {headers: this.authService.getHeaders()});
   }
 
   addReservationWithOnlyFullName(firstName: string, lastName: string, reservationDate: string, reservationTime: string) {
