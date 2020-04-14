@@ -136,7 +136,7 @@ export class AgendaService {
       .append('thursday', formatDatesList[2])
       .append('sunday', formatDatesList[3]);
 
-    console.log('De params voor de GET requst: ' + params);
+    console.log('De params voor de GET request: ' + params);
 
     return this.http.get<boolean[]>(this.url + 'v1/isParticipantReserved', {params: params});
   }
