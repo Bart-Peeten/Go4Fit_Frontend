@@ -50,10 +50,10 @@ export class AgendaService {
   }
 
   addReservation(participantName: String, date: string, time: string) {
-    const email = this.authService.loggedInUser.getEmail();
+    const user = this.authService.loggedInUser;
     const params = new HttpParams().set('date', date)
       .set('time', time)
-      .set('email', email);
+      .set('email', user.getEmail());
 
     return this.http.post<Reservation>(this.url + 'v1/reservation', params, {headers: this.authService.getHeaders()});
   }
