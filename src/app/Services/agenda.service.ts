@@ -86,9 +86,9 @@ export class AgendaService {
         .set('time', formatTime)
         .set('isAllowed', isAllowed.toString())
     };
-    console.log('WE GAAN EEN RESERVATIE VERWIJDEREN!!');
-    console.log('De datum is: ' + reservationDate);
-    console.log(this.url + 'reservation/delete' + options.params);
+    // console.log('WE GAAN EEN RESERVATIE VERWIJDEREN!!');
+    // console.log('De datum is: ' + reservationDate);
+    // console.log(this.url + 'reservation/delete' + options.params);
     return this.http.put(this.url + 'v1/deletereservation', null, options);
   }
 
@@ -118,7 +118,7 @@ export class AgendaService {
       .append('thursday', formatDatesList[2])
       .append('sunday', formatDatesList[3]);
 
-    console.log('De params voor de GET requst: ' + params);
+    // console.log('De params voor de GET requst: ' + params);
 
     return this.http.get<number[]>(this.url + 'v1/weekreservaties', {params: params});
   }
@@ -136,7 +136,7 @@ export class AgendaService {
       .append('thursday', formatDatesList[2])
       .append('sunday', formatDatesList[3]);
 
-    console.log('De params voor de GET request: ' + params);
+    // console.log('De params voor de GET request: ' + params);
 
     return this.http.get<boolean[]>(this.url + 'v1/isParticipantReserved', {params: params});
   }

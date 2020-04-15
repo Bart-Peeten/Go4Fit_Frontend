@@ -176,9 +176,10 @@ export class AuthService {
   }
 
   public getHeaders() {
-    const securityToken = this.getUserName() + ':' + this.getPassword();
-    // console.log('Security token is: ' + securityToken);
-    return new HttpHeaders().set('Authorization', 'Basic ' +
-      btoa(securityToken));
+    // const securityToken = this.getUserName() + ':' + this.getPassword();
+    // // console.log('Security token is: ' + securityToken);
+    // return new HttpHeaders().set('Authorization', 'Basic ' +
+    //   btoa(securityToken));
+    return new HttpHeaders({'Content-Type': 'application/json'});
   }
 }
