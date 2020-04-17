@@ -51,14 +51,16 @@ export class AgendaService {
 
   addReservation(participantName: String, date: string, time: string) {
     const email = this.authService.getEmail();
-    const params = new HttpParams().set('date', date)
-      .set('time', time)
-      .set('email', email);
+    const data = {
+      'date': date,
+      'time': time,
+      'email': email
+    };
 
-    console.log('De parameters verzonden naar reservation zijn:');
-    console.log(date + ' ' + time + ' ' + email);
+    // console.log('De parameters verzonden naar reservation zijn:');
+    // console.log(date + ' ' + time + ' ' + email);
 
-    return this.http.post<Reservation>(this.url + 'v1/reservation', params, {headers: this.authService.getHeaders()});
+    return this.http.post<Reservation>(this.url + 'v1/reservation', JSON.stringify(data), {headers: this.authService.getHeaders()});
   }
 
   addReservationWithOnlyFullName(firstName: string, lastName: string, reservationDate: string, reservationTime: string) {
@@ -94,14 +96,14 @@ export class AgendaService {
 
   getDataForGivenWeek(trainingDaysDatesList: any[]) {
     const params = this.prepareParams(trainingDaysDatesList);
-    console.log('De params voor de GET requst: ' + params);
+    // console.log('De params voor de GET requst: ' + params);
 
     return this.http.get<String[][]>(this.url + 'v1/weekusers', {params: params});
   }
 
   getCancellationsForGivenWeek(trainingDaysDatesList: any[]) {
     const params = this.prepareParams(trainingDaysDatesList);
-    console.log('De params voor de GET request in CANCELLATION: ' + params);
+    // console.log('De params voor de GET request in CANCELLATION: ' + params);
 
     return this.http.get<String[][]>(this.url + 'v1/cancellations', {params: params});
 
@@ -110,7 +112,7 @@ export class AgendaService {
   getNumberOfReservationsForGivenWeek(trainingDaysDatesList: any[]) {
     let formatDatesList: any[] = [];
     formatDatesList = this.formatDates(trainingDaysDatesList);
-    console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
+    // console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
 
     const params = new HttpParams()
       .append('tuesday', formatDatesList[0])
@@ -192,7 +194,7 @@ export class AgendaService {
       formatTimesList.push(tmpFormatTimesList);
       tmpFormatTimesList = [];
     }
-    console.log('De geformateerde tijd lijst is: ', formatTimesList);
+    // console.log('De geformateerde tijd lijst is: ', formatTimesList);
     return [];
   }
 }
