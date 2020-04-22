@@ -95,7 +95,7 @@ export class AgendaService {
     // console.log('WE GAAN EEN RESERVATIE VERWIJDEREN!!');
     // console.log('De datum is: ' + reservationDate);
     // console.log(this.url + 'reservation/delete' + options.params);
-    return this.http.put(this.url + 'v1/deletereservation', null, options);
+    return this.http.delete(this.url + 'v1/deletereservation', options);
   }
 
   getDataForGivenWeek(trainingDaysDatesList: any[]) {
