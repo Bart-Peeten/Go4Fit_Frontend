@@ -67,13 +67,17 @@ export class AgendaService {
     const formatDate = this.dateService.formatDate(reservationDate);
     const formatTime = this.dateService.getFullTime(reservationTime);
 
-    const params = new HttpParams().set('firstname', firstName)
-      .set('lastname', lastName)
-      .set('date', formatDate)
-      .set('time', formatTime);
+    const data = {
+      'firstname': firstName,
+      'lastname': lastName,
+      'date': formatDate,
+      'time': formatTime
+    };
 
     // console.log(this.url + 'reservation/onlyname' + params);
-    return this.http.post<Reservation>(this.url + 'v1/reservationwithonlyfullname', params, {headers: this.authService.getHeaders()});
+    return this.http.post<Reservation>(this.url + 'v1/reservationwithonlyfullname',
+      JSON.stringify(data),
+      {headers: this.authService.getHeaders()});
   }
 
   removeReservation(firstName: string, lastName: string, reservationDate: string, reservationTime: string, isAllowed: boolean) {
