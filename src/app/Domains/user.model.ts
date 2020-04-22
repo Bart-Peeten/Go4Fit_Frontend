@@ -6,7 +6,7 @@ export class User {
   password: String;
   password_confirmation: string;
   enabled: number;
-  role: String;
+  private _role: String;
 
 
   // tslint:disable-next-line:max-line-length
@@ -18,11 +18,11 @@ export class User {
     this.password = password;
     this.password_confirmation = password_confirmation;
     this.enabled = 1;
-    this.role = role;
+    this._role = role;
   }
 
   getRole() {
-    return this.role;
+    return this._role;
   }
 
   getFirstName() {
@@ -35,5 +35,9 @@ export class User {
 
   getEmail() {
     return this.email;
+  }
+
+  set role(value: String) {
+    this._role = value;
   }
 }

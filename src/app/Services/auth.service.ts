@@ -108,7 +108,7 @@ export class AuthService {
         this.email = result['user'].email;
         this.setIsLoggedIn(true);
         // console.log('DE ROL IS: ' + result.role);
-        if (result.role === 'ROLE_ADMIN') {
+        if (result['role'] === 'ROLE_ADMIN') {
           this.setIsLoggedIn(true);
           this.setIsLoggedInAsAdmin(true);
         }
@@ -132,7 +132,7 @@ export class AuthService {
   }
 
   public signIn(lastName: string, firstName: string, email: string, phone: string, password: string, password_confirmation: string) {
-    const newUser = new User(lastName, firstName, email, phone, password, password_confirmation);
+    const newUser = new User(lastName, firstName, email, phone, password, password_confirmation, 'ROLE_USER ');
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     console.log(this.url);
     // console.log(newUser);
@@ -140,7 +140,9 @@ export class AuthService {
       map(result => {
         // console.log(result['token']);
         this.setToken(result['token']);
-        console.log(this.getToken());
+        // console.log(this.getToken());
+        console.log('Het resultaat van het INLOGGEN is: ');
+        console.log(result);
         sessionStorage.setItem('username', email);
         this.setIsLoggedIn(true);
         // console.log('DE ROL IS: ' + result.role);
