@@ -22,6 +22,7 @@ import {httpInterceptProviders} from './Services/Http_Interceptors';
 import {LoaderComponent} from './Components/shared/loader/loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoaderService} from './Services/loader-service.service';
+import { SpinnerComponent } from './Components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {LoaderService} from './Services/loader-service.service';
     SignUpComponent,
     AdminAgendaComponent,
     SignUpAdminComponent,
-    LoaderComponent
+    LoaderComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

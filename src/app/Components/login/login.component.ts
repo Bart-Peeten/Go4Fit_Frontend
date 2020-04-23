@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ErrorHandlerService} from '../../Services/error-handler.service';
+import {LoaderService} from '../../Services/loader-service.service';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
     constructor(private authService: AuthService,
                 private router: Router,
-                private errorHandler: ErrorHandlerService) { }
+                private errorHandler: ErrorHandlerService,
+                private loaderService: LoaderService) { }
 
     ngOnInit() {
         // this.authService.getIsLoggedIn().subscribe(value => this.setIsLoggedIn(value));
