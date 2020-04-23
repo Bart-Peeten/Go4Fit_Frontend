@@ -22,7 +22,13 @@ export class SignUpComponent implements OnInit {
     }
 
     signIn() {
+      if (this.password === this.password_confirmation) {
         this.authService.signIn(this.lastName, this.firstName, this.email, this.phone, this.password, this.password_confirmation)
-            .subscribe(_ => this.router.navigate(['/login']));
+          .subscribe(_ => this.router.navigate(['/login']));
+      } else {
+        window.confirm('Beide paswoorden zijn niet gelijk aan elkaar');
+        this.password = '';
+        this.password_confirmation = '';
+      }
     }
 }

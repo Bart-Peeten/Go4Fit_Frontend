@@ -132,20 +132,14 @@ export class AuthService {
   }
 
   public signIn(lastName: string, firstName: string, email: string, phone: string, password: string, password_confirmation: string) {
-    const newUser = new User(lastName, firstName, email, phone, password, password_confirmation, 'ROLE_USER ');
+    const newUser = new User(lastName, firstName, email, phone, password, password_confirmation);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     console.log(this.url);
     // console.log(newUser);
     return this.http.post<User>(this.url + 'v1/register', newUser, {headers: headers}).pipe(
       map(result => {
-        // console.log(result['token']);
-        // this.setToken(result['token']);
-        // console.log(this.getToken());
-        // console.log('Het resultaat van het INLOGGEN is: ');
-        // console.log(result['user'].role);
         sessionStorage.setItem('username', email);
         this.setIsLoggedIn(true);
-        // console.log('DE ROL IS: ' + result.role);
         if (result['data'].role === 'ROLE_ADMIN') {
           this.setIsLoggedIn(true);
           this.setIsLoggedInAsAdmin(true);
