@@ -22,7 +22,6 @@ import {httpInterceptProviders} from './Services/Http_Interceptors';
 import {LoaderComponent} from './Components/shared/loader/loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoaderService} from './Services/loader-service.service';
-import { SpinnerComponent } from './Components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +38,7 @@ import { SpinnerComponent } from './Components/spinner/spinner.component';
     SignUpComponent,
     AdminAgendaComponent,
     SignUpAdminComponent,
-    LoaderComponent,
-    SpinnerComponent
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +47,7 @@ import { SpinnerComponent } from './Components/spinner/spinner.component';
     FormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    MatProgressSpinnerModule,
+    MatProgressSpinnerModule
     // InMemoryWebApiModule.forRoot(InMemoryService, { delay: 1000 })
   ],
   providers: [

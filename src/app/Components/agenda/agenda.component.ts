@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AgendaService} from '../../Services/agenda.service';
 import {DateService} from '../../Services/date.service';
 import {AuthService} from '../../Services/auth.service';
-import * as moment from 'moment';
 import {ErrorHandlerService} from '../../Services/error-handler.service';
 
 @Component({

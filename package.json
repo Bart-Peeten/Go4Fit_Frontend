@@ -27,6 +27,7 @@
     "current-week-number": "^1.0.7",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
+    "ng4-loading-spinner": "^1.2.3",
     "ngx-moment": "^3.5.0",
     "ngx-page-scroll": "^5.0.1",
     "rxjs": "^6.5.4",
