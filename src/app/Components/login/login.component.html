@@ -22,9 +22,13 @@
                                    class="form-control" minlength="2" placeholder="paswoord" [(ngModel)]="password">
                             <p *ngIf="form.controls.password?.errors?.minlength" class="error">Het paswoord moet min 2 characters hebben.</p>
                         </div>
+
                         <div class="form-group">
+                          <!-- remember me button is temp disabled -->
+                          <!--
                             <label for="remember-me" class="text_color"><span>Onthoud mij</span> <span><input
-                                    id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                    id="remember-me" name="remember-me" type="checkbox"></span></label>
+                                    --><br>
                             <input type="submit" name="submit" class="btn btn-info btn-md"
                                    style="background-color: black" value="submit"  (click)="login()">
                         </div>
