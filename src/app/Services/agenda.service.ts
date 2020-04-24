@@ -46,7 +46,7 @@ export class AgendaService {
       .set('date', date)
       .set('time', time);
 
-    return this.http.get<Participant[]>(this.url + 'reservation/names', {headers: this.authService.getHeaders(), params: params});
+    return this.http.get<Participant[]>(this.url + 'reservation/names', {params: params});
   }
 
   addReservation(participantName: String, date: string, time: string) {
@@ -60,7 +60,7 @@ export class AgendaService {
     // console.log('De parameters verzonden naar reservation zijn:');
     // console.log(date + ' ' + time + ' ' + email);
 
-    return this.http.post<Reservation>(this.url + 'v1/reservation', JSON.stringify(data), {headers: this.authService.getHeaders()});
+    return this.http.post<Reservation>(this.url + 'v1/reservation', JSON.stringify(data));
   }
 
   addReservationWithOnlyFullName(firstName: string, lastName: string, reservationDate: string, reservationTime: string) {
@@ -76,14 +76,12 @@ export class AgendaService {
 
     // console.log(this.url + 'reservation/onlyname' + params);
     return this.http.post<Reservation>(this.url + 'v1/reservationwithonlyfullname',
-      JSON.stringify(data),
-      {headers: this.authService.getHeaders()});
+      JSON.stringify(data));
   }
 
   removeReservation(firstName: string, lastName: string, reservationDate: string, reservationTime: string, isAllowed: boolean) {
     const formatTime = this.dateService.getFullTime(reservationTime);
     const options = {
-      headers: this.authService.getHeaders(),
       body: null,
       params: new HttpParams()
         .set('firstname', firstName)
@@ -148,16 +146,11 @@ export class AgendaService {
   }
 
   getNumberOfReservations(date: string, time: string) {
-    const headers = new HttpHeaders({
-      Authorization: 'Basic' +
-        btoa(this.authService.getPassword() + ':' + this.authService.name)
-    });
-
     const params = new HttpParams()
       .set('date', date)
       .set('time', time);
 
-    const result = this.http.get(this.url + 'numberofreservations', {headers: headers, params: params});
+    const result = this.http.get(this.url + 'numberofreservations', {params: params});
 
     return result;
   }
