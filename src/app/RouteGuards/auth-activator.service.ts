@@ -13,7 +13,7 @@ export class AuthActivatorService implements CanActivate{
     canActivate() {
         this.authService.getIsLoggedIn().subscribe(value => console.log('is logged in is: ' + value));
         this.authService.getIsLoggedIn().subscribe(value => this.isLoggedIn = value);
-      console.log('In auth-activator is isLoggedIn: ' + this.isLoggedIn);
+      // console.log('In auth-activator is isLoggedIn: ' + this.isLoggedIn);
         if (!this.isLoggedIn) {
             this.router.navigate(['/login']);
         }

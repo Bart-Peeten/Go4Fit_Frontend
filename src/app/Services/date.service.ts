@@ -23,12 +23,17 @@ export class DateService {
   }
 
   getWeekNumber() {
-    console.log(moment().week());
+    // console.log(moment().week());
     return moment().startOf('isoWeek').week();
   }
 
+  getWeekNumberOfPreviousWeek(diffWithCurrentWeek: number) {
+    const t = moment().startOf('isoWeek').subtract(-diffWithCurrentWeek, 'weeks').format('DD-MM-YYYY');
+    return moment(t, 'DD-MM-YYYY').week();
+  }
+
   getWeekNumberOfNextWeek(nextWeek: number) {
-    let t = moment().startOf('isoWeek').add(nextWeek, 'weeks').format('DD-MM-YYYY');
+    const t = moment().startOf('isoWeek').add(nextWeek, 'weeks').format('DD-MM-YYYY');
     return moment(t, 'DD-MM-YYYY').week();
   }
 
@@ -40,6 +45,14 @@ export class DateService {
     return moment().startOf('isoWeek').day(7).format('DD-MMM');
   }
 
+  getFirstDayOfPreviousWeek(nextWeek: number) {
+    return moment().startOf('isoWeek').day(1 + nextWeek).format('DD-MMM');
+  }
+
+  getLastDayOfPreviousWeek(nextWeek: number) {
+    return moment().startOf('isoWeek').day(7 + nextWeek).format('DD-MMM');
+  }
+
   getFirstDayOfNextWeek(nextWeek: number) {
     return moment().startOf('isoWeek').day(1 + nextWeek).format('DD-MMM');
   }
@@ -49,22 +62,33 @@ export class DateService {
   }
 
   getTrainingsDays() {
-    let trainingsDays = [];
-    let tuesday = moment().startOf('isoWeek').day(2).format('DD-MM-YYYY');
-    let wednesday = moment().startOf('isoWeek').day(3).format('DD-MM-YYYY');
-    let thursday = moment().startOf('isoWeek').day(4).format('DD-MM-YYYY');
-    let sunday = moment().startOf('isoWeek').day(7).format('DD-MM-YYYY');
+    const trainingsDays = [];
+    const tuesday = moment().startOf('isoWeek').day(2).format('DD-MM-YYYY');
+    const wednesday = moment().startOf('isoWeek').day(3).format('DD-MM-YYYY');
+    const thursday = moment().startOf('isoWeek').day(4).format('DD-MM-YYYY');
+    const sunday = moment().startOf('isoWeek').day(7).format('DD-MM-YYYY');
+    trainingsDays.push(tuesday, wednesday, thursday, sunday);
+
+    return trainingsDays;
+  }
+
+  getDatesofDaysOfPreviousWeek(nextWeek: number) {
+    const trainingsDays = [];
+    const tuesday = moment().startOf('isoWeek').day(2 + nextWeek).format('DD-MM-YYYY');
+    const wednesday = moment().startOf('isoWeek').day(3 + nextWeek).format('DD-MM-YYYY');
+    const thursday = moment().startOf('isoWeek').day(4 + nextWeek).format('DD-MM-YYYY');
+    const sunday = moment().startOf('isoWeek').day(7 + nextWeek).format('DD-MM-YYYY');
     trainingsDays.push(tuesday, wednesday, thursday, sunday);
 
     return trainingsDays;
   }
 
   getDatesofDaysOfNextWeek(nextWeek: number) {
-    let trainingsDays = [];
-    let tuesday = moment().startOf('isoWeek').day(2 + nextWeek).format('DD-MM-YYYY');
-    let wednesday = moment().startOf('isoWeek').day(3 + nextWeek).format('DD-MM-YYYY');
-    let thursday = moment().startOf('isoWeek').day(4 + nextWeek).format('DD-MM-YYYY');
-    let sunday = moment().startOf('isoWeek').day(7 + nextWeek).format('DD-MM-YYYY');
+    const trainingsDays = [];
+    const tuesday = moment().startOf('isoWeek').day(2 + nextWeek).format('DD-MM-YYYY');
+    const wednesday = moment().startOf('isoWeek').day(3 + nextWeek).format('DD-MM-YYYY');
+    const thursday = moment().startOf('isoWeek').day(4 + nextWeek).format('DD-MM-YYYY');
+    const sunday = moment().startOf('isoWeek').day(7 + nextWeek).format('DD-MM-YYYY');
     trainingsDays.push(tuesday, wednesday, thursday, sunday);
 
     return trainingsDays;

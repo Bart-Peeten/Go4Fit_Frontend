@@ -1,4 +1,5 @@
 .blackbackground {
+  margin-top: 30px;
   background-color: black;
   background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
   width: 100vw;
@@ -9,7 +10,6 @@ p {
 }
 
 .header {
-  color: greenyellow;
   margin-top: 80px;
   text-align: center;
   font-family: "Roboto Light", serif;
@@ -19,7 +19,6 @@ p {
   margin-top: 40px;
   margin-bottom: 40px;
   text-align: center;
-  color: greenyellow;
   font-family: "Roboto Light", serif;
 }
 
@@ -38,6 +37,10 @@ img {
 
 .mobile {
   display: none;
+}
+
+.text_color {
+  color: white;
 }
 
 @media screen and (max-width: 650px) {

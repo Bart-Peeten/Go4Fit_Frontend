@@ -27,10 +27,6 @@
                 <a class="nav-link" [routerLink]="['/contact']" routerLinkActive="active">Contact</a>
             </li>
 
-
-          <li *ngIf="!isLoggedin" class="nav-item">
-            <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
-          </li>
           <li *ngIf="isLoggedinAsAdmin" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>

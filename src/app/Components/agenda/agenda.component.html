@@ -1,5 +1,5 @@
 <app-loader></app-loader>
-<div class="container-fluid my-container">
+<div class="container-fluid my-container text_color">
   <div class="row my-header-row">
     <div class="col-md-3"></div>
     <div class="col-md-6 text-center title">
@@ -24,6 +24,7 @@
       <label>Week: {{ weekNumber }}</label>
     </div>
     <div class="col-md-1">
+      <button class="nextWeekButton glyphicon glyphicon-arrow-left" (click)="getPreviousWeekData()"></button>
       <button class="nextWeekButton glyphicon glyphicon-arrow-right" (click)="getNextWeekData()"></button>
     </div>
   </div>

@@ -158,7 +158,7 @@ export class AgendaService {
   private prepareParams(trainingDaysDatesList: any[]) {
     let formatDatesList: any[] = [];
     formatDatesList = this.formatDates(trainingDaysDatesList);
-    console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
+    // console.log('De lijst die naar de API wordt gestuurd is: ' + formatDatesList);
 
     const params = new HttpParams()
       .append('tuesday', formatDatesList[0])

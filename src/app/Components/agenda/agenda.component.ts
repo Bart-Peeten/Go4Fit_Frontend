@@ -19,7 +19,7 @@ export class AgendaComponent implements OnInit {
   private trainingsTypes: any[][];
   private trainingDaysDatesList: any[];
   private nextWeek = 1;
-  private nextWeekDays = 7;
+  private nextWeekDays = 0;
   private isOccupied: boolean;
   private participantName: String;
   private reservationDay: String;
@@ -29,6 +29,9 @@ export class AgendaComponent implements OnInit {
   private isReserved: boolean[] = [false];
   private isAllowedToDeleteReservation: boolean;
   mayOpenModal = true;
+  private previousWeekDays: number;
+  private previousWeek: number;
+  private diffWithCurrentWeek = 0;
 
   constructor(private agendaService: AgendaService,
               private dateService: DateService,
@@ -57,12 +60,28 @@ export class AgendaComponent implements OnInit {
     this.getDataOfGivenWeek();
     // Here data for this week will be fetched.
 
+    this.diffWithCurrentWeek = 0;
     this.nextWeek = 1;
-    this.nextWeekDays = 7;
+    this.nextWeekDays = 0;
+  }
+
+  getPreviousWeekData() {
+    this.diffWithCurrentWeek -= 1;
+    this.nextWeekDays -= 7;
+    this.weekNumber = this.dateService.getWeekNumberOfPreviousWeek(this.diffWithCurrentWeek);
+    this.trainingDaysDatesList = this.dateService.getDatesofDaysOfPreviousWeek(this.nextWeekDays);
+    this.getFirstDayOfPreviousWeekString();
+    this.getLastDayOfPreviousWeekString();
+
+    // Here data for previous weeks will be fetched.
+    this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList);
+    this.getDataOfGivenWeek();
   }
 
   getNextWeekData() {
-    this.weekNumber = this.dateService.getWeekNumberOfNextWeek(this.nextWeek);
+    this.diffWithCurrentWeek += 1;
+    this.nextWeekDays += 7;
+    this.weekNumber = this.dateService.getWeekNumberOfNextWeek(this.diffWithCurrentWeek);
     this.trainingDaysDatesList = this.dateService.getDatesofDaysOfNextWeek(this.nextWeekDays);
     this.getFirstDayOfNextWeekString();
     this.getLastDayOfNextWeekString();
@@ -73,8 +92,6 @@ export class AgendaComponent implements OnInit {
     // Here data for next weeks will be fetched.
     this.agendaService.getDataForGivenWeek(this.trainingDaysDatesList);
     this.getDataOfGivenWeek();
-    this.nextWeek += 1;
-    this.nextWeekDays += 7;
   }
 
   private getFirstDayOfWeekString() {
@@ -85,7 +102,19 @@ export class AgendaComponent implements OnInit {
     this.lastdayOfWeekString = 'Zo ' + this.dateService.getLastDayOfWeek();
   }
 
+  private getFirstDayOfPreviousWeekString() {
+    this.firstDayOfWeekString = 'Ma ' + this.dateService.getFirstDayOfPreviousWeek(this.nextWeekDays);
+  }
+
+  private getLastDayOfPreviousWeekString() {
+    console.log('De waarde van nextWeekDays is :');
+    console.log(this.nextWeekDays);
+    this.lastdayOfWeekString = 'Zo ' + this.dateService.getLastDayOfPreviousWeek(this.nextWeekDays);
+  }
+
   private getFirstDayOfNextWeekString() {
+    console.log('De waarde van nextWeekDays in NextWeekString() is :');
+    console.log(this.nextWeekDays);
     this.firstDayOfWeekString = 'Ma ' + this.dateService.getFirstDayOfNextWeek(this.nextWeekDays);
   }
 
