@@ -19,6 +19,6 @@ export class AgendaHttpInterceptorService implements HttpInterceptor {
       }
     });
 
-    return next.handle(authReq);
+    return next.handle(req);
   }
 }
