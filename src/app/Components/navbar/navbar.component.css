@@ -4,6 +4,13 @@
 
 img {
     margin-top: -15px;
+    height: 100px;
+    width: 100px;
+}
+
+a {
+  font-size: 20px;
+  font-family: SansSerif;
 }
 
 .navbar-nav > li {
@@ -12,11 +19,11 @@ img {
 }
 
 .navbar-nav > li a {
-    color: white;
+    color: black;
 }
 
 .navbar-nav > li a:hover {
-    color: white;
+    color: black;
 }
 
 .dropdownItem {

@@ -1,7 +1,6 @@
 .my-container {
   margin-top: 70px;
-  background-color: black;
-  background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
+  /*background-image: linear-gradient(to bottom right, black, 85%, greenyellow);*/
   position: relative;
 }
 
@@ -22,11 +21,10 @@
   margin-left: 30px;
   margin-right: 30px;
   clear: both;
-  color: greenyellow;
 }
 
 .my-header-row {
-  background-color: black;
+  background-color: white;
 }
 
 .my-col {
@@ -35,20 +33,19 @@
 
 .title {
   font-size: 35px;
-  color: greenyellow;
   font-weight: bold;
 }
 
 .nextWeekButton {
   border: black;
   font-weight: bolder;
-  background-color: black;
+  background-color: white;
   border-radius: 50%;
 }
 
 .thisWeekButton {
   border: black;
-  background-color: black;
+  background-color: white;
   font-weight: bold;
 }
 
@@ -66,7 +63,6 @@
   margin-right: 30px;
   min-height: 500px;
   text-align: center;
-  color: greenyellow;
 }
 
 .trianingdaytitle {
@@ -90,7 +86,7 @@
 
 .reservation {
   padding: 20px;
-  background-color: white;
+  background-color: lightgray;
   color: black;
   margin-top: 5px;
   border-left: 2px solid;
@@ -129,5 +125,8 @@ ul, li {
   font-size: 15px;
   text-align: right;
   vertical-align: top;
-  color: greenyellow;
+}
+
+.text_color {
+  color: black;
 }

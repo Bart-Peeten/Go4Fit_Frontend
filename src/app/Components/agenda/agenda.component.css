@@ -1,6 +1,6 @@
 .my-container {
-  background-color: black;
-  background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
+  background-color: white;
+  /*background-image: linear-gradient(to bottom right, black, 85%, greenyellow);*/
   position: relative;
 }
 
@@ -25,7 +25,7 @@
 
 .my-header-row {
   margin-top: 70px;
-  background-color: black;
+  background-color: white;
 }
 
 .my-col {
@@ -41,12 +41,12 @@
   border: black;
   font-weight: bolder;
   border-radius: 50%;
-  background: black;
+  background: white;
 }
 
 .thisWeekButton {
   border: black;
-  background-color: black;
+  background-color: white;
 }
 
 .weekLabel {
@@ -87,7 +87,7 @@
 .reservation {
   height: 120px;
   padding: 20px;
-  background-color: white;
+  background-color: lightgray;
   margin-top: 5px;
   border-left: 2px solid;
   color: black;
@@ -112,5 +112,5 @@
 }
 
 .text_color {
-  color: white;
+  color: black;
 }

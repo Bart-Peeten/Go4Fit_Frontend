@@ -1,8 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: black;
-    background-image: linear-gradient(to bottom right, black, 85%, greenyellow);
+    background-color: white;
+    /*background-image: linear-gradient(to bottom right, black, 85%, greenyellow);*/
     height: 100vh;
 }
 
