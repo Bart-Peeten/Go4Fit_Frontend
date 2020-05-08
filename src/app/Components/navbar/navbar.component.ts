@@ -13,8 +13,7 @@ export class NavbarComponent implements OnInit {
   show = false;
 
   constructor(private authService: AuthService,
-              private router: Router,
-              private document: Document) {
+              private router: Router) {
     authService.getIsLoggedIn().subscribe(value => this.setIsLoggedIn(value));
     authService.getIsLoggedInAsAdmin().subscribe(value => this.setIsLoggedInAsAdmin(value));
   }
@@ -34,6 +33,5 @@ export class NavbarComponent implements OnInit {
     this.authService.setIsLoggedIn(false);
     this.authService.setIsLoggedInAsAdmin(false);
     // this.router.navigate(['/home']);
-    this.document.location.href = 'http://go4fitwordpress.byethost8.com/';
   }
 }
