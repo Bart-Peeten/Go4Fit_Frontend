@@ -23,16 +23,16 @@ a {
 }
 
 .navbar-nav > li a:hover {
-  color: black;
+  color: greenyellow;
 }
 
 .dropdownItem {
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 .dropdownItem > a:hover {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: greenyellow;
 }
 
