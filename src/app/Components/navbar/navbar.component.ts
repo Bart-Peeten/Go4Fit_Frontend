@@ -31,6 +31,6 @@ export class NavbarComponent implements OnInit {
     logOut() {
         this.authService.setIsLoggedIn(false);
         this.authService.setIsLoggedInAsAdmin(false);
-        this.router.navigate(['/home']);
+        this.router.navigate(['http://go4fitwordpress.byethost8.com/']);
     }
 }
