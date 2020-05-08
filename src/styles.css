@@ -2,5 +2,5 @@
 @import '~@angular/material/prebuilt-themes/purple-green.css';
 html {
     background-color: white;
-    background-image: linear-gradient(black, black);
+    /*background-image: linear-gradient(black, black);*/
 }
