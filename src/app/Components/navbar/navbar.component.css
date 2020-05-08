@@ -15,20 +15,20 @@ a {
 
 .navbar-nav > li {
     padding-left:20px;
-    padding-right:20px;
+  padding-right:20px;
 }
 
 .navbar-nav > li a {
-    color: black;
+  color: black;
 }
 
 .navbar-nav > li a:hover {
-    color: black;
+  color: black;
 }
 
 .dropdownItem {
-    background-color: black;
-    color: black;
+  background-color: black;
+  color: white;
 }
 
 .dropdownItem > a:hover {
