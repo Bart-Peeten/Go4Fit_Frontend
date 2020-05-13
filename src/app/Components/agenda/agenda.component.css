@@ -87,7 +87,8 @@
 .reservation {
   height: 120px;
   padding: 20px;
-  background-color: lightgray;
+  background-color: #ECE9E9;
+  border-radius:10%;
   margin-top: 5px;
   border-left: 2px solid;
   color: black;

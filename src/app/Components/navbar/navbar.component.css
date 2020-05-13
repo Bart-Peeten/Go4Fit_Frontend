@@ -1,16 +1,17 @@
 .navbar {
     font-size: 20px;
+  height: 40px;
 }
 
 img {
     margin-top: -15px;
-    height: 100px;
-    width: 100px;
+    height: 70px;
+    width: 120px;
 }
 
 a {
-  font-size: 20px;
-  font-family: SansSerif;
+  font-size: 15px;
+  font-family: OpenSans;
 }
 
 .navbar-nav > li {
@@ -23,7 +24,7 @@ a {
 }
 
 .navbar-nav > li a:hover {
-  color: greenyellow;
+  color: black;
 }
 
 .dropdownItem {
@@ -33,6 +34,6 @@ a {
 
 .dropdownItem > a:hover {
     background-color: white;
-    color: greenyellow;
+    color: black;
 }
 

@@ -7,7 +7,7 @@
                 <div id="login-box" class="col-md-12">
                     <form #form="ngForm" id="login-form" class="form" action="" method="post">
 
-                        <img id="profile-img" class="profile-img-card" src="assets/Go4Fit_logo.png"/>
+                        <img id="profile-img" class="img-responsive center" src="assets/Go4Fit_new_logo.jpg"/>
 
                         <div class="form-group">
                             <label for="email" class="text_color">E-mail:</label><br>
@@ -30,7 +30,7 @@
                                     id="remember-me" name="remember-me" type="checkbox"></span></label>
                                     --><br>
                             <input type="submit" name="submit" class="btn btn-info btn-md"
-                                   style="background-color: black" value="submit"  (click)="login()">
+                                   style="background-color: black" value="aanmelden"  (click)="login()">
                         </div>
                         <div id="register-link" class="text-right">
                             <a class="text_color" [routerLink]="['/signUp']">Registreer hier</a>
